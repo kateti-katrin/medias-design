@@ -8,113 +8,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles.css">
-  <style>
-    .articles-page {
-      width: min(980px, calc(100% - 40px));
-      margin: 48px auto 80px;
-      display: flex;
-      flex-direction: column;
-      gap: 40px;
-    }
-
-    .articles-page__header {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .articles-page__back {
-      width: fit-content;
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      color: var(--color-text);
-      opacity: 0.85;
-      text-decoration: none;
-    }
-
-    .articles-page__title {
-      font-family: 'Bounded', system-ui, sans-serif;
-      font-size: clamp(48px, 7vw, 100px);
-      line-height: 1.0;
-      letter-spacing: -2px;
-      text-transform: uppercase;
-      color: var(--color-text);
-      margin: 0;
-    }
-
-    .articles-filters {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .articles-filter {
-      font-family: 'Inter', sans-serif;
-      font-size: 14px;
-      color: var(--color-text);
-      border: 1px solid rgba(252, 248, 201, 0.35);
-      background: transparent;
-      padding: 6px 16px;
-      cursor: pointer;
-      transition: background 0.15s, opacity 0.15s;
-      opacity: 0.6;
-      letter-spacing: 0.02em;
-    }
-
-    .articles-filter:hover {
-      opacity: 1;
-    }
-
-    .articles-filter.is-active {
-      background: rgba(252, 248, 201, 0.12);
-      border-color: rgba(252, 248, 201, 0.7);
-      opacity: 1;
-    }
-
-    .articles-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-    }
-
-    .articles-grid .article-card {
-      width: 100%;
-    }
-
-    .articles-grid .article-img--large,
-    .articles-grid .article-img--small {
-      width: 100%;
-      height: 280px;
-    }
-
-    .articles-grid .article-img--large .article-img__photo img,
-    .articles-grid .article-img--small .article-img__photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .articles-grid .article-img--large .article-img__overlay img,
-    .articles-grid .article-img--small .article-img__overlay img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .article-card[hidden] {
-      display: none;
-    }
-
-    @media (max-width: 640px) {
-      .articles-page {
-        width: calc(100% - 24px);
-        margin: 28px auto 48px;
-      }
-      .articles-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
 </head>
 <body>
 
@@ -122,116 +15,130 @@
     <img src="./app/assets/images/bg-decoration.svg" alt="">
   </div>
 
-  <div class="articles-page">
-    <header class="articles-page__header">
-      <a href="./index.html" class="articles-page__back">← на главную</a>
-      <h1 class="articles-page__title">Читать</h1>
+  <main class="reading-page">
+    <header class="reading-page__head">
+      <a href="./index.html" class="reading-page__back">← на главную</a>
+      <h1 class="reading-page__title">Читать</h1>
     </header>
 
-    <div class="articles-filters" role="group" aria-label="Фильтр по темам">
-      <button class="articles-filter is-active" data-filter="all">Все материалы</button>
-      <button class="articles-filter" data-filter="задача">[ задача ]</button>
-      <button class="articles-filter" data-filter="оценка">[ оценка ]</button>
-      <button class="articles-filter" data-filter="деньги">[ деньги ]</button>
-      <button class="articles-filter" data-filter="процесс">[ процесс ]</button>
+    <div class="reading-filters" role="group" aria-label="Фильтр материалов">
+      <button type="button" class="reading-filters__button is-active" data-filter="all">Все материалы</button>
+      <button type="button" class="reading-filters__button" data-filter="задача">[ задача ]</button>
+      <button type="button" class="reading-filters__button" data-filter="оценка">[ оценка ]</button>
+      <button type="button" class="reading-filters__button" data-filter="деньги">[ деньги ]</button>
+      <button type="button" class="reading-filters__button" data-filter="процесс">[ процесс ]</button>
     </div>
 
-    <div class="articles-grid">
-
+    <section class="reading-grid" aria-label="Список статей">
       <article class="article-card article-card--large" data-tag="задача">
-        <div class="article-img article-img--large">
-          <div class="article-img__photo">
-            <img src="./app/assets/images/article-large.png" alt="">
+        <a href="./articles/article-1.html" class="article-link" aria-label="Открыть статью про задачу">
+          <div class="article-img article-img--large">
+            <div class="article-img__photo">
+              <img src="./app/assets/images/article-large.png" alt="Обложка статьи: как поставить задачу дизайнеру">
+            </div>
+            <div class="article-img__overlay" aria-hidden="true">
+              <img src="./app/assets/images/article-large-overlay.png" alt="">
+              <div class="article-img__tint"></div>
+            </div>
           </div>
-          <div class="article-img__overlay" aria-hidden="true">
-            <img src="./app/assets/images/article-large-overlay.png" alt="">
-            <div class="article-img__tint"></div>
-          </div>
-        </div>
+        </a>
         <div class="article-card__body article-card__body--large">
           <p class="article-card__tag">[ задача ]</p>
-          <p class="article-card__title">Как поставить задачу дизайнеру, чтобы не переделывать 3 раза</p>
+          <p class="article-card__title"><a href="./articles/article-1.html">Как поставить задачу дизайнеру, чтобы не переделывать три раза</a></p>
         </div>
       </article>
 
       <article class="article-card article-card--large" data-tag="оценка">
-        <div class="article-img article-img--large">
-          <div class="article-img__photo">
-            <img src="./app/assets/images/article-small.png" alt="">
+        <a href="./articles/article-2.html" class="article-link" aria-label="Открыть статью про оценку">
+          <div class="article-img article-img--large">
+            <div class="article-img__photo">
+              <img src="./app/assets/images/article-small.png" alt="Обложка статьи: что ломает лендинг">
+            </div>
+            <div class="article-img__overlay" aria-hidden="true">
+              <img src="./app/assets/images/article-small-overlay.png" alt="">
+              <div class="article-img__gradient"></div>
+            </div>
           </div>
-          <div class="article-img__overlay" aria-hidden="true">
-            <img src="./app/assets/images/article-small-overlay.png" alt="">
-            <div class="article-img__gradient"></div>
-          </div>
-        </div>
+        </a>
         <div class="article-card__body article-card__body--large">
           <p class="article-card__tag">[ оценка ]</p>
-          <p class="article-card__title">Что ломает лендинг ещё до первого экрана</p>
+          <p class="article-card__title"><a href="./articles/article-2.html">Что ломает лендинг ещё до первого экрана</a></p>
         </div>
       </article>
 
       <article class="article-card article-card--large" data-tag="деньги">
-        <div class="article-img article-img--large">
-          <div class="article-img__photo">
-            <img src="./app/assets/images/article-small.png" alt="">
+        <a href="./articles/article-3.html" class="article-link" aria-label="Открыть статью про деньги">
+          <div class="article-img article-img--large article-img--simple">
+            <div class="article-img__photo">
+              <img src="./app/assets/images/service-02.png" alt="Обложка статьи: почему сайт стоит по-разному">
+            </div>
           </div>
-        </div>
+        </a>
         <div class="article-card__body article-card__body--large">
           <p class="article-card__tag">[ деньги ]</p>
-          <p class="article-card__title">Почему один и тот же сайт стоит по‑разному</p>
+          <p class="article-card__title"><a href="./articles/article-3.html">Почему один и тот же сайт стоит по-разному</a></p>
         </div>
       </article>
 
       <article class="article-card article-card--large" data-tag="процесс">
-        <div class="article-img article-img--large">
-          <div class="article-img__photo">
-            <img src="./app/assets/images/article-large.png" alt="">
+        <a href="./articles/article-4.html" class="article-link" aria-label="Открыть статью про процесс">
+          <div class="article-img article-img--large article-img--simple">
+            <div class="article-img__photo">
+              <img src="./app/assets/images/service-01.jpg" alt="Обложка статьи: почему правки съедают сроки">
+            </div>
           </div>
-        </div>
+        </a>
         <div class="article-card__body article-card__body--large">
           <p class="article-card__tag">[ процесс ]</p>
-          <p class="article-card__title">Почему правки в дизайне съедают сроки и результат</p>
+          <p class="article-card__title"><a href="./articles/article-4.html">Почему правки в дизайне съедают сроки и результат</a></p>
         </div>
       </article>
+    </section>
+  </main>
 
+  <footer class="site-footer reading-page__footer">
+    <div class="site-footer__logo">
+      <img src="./app/assets/images/logo-smysl-footer.svg" alt="СМЫСЛ">
     </div>
-
-    <footer class="site-footer">
-      <div class="site-footer__logo">
-        <img src="./app/assets/images/logo-smysl-footer.svg" alt="СМЫСЛ">
-      </div>
-      <p class="site-footer__tagline">Пишем о продающем визуале</p>
-      <nav class="site-footer__nav" aria-label="Навигация в подвале">
-        <a href="./index.html" class="site-nav__link">главная</a>
-        <a href="#" class="site-nav__link">Статьи</a>
-        <a href="./services/brief.html" class="site-nav__link">Задача</a>
-        <a href="./services/calculator.html" class="site-nav__link">бюджет</a>
-        <a href="#" class="site-nav__link">о нас</a>
-      </nav>
-    </footer>
-  </div>
+    <p class="site-footer__tagline">Пишем о продающем визуале</p>
+    <nav class="site-footer__nav" aria-label="Навигация в подвале">
+      <a href="./index.html" class="site-nav__link">главная</a>
+      <a href="./articles.html" class="site-nav__link">Статьи</a>
+      <a href="./services/brief.html" class="site-nav__link">Задача</a>
+      <a href="./services/calculator.html" class="site-nav__link">бюджет</a>
+      <a href="./index.html" class="site-nav__link">о нас</a>
+    </nav>
+  </footer>
 
   <script>
     (function () {
-      var filters = document.querySelectorAll(".articles-filter");
-      var cards = document.querySelectorAll(".articles-grid .article-card");
+      var buttons = document.querySelectorAll('.reading-filters__button');
+      var cards = document.querySelectorAll('.reading-grid .article-card');
 
-      filters.forEach(function (btn) {
-        btn.addEventListener("click", function () {
-          var tag = btn.dataset.filter;
+      function applyFilter(tag) {
+        cards.forEach(function (card) {
+          var cardTag = card.getAttribute('data-tag');
+          var show = tag === 'all' || cardTag === tag;
+          card.hidden = !show;
+          card.style.display = show ? '' : 'none';
+        });
+      }
 
-          filters.forEach(function (b) { b.classList.remove("is-active"); });
-          btn.classList.add("is-active");
+      buttons.forEach(function (button) {
+        button.addEventListener('click', function () {
+          var current = button.getAttribute('data-filter');
 
-          cards.forEach(function (card) {
-            if (tag === "all" || card.dataset.tag === tag) {
-              card.hidden = false;
-            } else {
-              card.hidden = true;
-            }
+          buttons.forEach(function (item) {
+            var active = item === button;
+            item.classList.toggle('is-active', active);
+            item.setAttribute('aria-pressed', active ? 'true' : 'false');
           });
+
+          applyFilter(current);
         });
       });
+
+      applyFilter('all');
     })();
   </script>
 

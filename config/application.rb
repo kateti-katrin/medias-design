@@ -16,6 +16,8 @@ module Site001
     # Common ones are `templates`, `generators`, or `middleware`, for example.
     config.autoload_lib(ignore: %w[assets tasks])
     config.exceptions_app = self.routes
+    config.i18n.default_locale = :ru
+    config.i18n.available_locales = %i[ru en]
 
     # Configuration for the application, engines, and railties goes here.
     #
