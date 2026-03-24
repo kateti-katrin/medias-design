@@ -1,80 +1,76 @@
 # СМЫСЛ — медиа о дизайне
 
-Веб-приложение на Ruby on Rails 8. Медиа о дизайне для тех, кто его заказывает.
+Веб-приложение на Ruby on Rails 8. Проект содержит главную страницу, разделы статей и сервисов.
 
-## Стек
+## Технологии
 
-| Технология | Версия |
-|---|---|
-| Ruby | 3.2.10 |
-| Rails | 8.1.2.1 |
-| База данных | SQLite3 |
-| CSS | SCSS (cssbundling-rails + sass) |
-| JavaScript | esbuild + React 18 + Hotwire Turbo |
-| Asset pipeline | Propshaft |
+- Ruby 3.2.10
+- Rails 8.1.2.1
+- SQLite3
+- SCSS (`cssbundling-rails` + `sass`)
+- JavaScript (`esbuild`, `React 18`, `Turbo`, `Stimulus`)
+- Propshaft
 
-## Архитектура
+## Требования
 
-- **MVC**: контроллеры `Pages`, `Articles`, `Services`
-- **Модели**: `Article` (статьи), `Service` (сервисы)
-- **SCSS**: модульная структура `base → layout → components`
-- **React**: компонент `ServicesApp` (интерактивные карточки сервисов)
-- **Responsive**: breakpoints 1024px и 640px
+- Ruby 3.2.10
+- Node.js и npm
+- Bundler
 
-## Установка и запуск
+## Установка
 
 ```bash
-# 1. Установить зависимости Ruby
 bundle install
-
-# 2. Установить зависимости Node
 npm install
-
-# 3. Создать и подготовить базу данных
-rails db:create db:migrate db:seed
-
-# 4. Собрать assets (SCSS → CSS, JS + React → bundle)
-npm run build
-npm run build:css
-
-# 5. Запустить сервер
-rails server
-# → http://localhost:3000
+bin/rails db:create db:migrate db:seed
 ```
 
-Или одной командой:
+## Запуск в development
+
 ```bash
 bin/dev
 ```
 
+Приложение будет доступно по адресу `http://localhost:3000`.
+
+Альтернативно можно запускать процессы отдельно:
+
+```bash
+npm run build
+npm run build:css
+bin/rails server -p 3000
+```
+
+## Основные маршруты
+
+- `/` — главная страница
+- `/articles` — список статей
+- `/articles/:id` — страница статьи
+- `/services` — список сервисов
+- `/services/:id` — страница сервиса
+- `/up` — healthcheck
+
 ## Структура проекта
 
-```
+```text
 app/
-  controllers/          — Pages, Articles, Services
-  models/               — Article, Service
+  controllers/
+  models/
   views/
-    pages/home.html.erb — главная страница
-    articles/           — список и карточка статьи
-    services/           — список и карточка сервиса
   assets/
-    stylesheets/
-      base/             — шрифты, переменные, reset
-      layout/           — hero, page layout
-      components/       — nav, buttons, articles, services, footer
-    images/             — изображения из дизайна
-    fonts/              — Bounded Bold (heading font)
   javascript/
-    application.js      — entry point
-    components/
-      services_app.jsx  — React компонент
-db/
-  migrate/              — миграции Articles и Services
-  seeds.rb              — демо-данные (4 статьи, 2 сервиса)
 config/
-  routes.rb             — root → pages#home, REST ресурсы
+db/
+test/
 ```
 
-## Дизайн
+## Данные для разработки
 
-Макет: Figma node 17:2. Все дизайн-токены — в `app/assets/stylesheets/base/_variables.scss`.
+Команда `bin/rails db:seed` добавляет тестовые записи в таблицы `articles` и `services`.
+
+## Полезные команды
+
+```bash
+bin/rails test
+bin/rubocop
+```
