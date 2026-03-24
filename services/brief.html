@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Генератор ТЗ — СМЫСЛ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <script src="./tools.js" defer></script>
+</head>
+<body>
+  <div class="tool-page">
+    <header class="tool-page__header">
+      <a href="../index.html" class="tool-page__back">← на главную</a>
+      <h1 class="tool-page__title">Генератор ТЗ для дизайнера</h1>
+      <p class="tool-page__lead">Ответьте на 8 вопросов и получите готовый черновик технического задания.</p>
+    </header>
+
+    <section class="tool-card" id="brief-quiz" aria-label="Квиз генератора ТЗ">
+      <form class="tool-form" id="brief-quiz-form">
+        <label class="tool-field">
+          <span>1. Что нужно разработать?</span>
+          <select name="projectType" required>
+            <option value="Лендинг для услуги">Лендинг для услуги</option>
+            <option value="Многостраничный корпоративный сайт">Многостраничный корпоративный сайт</option>
+            <option value="Интернет-магазин">Интернет-магазин</option>
+            <option value="Презентация/коммерческое предложение">Презентация/коммерческое предложение</option>
+          </select>
+        </label>
+
+        <label class="tool-field">
+          <span>2. Какая цель проекта?</span>
+          <textarea name="goal" rows="2" required placeholder="Например: увеличить количество заявок с сайта"></textarea>
+        </label>
+
+        <label class="tool-field">
+          <span>3. Кто ваша целевая аудитория?</span>
+          <textarea name="audience" rows="2" required placeholder="Кому вы продаёте, кто будет читать сайт"></textarea>
+        </label>
+
+        <label class="tool-field">
+          <span>4. Какое основное действие должен сделать пользователь?</span>
+          <select name="cta" required>
+            <option value="Оставить заявку">Оставить заявку</option>
+            <option value="Позвонить">Позвонить</option>
+            <option value="Купить">Купить</option>
+            <option value="Скачать/получить материал">Скачать/получить материал</option>
+          </select>
+        </label>
+
+        <label class="tool-field">
+          <span>5. Есть ли фирменный стиль?</span>
+          <select name="brand" required>
+            <option value="Есть брендбук и готовые материалы">Есть брендбук и готовые материалы</option>
+            <option value="Есть логотип, но нет системы">Есть логотип, но нет системы</option>
+            <option value="Пока ничего нет">Пока ничего нет</option>
+          </select>
+        </label>
+
+        <label class="tool-field">
+          <span>6. Какие блоки точно должны быть на странице?</span>
+          <textarea name="blocks" rows="3" required placeholder="Например: оффер, преимущества, кейсы, отзывы, FAQ, контакты"></textarea>
+        </label>
+
+        <label class="tool-field">
+          <span>7. Срок запуска</span>
+          <select name="deadline" required>
+            <option value="до 2 недель">до 2 недель</option>
+            <option value="3–4 недели">3–4 недели</option>
+            <option value="1–2 месяца">1–2 месяца</option>
+            <option value="срок гибкий">срок гибкий</option>
+          </select>
+        </label>
+
+        <label class="tool-field">
+          <span>8. Дополнительные пожелания</span>
+          <textarea name="notes" rows="3" placeholder="Любые нюансы: примеры сайтов, ограничения, технические требования"></textarea>
+        </label>
+
+        <button type="submit" class="btn btn--primary tool-submit">Сформировать ТЗ</button>
+      </form>
+
+      <div class="tool-result" id="brief-result" hidden>
+        <div class="tool-result__head">
+          <h2>Готовый черновик ТЗ</h2>
+          <button type="button" class="btn btn--about" id="brief-copy">Скопировать</button>
+        </div>
+        <pre id="brief-output"></pre>
+        <p class="tool-result__note">Текст можно вставить в документ и доработать под проект.</p>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
