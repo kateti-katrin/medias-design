@@ -21,7 +21,7 @@ gem "marcel"
 gem "russian"
 
 # Pin psych to exactly bundled version (avoids libyaml native build)
-gem "psych", "= 5.0.1"
+gem "psych", "5.3.1"
 
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "solid_cache"
