@@ -1,2 +1,211 @@
-<h1>Articles#index</h1>
-<p>Find me in app/views/articles/index.html.erb</p>
+<% content_for :title, "Читать — СМЫСЛ" %>
+
+<%= content_for :head do %>
+<style>
+  /* ── Wrapper: mirrors page-content but with tighter internal gaps ── */
+  .articles-pg-wrap {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: var(--gap-block);
+    padding-bottom: var(--gap-section);
+    gap: var(--gap-block);
+  }
+
+  /* ── Page header: back link + title ── */
+  .articles-pg-head {
+    width: var(--w-content);
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-element);
+  }
+  .articles-pg-back {
+    font-family: 'Inter', sans-serif;
+    font-size: var(--fs-body);
+    color: var(--color-text);
+    opacity: 0.65;
+    text-decoration: none;
+    width: fit-content;
+    transition: opacity 0.15s;
+  }
+  .articles-pg-back:hover { opacity: 1; }
+  .articles-pg-title {
+    font-family: 'Bounded', system-ui, sans-serif;
+    font-size: clamp(60px, 9.722vw, 140px);
+    line-height: 0.92;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  /* ── Filters ── */
+  .articles-pg-filters {
+    width: var(--w-content);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--gap-tight);
+  }
+  .articles-pg-filter {
+    font-family: 'Inter', sans-serif;
+    font-size: var(--fs-label);
+    color: var(--color-text);
+    border: 1px solid rgba(252, 248, 201, 0.28);
+    background: transparent;
+    padding: 0.4vw 1.5vw;
+    cursor: pointer;
+    opacity: 0.5;
+    transition: opacity 0.15s, background 0.15s, border-color 0.15s;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    line-height: 1.4;
+  }
+  .articles-pg-filter:hover { opacity: 0.9; }
+  .articles-pg-filter.is-active {
+    background: rgba(252, 248, 201, 0.08);
+    border-color: rgba(252, 248, 201, 0.6);
+    opacity: 1;
+  }
+
+  /* ── Hidden cards via filter ── */
+  .article-card[hidden] { display: none; }
+
+  /* ── Responsive ── */
+  @media (max-width: 1024px) {
+    .articles-pg-head,
+    .articles-pg-filters { width: calc(100% - 40px); }
+    .articles-pg-title { font-size: clamp(48px, 8vw, 100px); }
+    .articles-pg-filter { padding: 6px 16px; font-size: 12px; }
+  }
+  @media (max-width: 640px) {
+    .articles-pg-head,
+    .articles-pg-filters { width: calc(100% - 24px); }
+    .articles-pg-wrap { padding-top: 40px; gap: 40px; }
+  }
+</style>
+<% end %>
+
+<div class="bg-grid" aria-hidden="true">
+  <%= image_tag "bg-decoration.svg", alt: "" %>
+</div>
+
+<div class="articles-pg-wrap">
+
+  <%# ── Header ── %>
+  <div class="articles-pg-head">
+    <%= link_to "← на главную", root_path, class: "articles-pg-back" %>
+    <h1 class="articles-pg-title">Читать</h1>
+  </div>
+
+  <%# ── Filters ── %>
+  <div class="articles-pg-filters" role="group" aria-label="Фильтр по темам">
+    <button class="articles-pg-filter is-active" data-filter="all">Все материалы</button>
+    <button class="articles-pg-filter" data-filter="задача">[ задача ]</button>
+    <button class="articles-pg-filter" data-filter="оценка">[ оценка ]</button>
+    <button class="articles-pg-filter" data-filter="деньги">[ деньги ]</button>
+    <button class="articles-pg-filter" data-filter="процесс">[ процесс ]</button>
+  </div>
+
+  <%# ── Cards — same structure and classes as home page ── %>
+  <div class="articles">
+
+    <div class="articles-row">
+
+      <%= link_to article_path(1), class: "article-card article-card--large", data: { tag: "задача" } do %>
+        <div class="article-img article-img--large">
+          <div class="article-img__photo">
+            <%= image_tag "article-large.png", alt: "" %>
+          </div>
+          <div class="article-img__overlay" aria-hidden="true">
+            <%= image_tag "article-large-overlay.png", alt: "" %>
+            <div class="article-img__tint"></div>
+          </div>
+        </div>
+        <div class="article-card__body article-card__body--large">
+          <p class="article-card__tag">[ задача ]</p>
+          <p class="article-card__title">Как поставить задачу дизайнеру, чтобы не переделывать 3 раза</p>
+        </div>
+      <% end %>
+
+      <%= link_to article_path(2), class: "article-card article-card--small", data: { tag: "оценка" } do %>
+        <div class="article-img article-img--small">
+          <div class="article-img__photo">
+            <%= image_tag "article-small.png", alt: "" %>
+          </div>
+          <div class="article-img__overlay" aria-hidden="true">
+            <%= image_tag "article-small-overlay.png", alt: "" %>
+            <div class="article-img__gradient"></div>
+          </div>
+        </div>
+        <div class="article-card__body">
+          <p class="article-card__tag">[ оценка ]</p>
+          <p class="article-card__title">Что ломает лендинг ещё до первого экрана</p>
+        </div>
+      <% end %>
+
+    </div>
+
+    <div class="articles-row">
+
+      <%= link_to article_path(3), class: "article-card article-card--small", data: { tag: "деньги" } do %>
+        <div class="article-img article-img--small article-img--simple">
+          <div class="article-img__photo">
+            <%= image_tag "article-small.png", alt: "" %>
+          </div>
+        </div>
+        <div class="article-card__body">
+          <p class="article-card__tag">[ деньги ]</p>
+          <p class="article-card__title">Почему один и тот же сайт стоит по‑разному</p>
+        </div>
+      <% end %>
+
+      <%= link_to article_path(4), class: "article-card article-card--large", data: { tag: "процесс" } do %>
+        <div class="article-img article-img--large article-img--simple">
+          <div class="article-img__photo">
+            <%= image_tag "article-large.png", alt: "" %>
+          </div>
+        </div>
+        <div class="article-card__body article-card__body--large">
+          <p class="article-card__tag">[ процесс ]</p>
+          <p class="article-card__title">Почему правки в дизайне съедают сроки и результат</p>
+        </div>
+      <% end %>
+
+    </div>
+
+  </div>
+
+</div>
+
+<%# ── Footer — full-width, same as home page ── %>
+<footer class="site-footer">
+  <div class="site-footer__logo">
+    <%= image_tag "logo-smysl-footer.svg", alt: "СМЫСЛ" %>
+  </div>
+  <p class="site-footer__tagline">Пишем о продающем визуале</p>
+  <nav class="site-footer__nav" aria-label="Навигация в подвале">
+    <%= link_to "главная",  root_path,                class: "site-nav__link" %>
+    <%= link_to "Статьи",   articles_path,            class: "site-nav__link" %>
+    <%= link_to "Задача",   brief_services_path,      class: "site-nav__link" %>
+    <%= link_to "бюджет",   calculator_services_path, class: "site-nav__link" %>
+    <%= link_to "о нас",    "#",                      class: "site-nav__link" %>
+  </nav>
+</footer>
+
+<script>
+  (function () {
+    var filters = document.querySelectorAll(".articles-pg-filter");
+    var cards   = document.querySelectorAll(".articles [data-tag]");
+    filters.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var tag = btn.dataset.filter;
+        filters.forEach(function (b) { b.classList.remove("is-active"); });
+        btn.classList.add("is-active");
+        cards.forEach(function (card) {
+          card.hidden = !(tag === "all" || card.dataset.tag === tag);
+        });
+      });
+    });
+  })();
+</script>

@@ -5,5 +5,6 @@ class ArticlesController < ApplicationController
 
   def show
     @article = Article.find(params[:id])
+    @other_articles = Article.where.not(id: @article.id).order(:id)
   end
 end

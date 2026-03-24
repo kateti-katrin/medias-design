@@ -64,7 +64,7 @@
       <!-- Row 1: large LEFT, small RIGHT -->
       <div class="articles-row">
 
-        <article class="article-card article-card--large">
+        <%= link_to article_path(@articles[0]), class: "article-card article-card--large" do %>
           <div class="article-img article-img--large">
             <div class="article-img__photo">
               <%= image_tag "article-large.png", alt: "" %>
@@ -80,9 +80,9 @@
               <%= @articles[0]&.title || "Как поставить задачу дизайнеру, чтобы не переделывать 3 раза" %>
             </p>
           </div>
-        </article>
+        <% end %>
 
-        <article class="article-card article-card--small">
+        <%= link_to article_path(@articles[1]), class: "article-card article-card--small" do %>
           <div class="article-img article-img--small">
             <div class="article-img__photo">
               <%= image_tag "article-small.png", alt: "" %>
@@ -98,14 +98,14 @@
               <%= @articles[1]&.title || "Что ломает лендинг ещё до первого экрана" %>
             </p>
           </div>
-        </article>
+        <% end %>
 
       </div>
 
       <!-- Row 2: small LEFT, large RIGHT -->
       <div class="articles-row">
 
-        <article class="article-card article-card--small">
+        <%= link_to article_path(@articles[2]), class: "article-card article-card--small" do %>
           <div class="article-img article-img--small article-img--simple">
             <div class="article-img__photo">
               <%= image_tag "article-small.png", alt: "" %>
@@ -117,9 +117,9 @@
               <%= @articles[2]&.title || "Почему один и тот же сайт стоит по‑разному" %>
             </p>
           </div>
-        </article>
+        <% end %>
 
-        <article class="article-card article-card--large">
+        <%= link_to article_path(@articles[3]), class: "article-card article-card--large" do %>
           <div class="article-img article-img--large article-img--simple">
             <div class="article-img__photo">
               <%= image_tag "article-large.png", alt: "" %>
@@ -131,7 +131,7 @@
               <%= @articles[3]&.title || "Почему правки в дизайне съедают сроки и результат" %>
             </p>
           </div>
-        </article>
+        <% end %>
 
       </div>
 

@@ -1,2 +1,429 @@
-<h1>Articles#show</h1>
-<p>Find me in app/views/articles/show.html.erb</p>
+<% content_for :title, "#{@article.title} — СМЫСЛ" %>
+
+<%= content_for :head do %>
+<style>
+  .art-wrap {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: var(--gap-block);
+    padding-bottom: var(--gap-section);
+    gap: var(--gap-block);
+  }
+
+  /* Breadcrumbs */
+  .art-breadcrumbs {
+    width: var(--w-content);
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    font-family: 'Inter', sans-serif;
+    font-size: var(--fs-label);
+    color: var(--color-text);
+    opacity: 0.5;
+    flex-wrap: wrap;
+  }
+  .art-breadcrumbs a { color: var(--color-text); text-decoration: none; transition: opacity 0.15s; }
+  .art-breadcrumbs a:hover { opacity: 1.8; }
+  .art-breadcrumbs__sep { opacity: 0.4; }
+  .art-breadcrumbs__current { opacity: 1.8; }
+
+  /* Head */
+  .art-head {
+    width: var(--w-content);
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-tight);
+  }
+  .art-tag {
+    font-family: 'Inter', sans-serif;
+    font-size: var(--fs-label);
+    color: var(--color-text);
+    text-transform: uppercase;
+    opacity: 0.55;
+    letter-spacing: 0.06em;
+  }
+  .art-title {
+    font-family: 'Bounded', system-ui, sans-serif;
+    font-size: clamp(36px, 5.556vw, 80px);
+    line-height: 1.0;
+    letter-spacing: -0.03em;
+    text-transform: uppercase;
+    color: var(--color-text);
+    margin: 0;
+    max-width: 78%;
+  }
+
+  /* Cover */
+  .art-cover {
+    width: var(--w-content);
+    height: var(--h-article-large);
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+  .art-cover img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Reading column */
+  .art-col {
+    width: var(--w-col-text);
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-element);
+  }
+
+  /* Author */
+  .art-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding-bottom: var(--gap-element);
+    border-bottom: 1px solid rgba(252, 248, 201, 0.15);
+  }
+  .art-meta__avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgba(252, 248, 201, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    background: rgba(252, 248, 201, 0.05);
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--color-text);
+    opacity: 0.7;
+    letter-spacing: 0.04em;
+  }
+  .art-meta__author {
+    font-family: 'Inter', sans-serif;
+    font-size: var(--fs-body);
+    font-weight: 500;
+    color: var(--color-text);
+    line-height: 1.2;
+  }
+  .art-meta__details {
+    font-family: 'Inter', sans-serif;
+    font-size: var(--fs-label);
+    color: var(--color-text);
+    opacity: 0.45;
+    line-height: 1.2;
+    margin-top: 3px;
+  }
+
+  /* Body — Inter only */
+  .art-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-tight);
+  }
+  .art-body p {
+    font-family: 'Inter', sans-serif;
+    font-size: var(--fs-body-md);
+    line-height: 1.6;
+    color: var(--color-text);
+    margin: 0;
+  }
+  .art-body h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: var(--fs-body-md);
+    font-weight: 500;
+    line-height: 1.3;
+    color: var(--color-text);
+    margin: calc(var(--gap-tight) * 0.5) 0 0;
+    opacity: 0.9;
+    letter-spacing: 0.01em;
+  }
+
+  /* Engagement */
+  .art-engage {
+    display: flex;
+    align-items: center;
+    gap: var(--gap-element);
+    padding-top: var(--gap-element);
+    border-top: 1px solid rgba(252, 248, 201, 0.15);
+  }
+  .art-engage__btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: var(--fs-label);
+    color: var(--color-text);
+    opacity: 0.5;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    transition: opacity 0.15s;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  .art-engage__btn:hover { opacity: 1; }
+  .art-engage__btn.is-liked { opacity: 1; }
+  .art-engage__views {
+    font-family: 'Inter', sans-serif;
+    font-size: var(--fs-label);
+    color: var(--color-text);
+    opacity: 0.3;
+    margin-left: auto;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  /* More articles */
+  .art-more {
+    width: var(--w-content);
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-block);
+  }
+  .art-more__label {
+    font-family: 'Bounded', system-ui, sans-serif;
+    font-size: clamp(28px, 3.333vw, 48px);
+    line-height: 1.0;
+    letter-spacing: -0.025em;
+    text-transform: uppercase;
+    color: var(--color-text);
+    margin: 0;
+  }
+  .art-more__grid {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--gap-element);
+  }
+  .art-more__card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-tight);
+    flex: 1;
+    text-decoration: none;
+    color: var(--color-text);
+    transition: opacity 0.15s;
+  }
+  .art-more__card:hover { opacity: 0.7; }
+  .art-more__img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    position: relative;
+    overflow: hidden;
+  }
+  .art-more__img img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .art-more__tag {
+    font-family: 'Inter', sans-serif;
+    font-size: var(--fs-label);
+    text-transform: uppercase;
+    opacity: 0.5;
+    letter-spacing: 0.04em;
+  }
+  .art-more__title {
+    font-family: 'Inter', sans-serif;
+    font-size: var(--fs-body-md);
+    line-height: 1.3;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .art-breadcrumbs, .art-head, .art-cover, .art-more { width: calc(100% - 40px); }
+    .art-col { width: calc(100% - 40px); }
+    .art-cover { height: 380px; }
+    .art-title { max-width: 100%; font-size: clamp(32px, 5vw, 60px); }
+    .art-more__grid { flex-wrap: wrap; }
+    .art-more__card { flex: 1 1 calc(50% - 16px); min-width: 200px; }
+  }
+  @media (max-width: 640px) {
+    .art-breadcrumbs, .art-head, .art-cover, .art-more, .art-col { width: calc(100% - 24px); }
+    .art-wrap { padding-top: 40px; gap: 40px; }
+    .art-cover { height: 240px; }
+    .art-more__grid { flex-direction: column; }
+  }
+</style>
+<% end %>
+
+<div class="bg-grid" aria-hidden="true">
+  <%= image_tag "bg-decoration.svg", alt: "" %>
+</div>
+
+<div class="art-wrap">
+
+  <%# Breadcrumbs %>
+  <nav class="art-breadcrumbs" aria-label="Навигация">
+    <%= link_to "Главная", root_path %>
+    <span class="art-breadcrumbs__sep">—</span>
+    <%= link_to "Статьи", articles_path %>
+    <span class="art-breadcrumbs__sep">—</span>
+    <span class="art-breadcrumbs__current">[ <%= @article.tag %> ]</span>
+  </nav>
+
+  <%# Tag + Title %>
+  <div class="art-head">
+    <p class="art-tag">[ <%= @article.tag %> ]</p>
+    <h1 class="art-title"><%= @article.title %></h1>
+  </div>
+
+  <%# Cover %>
+  <div class="art-cover">
+    <%= image_tag @article.image, alt: @article.title %>
+  </div>
+
+  <%# Reading column %>
+  <div class="art-col">
+
+    <%# Author %>
+    <div class="art-meta">
+      <div class="art-meta__avatar" aria-hidden="true">СМ</div>
+      <div>
+        <div class="art-meta__author">Редакция «Смысл»</div>
+        <div class="art-meta__details">Март 2026&nbsp;&nbsp;·&nbsp;&nbsp;4 минуты</div>
+      </div>
+    </div>
+
+    <%# Body — renders ## headings as h2, **bold** as strong, plain text as p %>
+    <div class="art-body">
+      <% @article.body.to_s.strip.split(/\n{2,}/).each do |block| %>
+        <% block = block.strip %>
+        <% if block.start_with?("## ") %>
+          <h2><%= block.sub(/^## /, "") %></h2>
+        <% else %>
+          <p><%= raw block.gsub(/\*\*(.+?)\*\*/, '<strong>\1</strong>') %></p>
+        <% end %>
+      <% end %>
+    </div>
+
+    <%# Engagement %>
+    <div class="art-engage" id="art-engage">
+      <button class="art-engage__btn" id="like-btn" aria-label="Поставить лайк">
+        <svg width="18" height="16" viewBox="0 0 18 16" fill="none">
+          <path id="like-icon"
+            d="M9 15S1 10.2 1 4.8C1 2.7 2.7 1 4.8 1c1.2 0 2.3.6 3 1.5L9 4l1.2-1.5C10.9 1.6 12 1 13.2 1 15.3 1 17 2.7 17 4.8 17 10.2 9 15 9 15z"
+            stroke="currentColor" stroke-width="1.2" fill="none"/>
+        </svg>
+        <span id="like-count"></span>
+      </button>
+
+      <button class="art-engage__btn" id="share-btn" aria-label="Поделиться">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <circle cx="13" cy="3" r="2" stroke="currentColor" stroke-width="1.2"/>
+          <circle cx="3" cy="8" r="2" stroke="currentColor" stroke-width="1.2"/>
+          <circle cx="13" cy="13" r="2" stroke="currentColor" stroke-width="1.2"/>
+          <line x1="4.9" y1="7" x2="11.1" y2="4" stroke="currentColor" stroke-width="1.2"/>
+          <line x1="4.9" y1="9" x2="11.1" y2="12" stroke="currentColor" stroke-width="1.2"/>
+        </svg>
+        <span id="share-label">Поделиться</span>
+      </button>
+
+      <span class="art-engage__views" id="views-count" aria-label="Просмотры"></span>
+    </div>
+
+  </div>
+
+  <%# More articles %>
+  <% if @other_articles.any? %>
+  <div class="art-more">
+    <h2 class="art-more__label">Что ещё почитать</h2>
+    <div class="art-more__grid">
+      <% @other_articles.each do |art| %>
+        <%= link_to article_path(art), class: "art-more__card" do %>
+          <div class="art-more__img">
+            <%= image_tag art.image, alt: art.title %>
+          </div>
+          <p class="art-more__tag">[ <%= art.tag %> ]</p>
+          <p class="art-more__title"><%= art.title %></p>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <% end %>
+
+</div>
+
+<%# Footer — full-width %>
+<footer class="site-footer">
+  <div class="site-footer__logo">
+    <%= image_tag "logo-smysl-footer.svg", alt: "СМЫСЛ" %>
+  </div>
+  <p class="site-footer__tagline">Пишем о продающем визуале</p>
+  <nav class="site-footer__nav" aria-label="Навигация в подвале">
+    <%= link_to "главная",  root_path,                class: "site-nav__link" %>
+    <%= link_to "Статьи",   articles_path,            class: "site-nav__link" %>
+    <%= link_to "Задача",   brief_services_path,      class: "site-nav__link" %>
+    <%= link_to "бюджет",   calculator_services_path, class: "site-nav__link" %>
+    <%= link_to "о нас",    "#",                      class: "site-nav__link" %>
+  </nav>
+</footer>
+
+<script>
+(function () {
+  var AID        = "<%= @article.id %>";
+  var BASE_LIKES = [0, 214, 87, 156, 93][+AID] || 120;
+  var BASE_VIEWS = [0, 1842, 957, 1203, 741][+AID] || 800;
+
+  /* ── Views: increment on every page load ── */
+  var VIEWS_KEY = "smysl_views_" + AID;
+  var storedViews = parseInt(localStorage.getItem(VIEWS_KEY) || "0", 10);
+  storedViews += 1;
+  localStorage.setItem(VIEWS_KEY, storedViews);
+  var totalViews = BASE_VIEWS + storedViews;
+  document.getElementById("views-count").textContent =
+    totalViews.toLocaleString("ru-RU") + "\u00a0просмотров";
+
+  /* ── Like ── */
+  var LIKE_KEY  = "smysl_like_" + AID;
+  var likeBtn   = document.getElementById("like-btn");
+  var likeCount = document.getElementById("like-count");
+  var liked     = localStorage.getItem(LIKE_KEY) === "1";
+
+  function renderLike() {
+    likeCount.textContent = (BASE_LIKES + (liked ? 1 : 0)).toString();
+    likeBtn.classList.toggle("is-liked", liked);
+    var path = likeBtn.querySelector("path");
+    if (path) path.style.fill = liked ? "currentColor" : "none";
+  }
+  renderLike();
+
+  likeBtn.addEventListener("click", function () {
+    liked = !liked;
+    localStorage.setItem(LIKE_KEY, liked ? "1" : "0");
+    renderLike();
+  });
+
+  /* ── Share ── */
+  var shareBtn   = document.getElementById("share-btn");
+  var shareLabel = document.getElementById("share-label");
+
+  shareBtn.addEventListener("click", async function () {
+    var url   = window.location.href;
+    var title = document.title;
+    if (navigator.share) {
+      try { await navigator.share({ title: title, url: url }); } catch (_) {}
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(url);
+    } catch (_) {
+      var ta = document.createElement("textarea");
+      ta.value = url; ta.style.position = "fixed"; ta.style.left = "-9999px";
+      document.body.appendChild(ta); ta.select();
+      document.execCommand("copy"); document.body.removeChild(ta);
+    }
+    var old = shareLabel.textContent;
+    shareLabel.textContent = "Ссылка скопирована";
+    setTimeout(function () { shareLabel.textContent = old; }, 1600);
+  });
+})();
+</script>

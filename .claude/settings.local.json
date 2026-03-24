@@ -44,7 +44,17 @@
       "Bash(bundle install:*)",
       "Bash(bin/rails server:*)",
       "Bash(ls /Users/kateti_katrin/Documents/site-001/*.css /Users/kateti_katrin/Documents/site-001/*.js)",
-      "Bash(ls /Users/kateti_katrin/Documents/site-001/*.css)"
+      "Bash(ls /Users/kateti_katrin/Documents/site-001/*.css)",
+      "Bash(bundle exec:*)",
+      "Bash(sed -n '79,100p' /Users/kateti_katrin/Documents/site-001/styles.css)",
+      "Bash(sed -n '699,750p' /Users/kateti_katrin/Documents/site-001/styles.css)",
+      "Bash(export PATH=/opt/homebrew/Cellar/ruby/4.0.2/bin:/opt/homebrew/bin:$PATH)",
+      "Bash(sed -n '38,44p' /Users/kateti_katrin/Documents/site-001/db/seeds.rb)",
+      "Bash(sed -n '65,71p' /Users/kateti_katrin/Documents/site-001/db/seeds.rb)",
+      "Bash(sed -n '92,98p' /Users/kateti_katrin/Documents/site-001/db/seeds.rb)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/articles/1)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/articles/4)",
+      "Bash(curl:*)"
     ]
   }
 }
