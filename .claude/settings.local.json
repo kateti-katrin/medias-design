@@ -65,7 +65,13 @@
       "Bash(cat /Users/kateti_katrin/Documents/site-001/db/migrate/*_create_articles.rb)",
       "Bash(wc -l /Users/kateti_katrin/Documents/site-001/app/assets/stylesheets/components/*.scss)",
       "Bash(/opt/homebrew/Cellar/ruby/4.0.2/bin/bundle add:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(echo $SHELL)",
+      "Read(//Users/kateti_katrin/**)",
+      "Bash(/opt/homebrew/Cellar/ruby/4.0.2/bin/ruby --version)",
+      "Read(//opt/homebrew/Cellar/ruby/4.0.2/bin/**)",
+      "Bash(find /Users/kateti_katrin/Documents/site-001 -name *.pdf -o -name *.docx -o -name *.md -o -name *ТЗ* -o -name *tз* -o -name *requirements*)"
     ]
   }
 }
