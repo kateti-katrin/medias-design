@@ -12,7 +12,7 @@
   line-height:     1.2;
   text-transform:  uppercase;
   white-space:     nowrap;
-  padding:         0.556vw 6.944vw;
+  padding:         8px 100px;
   background:      transparent;
   cursor:          pointer;
   flex-shrink:     0;
@@ -30,7 +30,7 @@
   &--about {
     width:            var(--w-btn-about);
     font-size:        var(--fs-label);
-    padding:          0.556vw 0;
+    padding:          8px 0;
     background-color: var(--color-bg);
   }
 }
