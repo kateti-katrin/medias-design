@@ -1,0 +1,2 @@
+class PricingArticle < Article
+end

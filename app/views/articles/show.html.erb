@@ -1,4 +1,16 @@
 <% content_for :title, "#{@article.title} — СМЫСЛ" %>
+<% article_description = @article.excerpt.presence || @article.body.to_s.gsub(/\s+/, " ").truncate(180) %>
+<% set_meta_tags(
+  description: article_description,
+  canonical: article_url(@article),
+  og: {
+    title: "#{@article.title} — СМЫСЛ",
+    description: article_description,
+    type: "article",
+    url: article_url(@article),
+    image: @article.image
+  }
+) %>
 
 <%= content_for :head do %>
 <style>
@@ -300,7 +312,7 @@
         <% if block.start_with?("## ") %>
           <h2><%= block.sub(/^## /, "") %></h2>
         <% else %>
-          <p><%= raw block.gsub(/\*\*(.+?)\*\*/, '<strong>\1</strong>') %></p>
+          <p><%= sanitize block.gsub(/\*\*(.+?)\*\*/, '<strong>\1</strong>'), tags: %w[strong em] %></p>
         <% end %>
       <% end %>
     </div>
@@ -371,16 +383,29 @@
 (function () {
   var AID        = "<%= @article.id %>";
   var BASE_LIKES = [0, 214, 87, 156, 93][+AID] || 120;
-  var BASE_VIEWS = [0, 1842, 957, 1203, 741][+AID] || 800;
+  var viewsNode  = document.getElementById("views-count");
+  var csrfToken  = document.querySelector('meta[name="csrf-token"]')?.getAttribute("content");
 
-  /* ── Views: increment on every page load ── */
-  var VIEWS_KEY = "smysl_views_" + AID;
-  var storedViews = parseInt(localStorage.getItem(VIEWS_KEY) || "0", 10);
-  storedViews += 1;
-  localStorage.setItem(VIEWS_KEY, storedViews);
-  var totalViews = BASE_VIEWS + storedViews;
-  document.getElementById("views-count").textContent =
-    totalViews.toLocaleString("ru-RU") + "\u00a0просмотров";
+  /* ── Views: backend counter via Rails JSON endpoint ── */
+  fetch("<%= track_view_article_path(@article) %>", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "X-CSRF-Token": csrfToken,
+      "Accept": "application/json"
+    },
+    credentials: "same-origin"
+  })
+    .then(function (response) { return response.ok ? response.json() : null; })
+    .then(function (payload) {
+      if (!payload || !viewsNode) return;
+      viewsNode.textContent =
+        Number(payload.views_count || 0).toLocaleString("ru-RU") + "\u00a0просмотров";
+    })
+    .catch(function () {
+      if (!viewsNode) return;
+      viewsNode.textContent = "<%= @article.views_count %>\u00a0просмотров";
+    });
 
   /* ── Like ── */
   var LIKE_KEY  = "smysl_like_" + AID;

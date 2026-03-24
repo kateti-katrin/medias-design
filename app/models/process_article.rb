@@ -1,0 +1,2 @@
+class ProcessArticle < Article
+end

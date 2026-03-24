@@ -54,7 +54,18 @@
       "Bash(sed -n '92,98p' /Users/kateti_katrin/Documents/site-001/db/seeds.rb)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/articles/1)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/articles/4)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(bin/rails db:migrate 2>&1)",
+      "Bash(BUNDLE_GEMFILE=/Users/kateti_katrin/Documents/site-001/Gemfile /opt/homebrew/Cellar/ruby/4.0.2/bin/ruby bin/rails db:migrate 2>&1)",
+      "Bash(/opt/homebrew/Cellar/ruby/4.0.2/bin/bundle install:*)",
+      "Bash(/opt/homebrew/Cellar/ruby/4.0.2/bin/bundle exec:*)",
+      "Bash(brew install:*)",
+      "Bash(grep:*)",
+      "Bash(cat /Users/kateti_katrin/Documents/site-001/db/migrate/*_create_users.rb)",
+      "Bash(cat /Users/kateti_katrin/Documents/site-001/db/migrate/*_create_articles.rb)",
+      "Bash(wc -l /Users/kateti_katrin/Documents/site-001/app/assets/stylesheets/components/*.scss)",
+      "Bash(/opt/homebrew/Cellar/ruby/4.0.2/bin/bundle add:*)",
+      "Bash(git add:*)"
     ]
   }
 }

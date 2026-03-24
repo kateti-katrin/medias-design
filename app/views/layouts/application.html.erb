@@ -2,7 +2,15 @@
 <html lang="ru">
   <head>
     <meta charset="UTF-8">
-    <title><%= content_for(:title) || "СМЫСЛ — медиа о дизайне" %></title>
+    <title><%= meta_title %></title>
+    <meta name="description" content="<%= meta_description %>">
+    <link rel="canonical" href="<%= meta_canonical_url %>">
+
+    <meta property="og:title" content="<%= meta_og_title %>">
+    <meta property="og:description" content="<%= meta_og_description %>">
+    <meta property="og:type" content="<%= meta_og_type %>">
+    <meta property="og:url" content="<%= meta_og_url %>">
+    <meta property="og:image" content="<%= meta_og_image %>">
     <meta name="viewport" content="width=1440">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>

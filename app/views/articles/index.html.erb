@@ -1,4 +1,12 @@
 <% content_for :title, "Читать — СМЫСЛ" %>
+<% set_meta_tags(
+  description: "Подборка материалов «Смысл» о задаче, оценке, бюджете и процессе работы с дизайном.",
+  canonical: articles_url,
+  og: {
+    type: "website",
+    image: "article-large.png"
+  }
+) %>
 
 <%= content_for :head do %>
 <style>
@@ -91,6 +99,11 @@
 </div>
 
 <div class="articles-pg-wrap">
+  <% article_by_tag = @articles.index_by(&:tag) %>
+  <% article_task = article_by_tag["задача"] || @articles[0] %>
+  <% article_eval = article_by_tag["оценка"] || @articles[1] %>
+  <% article_money = article_by_tag["деньги"] || @articles[2] %>
+  <% article_process = article_by_tag["процесс"] || @articles[3] %>
 
   <%# ── Header ── %>
   <div class="articles-pg-head">
@@ -112,7 +125,7 @@
 
     <div class="articles-row">
 
-      <%= link_to article_path(1), class: "article-card article-card--large", data: { tag: "задача" } do %>
+      <%= link_to article_path(article_task), class: "article-card article-card--large", data: { tag: "задача" } do %>
         <div class="article-img article-img--large">
           <div class="article-img__photo">
             <%= image_tag "article-large.png", alt: "" %>
@@ -128,7 +141,7 @@
         </div>
       <% end %>
 
-      <%= link_to article_path(2), class: "article-card article-card--small", data: { tag: "оценка" } do %>
+      <%= link_to article_path(article_eval), class: "article-card article-card--small", data: { tag: "оценка" } do %>
         <div class="article-img article-img--small">
           <div class="article-img__photo">
             <%= image_tag "article-small.png", alt: "" %>
@@ -148,7 +161,7 @@
 
     <div class="articles-row">
 
-      <%= link_to article_path(3), class: "article-card article-card--small", data: { tag: "деньги" } do %>
+      <%= link_to article_path(article_money), class: "article-card article-card--small", data: { tag: "деньги" } do %>
         <div class="article-img article-img--small article-img--simple">
           <div class="article-img__photo">
             <%= image_tag "article-small.png", alt: "" %>
@@ -160,7 +173,7 @@
         </div>
       <% end %>
 
-      <%= link_to article_path(4), class: "article-card article-card--large", data: { tag: "процесс" } do %>
+      <%= link_to article_path(article_process), class: "article-card article-card--large", data: { tag: "процесс" } do %>
         <div class="article-img article-img--large article-img--simple">
           <div class="article-img__photo">
             <%= image_tag "article-large.png", alt: "" %>

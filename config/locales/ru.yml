@@ -1,2 +1,257 @@
 ru:
+  # ── Общий интерфейс ───────────────────────────────────────────────────────
   hello: "Привет, мир"
+
+  site:
+    name: "Сайт"
+    tagline: "Добро пожаловать"
+
+  actions:
+    save: "Сохранить"
+    cancel: "Отмена"
+    delete: "Удалить"
+    edit: "Редактировать"
+    back: "Назад"
+    show: "Показать"
+    new: "Создать"
+    submit: "Отправить"
+    confirm: "Вы уверены?"
+    search: "Поиск"
+    load_more: "Загрузить ещё"
+
+  # ── Devise ────────────────────────────────────────────────────────────────
+  errors:
+    messages:
+      already_confirmed: "уже подтверждён, попробуйте войти"
+      confirmation_period_expired: "необходимо подтвердить в течение %{period}, пожалуйста запросите новое письмо"
+      expired: "устарел, пожалуйста запросите новый"
+      not_found: "не найден"
+      not_locked: "не заблокирован"
+      not_saved:
+        one: "Невозможно сохранить %{resource}: обнаружена 1 ошибка."
+        other: "Невозможно сохранить %{resource}: обнаружены %{count} ошибки(-ок)."
+
+  devise:
+    confirmations:
+      confirmed: "Ваш адрес электронной почты успешно подтверждён."
+      send_instructions: "Вам будет отправлено письмо с инструкциями по подтверждению."
+      send_paranoid_instructions: "Если ваш адрес существует в базе данных, вы получите письмо с инструкциями."
+    failure:
+      already_authenticated: "Вы уже вошли в систему."
+      inactive: "Ваш аккаунт ещё не активирован."
+      invalid: "Неверный %{authentication_keys} или пароль."
+      last_attempt: "Последняя попытка. Ваш аккаунт будет заблокирован."
+      locked: "Ваш аккаунт заблокирован."
+      not_found_in_database: "Неверный %{authentication_keys} или пароль."
+      timeout: "Ваша сессия истекла, войдите снова для продолжения."
+      unauthenticated: "Вам необходимо войти в систему или зарегистрироваться."
+      unconfirmed: "Подтвердите ваш адрес электронной почты перед продолжением."
+    mailer:
+      confirmation_instructions:
+        subject: "Инструкции по подтверждению"
+      reset_password_instructions:
+        subject: "Инструкции по изменению пароля"
+      unlock_instructions:
+        subject: "Инструкции по разблокировке"
+      email_changed:
+        subject: "Email изменён"
+      password_change:
+        subject: "Пароль изменён"
+    passwords:
+      no_token: "Вы не можете открыть эту страницу без токена сброса пароля."
+      send_instructions: "Вы получите письмо с инструкциями по изменению пароля в течение нескольких минут."
+      send_paranoid_instructions: "Если ваш адрес существует в базе данных, вы получите письмо с инструкциями по изменению пароля."
+      updated: "Ваш пароль изменён. Вы вошли в систему."
+      updated_not_active: "Ваш пароль изменён."
+    registrations:
+      destroyed: "Ваш аккаунт удалён."
+      signed_up: "Добро пожаловать! Вы успешно зарегистрировались."
+      signed_up_but_inactive: "Вы зарегистрированы, но аккаунт не активирован."
+      signed_up_but_locked: "Вы зарегистрированы, но аккаунт заблокирован."
+      signed_up_but_unconfirmed: "На ваш адрес отправлено письмо с подтверждением."
+      update_needs_confirmation: "Аккаунт обновлён, но необходимо подтвердить новый email."
+      updated: "Ваш аккаунт успешно обновлён."
+      updated_but_not_signed_in: "Аккаунт обновлён. Войдите снова."
+    sessions:
+      already_signed_out: "Вы успешно вышли из системы."
+      signed_in: "Вы успешно вошли в систему."
+      signed_out: "Вы успешно вышли из системы."
+    unlocks:
+      send_instructions: "Вы получите письмо с инструкциями по разблокировке."
+      send_paranoid_instructions: "Если ваш аккаунт существует, вы получите письмо с инструкциями по разблокировке."
+      unlocked: "Ваш аккаунт разблокирован."
+    shared:
+      links:
+        back: "Назад"
+        didn_t_receive_confirmation_instructions: "Не получили инструкции по подтверждению?"
+        didn_t_receive_unlock_instructions: "Не получили инструкции по разблокировке?"
+        forgot_your_password: "Забыли пароль?"
+        sign_in: "Войти"
+        sign_in_with_provider: "Войти через %{provider}"
+        sign_up: "Регистрация"
+      minimum_password_length:
+        one: "(минимум %{count} символ)"
+        few: "(минимум %{count} символа)"
+        many: "(минимум %{count} символов)"
+        other: "(минимум %{count} символов)"
+
+  # ── Модели ────────────────────────────────────────────────────────────────
+  activerecord:
+    models:
+      article:
+        one: "Статья"
+        few: "Статьи"
+        many: "Статьи"
+        other: "Статей"
+      service:
+        one: "Услуга"
+        few: "Услуги"
+        many: "Услуги"
+        other: "Услуг"
+      comment:
+        one: "Комментарий"
+        few: "Комментария"
+        many: "Комментариев"
+        other: "Комментариев"
+      tag:
+        one: "Тег"
+        few: "Тега"
+        many: "Тегов"
+        other: "Тегов"
+      user:
+        one: "Пользователь"
+        few: "Пользователя"
+        many: "Пользователей"
+        other: "Пользователей"
+    attributes:
+      user:
+        email: "Email"
+        password: "Пароль"
+        password_confirmation: "Подтверждение пароля"
+        remember_me: "Запомнить меня"
+        current_password: "Текущий пароль"
+      profile:
+        display_name: "Отображаемое имя"
+        bio: "О себе"
+        avatar: "Аватар"
+      article:
+        title: "Заголовок"
+        body: "Содержание"
+        excerpt: "Краткое описание"
+        image: "Изображение"
+        cover_image: "Обложка"
+        slug: "URL-идентификатор"
+        tag: "Тег"
+        created_at: "Дата публикации"
+        views_count: "Просмотры"
+      service:
+        title: "Название"
+        body: "Описание"
+        slug: "URL"
+      comment:
+        body: "Комментарий"
+        author_name: "Имя автора"
+      tag:
+        name: "Название"
+        slug: "URL-идентификатор"
+    errors:
+      messages:
+        blank: "не может быть пустым"
+        taken: "уже занято"
+        invalid: "некорректный формат"
+        too_short: "слишком короткий (минимум %{count} символов)"
+        too_long: "слишком длинный (максимум %{count} символов)"
+        not_a_number: "не является числом"
+        confirmation: "не совпадает с подтверждением"
+
+  # ── Страницы ──────────────────────────────────────────────────────────────
+  pages:
+    home:
+      title: "Главная"
+
+  articles:
+    index:
+      title: "Статьи"
+      no_articles: "Статей пока нет"
+    show:
+      back: "К списку статей"
+      comments_title: "Комментарии"
+      no_comments: "Комментариев ещё нет"
+      views: "просмотров"
+
+  services:
+    index:
+      title: "Услуги"
+    show:
+      back: "К списку услуг"
+
+  comments:
+    placeholder: "Напишите комментарий..."
+    submit: "Отправить"
+    reply: "Ответить"
+
+  # ── Ошибки ────────────────────────────────────────────────────────────────
+  errors:
+    not_found:
+      title: "Страница не найдена"
+      description: "Запрошенная страница не существует."
+    internal_server_error:
+      title: "Ошибка сервера"
+      description: "Что-то пошло не так. Пожалуйста, попробуйте позже."
+
+  # ── Даты и время ──────────────────────────────────────────────────────────
+  time:
+    formats:
+      default: "%d.%m.%Y %H:%M"
+      short: "%d.%m.%Y"
+      long: "%d %B %Y г., %H:%M"
+
+  date:
+    formats:
+      default: "%d.%m.%Y"
+      short: "%d.%m"
+      long: "%d %B %Y г."
+    month_names:
+      - ~
+      - январь
+      - февраль
+      - март
+      - апрель
+      - май
+      - июнь
+      - июль
+      - август
+      - сентябрь
+      - октябрь
+      - ноябрь
+      - декабрь
+    abbr_month_names:
+      - ~
+      - янв
+      - фев
+      - мар
+      - апр
+      - май
+      - июн
+      - июл
+      - авг
+      - сен
+      - окт
+      - ноя
+      - дек
+    day_names:
+      - воскресенье
+      - понедельник
+      - вторник
+      - среда
+      - четверг
+      - пятница
+      - суббота
+    abbr_day_names:
+      - вс
+      - пн
+      - вт
+      - ср
+      - чт
+      - пт
+      - сб

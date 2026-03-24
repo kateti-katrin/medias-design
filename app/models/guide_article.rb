@@ -1,0 +1,2 @@
+class GuideArticle < Article
+end
