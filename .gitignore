@@ -39,8 +39,6 @@ Thumbs.db
 
 # Old static files (superseded by Rails app)
 /assets/
-/index.html
-/styles.css
 /logo-smysl-footer.png
 /logo-smysl-hero.png
 /article-photo-large.jpg
