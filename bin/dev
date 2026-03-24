@@ -1,4 +1,4 @@
-#!/usr/bin/env ruby.exe
+#!/usr/bin/env ruby
 # Development server: build assets then start Rails
 
 system("npm run build") || abort("JS build failed")
