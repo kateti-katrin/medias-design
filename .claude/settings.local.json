@@ -35,7 +35,14 @@
       "Bash(powershell -Command \"Test-Path ''C:\\\\Program Files\\\\ImageMagick*'' ; \\(Get-Command magick -ErrorAction SilentlyContinue\\)?.Source\")",
       "Bash(node -e \"require\\(''sharp''\\); console.log\\(''sharp ok''\\)\")",
       "Bash(node -e \"require\\(''jimp''\\); console.log\\(''jimp ok''\\)\")",
-      "Bash(curl -L -o \"D:/ROOT-9/sites/site-001/assets/hero-bg-original.png\" \"https://www.figma.com/api/mcp/asset/3a425042-b0f9-4523-9cfb-76f457efa7cf\")"
+      "Bash(curl -L -o \"D:/ROOT-9/sites/site-001/assets/hero-bg-original.png\" \"https://www.figma.com/api/mcp/asset/3a425042-b0f9-4523-9cfb-76f457efa7cf\")",
+      "Bash(export PATH=\"/opt/homebrew/Cellar/ruby/4.0.2/bin:/opt/homebrew/bin:$PATH\")",
+      "Bash(ruby --version)",
+      "Bash(gem --version)",
+      "Bash(gem install:*)",
+      "Bash(bundle lock:*)",
+      "Bash(bundle install:*)",
+      "Bash(bin/rails server:*)"
     ]
   }
 }

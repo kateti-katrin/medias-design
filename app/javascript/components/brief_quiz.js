@@ -16,23 +16,38 @@ function copyText(text) {
 }
 
 function buildBrief(data) {
-  return [
-    "ТЕХНИЧЕСКОЕ ЗАДАНИЕ НА ДИЗАЙН",
-    "",
-    `1. Тип проекта: ${data.projectType}`,
-    `2. Цель проекта: ${data.goal}`,
-    `3. Целевая аудитория: ${data.audience}`,
-    `4. Ключевое действие пользователя (CTA): ${data.cta}`,
-    `5. Материалы по бренду: ${data.brand}`,
-    `6. Обязательные блоки: ${data.blocks}`,
-    `7. Желаемый срок запуска: ${data.deadline}`,
-    `8. Дополнительные пожелания: ${data.notes || "—"}`,
-    "",
-    "Ожидаемый результат:",
-    "- Визуальное решение, соответствующее цели проекта и аудитории",
-    "- Понятная структура контента по указанным блокам",
-    "- Подготовка макетов для передачи в разработку",
-  ].join("\n");
+  const brandNote =
+    data.brand === "Есть брендбук и готовые материалы"
+      ? "Фирменный стиль готов — брендбук и материалы предоставим."
+      : data.brand === "Есть логотип, но нет системы"
+      ? "Есть логотип, но единого стиля нет. Нужно выстроить систему."
+      : "Фирменного стиля нет. Потребуется разработка с нуля.";
+
+  const notesLine = data.notes?.trim()
+    ? `\nДополнительно\n${data.notes.trim()}`
+    : "";
+
+  return `ТЕХНИЧЕСКОЕ ЗАДАНИЕ НА ДИЗАЙН
+
+Проект: ${data.projectType}
+Срок запуска: ${data.deadline}
+
+Задача
+${data.goal.trim()}
+
+Целевая аудитория
+${data.audience.trim()}
+
+Ключевое действие пользователя
+${data.cta}
+
+Фирменный стиль
+${brandNote}
+
+Состав страницы / экранов
+${data.blocks.trim()}${notesLine}
+
+Ожидаемый результат: готовые макеты для передачи в разработку, соответствующие цели проекта и аудитории.`;
 }
 
 export function mountBriefQuiz() {
@@ -45,8 +60,7 @@ export function mountBriefQuiz() {
   form.addEventListener("submit", (event) => {
     event.preventDefault();
     const data = Object.fromEntries(new FormData(form).entries());
-    const text = buildBrief(data);
-    output.textContent = text;
+    output.textContent = buildBrief(data);
     result.hidden = false;
     result.scrollIntoView({ behavior: "smooth", block: "start" });
   });
@@ -58,8 +72,6 @@ export function mountBriefQuiz() {
     await copyText(text);
     const oldLabel = copyBtn.textContent;
     copyBtn.textContent = "Скопировано";
-    setTimeout(() => {
-      copyBtn.textContent = oldLabel;
-    }, 1400);
+    setTimeout(() => { copyBtn.textContent = oldLabel; }, 1400);
   });
 }

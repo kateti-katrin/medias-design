@@ -15,26 +15,31 @@ function copyText(text) {
   return Promise.resolve();
 }
 
-const BASE_BY_TYPE = {
-  landing: { label: "Лендинг", min: 45_000, max: 80_000, weeks: 2 },
-  corporate: { label: "Корпоративный сайт", min: 90_000, max: 170_000, weeks: 4 },
-  shop: { label: "Интернет-магазин", min: 130_000, max: 260_000, weeks: 6 },
-  presentation: { label: "Презентация", min: 30_000, max: 70_000, weeks: 2 },
+const BASE = {
+  freelancer: {
+    landing:      { label: "Лендинг",             min: 30_000,  max: 55_000,  weeks: 2 },
+    corporate:    { label: "Корпоративный сайт",  min: 60_000,  max: 110_000, weeks: 4 },
+    shop:         { label: "Интернет-магазин",     min: 80_000,  max: 150_000, weeks: 5 },
+    presentation: { label: "Презентация",          min: 20_000,  max: 45_000,  weeks: 2 },
+  },
+  agency: {
+    landing:      { label: "Лендинг",             min: 65_000,  max: 130_000, weeks: 3 },
+    corporate:    { label: "Корпоративный сайт",  min: 140_000, max: 260_000, weeks: 6 },
+    shop:         { label: "Интернет-магазин",     min: 200_000, max: 390_000, weeks: 8 },
+    presentation: { label: "Презентация",          min: 50_000,  max: 110_000, weeks: 3 },
+  },
 };
 
 function money(value) {
   return `${Math.round(value).toLocaleString("ru-RU")} ₽`;
 }
 
-function calculateBudget(data) {
-  const project = BASE_BY_TYPE[data.type] || BASE_BY_TYPE.landing;
-  const pages = Math.max(1, Number(data.pages || 1));
-
+function calcFor(type, pages, data, tier) {
+  const project = BASE[tier][type] || BASE[tier].landing;
   let min = project.min;
   let max = project.max;
   let weeks = project.weeks;
 
-  // Базовое масштабирование по объему страниц/экранов
   const pagesFactor = 1 + (pages - 1) * 0.12;
   min *= pagesFactor;
   max *= pagesFactor;
@@ -42,65 +47,63 @@ function calculateBudget(data) {
   const additions = [];
 
   if (data.brandbook) {
-    min += 25_000;
-    max += 55_000;
-    weeks += 1;
-    additions.push("Фирменный стиль: +25 000 — 55 000 ₽");
+    const [bbMin, bbMax] = tier === "freelancer" ? [15_000, 30_000] : [35_000, 70_000];
+    min += bbMin; max += bbMax; weeks += 1;
+    additions.push(`Фирменный стиль: +${money(bbMin)} — ${money(bbMax)}`);
   }
 
   if (data.copywriting) {
-    min += 12_000;
-    max += 28_000;
-    additions.push("Тексты и редактура: +12 000 — 28 000 ₽");
+    const [cpMin, cpMax] = tier === "freelancer" ? [8_000, 18_000] : [18_000, 38_000];
+    min += cpMin; max += cpMax;
+    additions.push(`Тексты: +${money(cpMin)} — ${money(cpMax)}`);
   }
 
   if (data.analytics) {
-    min += 15_000;
-    max += 35_000;
-    additions.push("Аналитика и структура: +15 000 — 35 000 ₽");
+    const [anMin, anMax] = tier === "freelancer" ? [10_000, 20_000] : [22_000, 45_000];
+    min += anMin; max += anMax;
+    additions.push(`Аналитика: +${money(anMin)} — ${money(anMax)}`);
   }
 
   if (data.urgency === "fast") {
-    min *= 1.18;
-    max *= 1.22;
+    min *= 1.2; max *= 1.2;
     weeks = Math.max(1, weeks - 1);
-    additions.push("Срочность x1.2");
+    additions.push("Срочность: +20%");
   }
 
   if (data.urgency === "rush") {
-    min *= 1.35;
-    max *= 1.45;
+    min *= 1.4; max *= 1.4;
     weeks = Math.max(1, weeks - 2);
-    additions.push("Очень срочно x1.4");
+    additions.push("Очень срочно: +40%");
   }
 
-  return {
-    projectLabel: project.label,
-    pages,
-    min,
-    max,
-    weeks,
-    additions,
-  };
+  return { min, max, weeks, additions, label: project.label };
 }
 
-function budgetText(data, result) {
+function addsList(items) {
+  return items.length
+    ? items.map((a) => `  · ${a}`).join("\n")
+    : "  · Без дополнительных опций";
+}
+
+function budgetText(data, fl, ag) {
   return [
-    "ПРЕДВАРИТЕЛЬНЫЙ РАСЧЕТ БЮДЖЕТА",
+    "ПРЕДВАРИТЕЛЬНЫЙ РАСЧЁТ БЮДЖЕТА",
     "",
-    `Тип проекта: ${result.projectLabel}`,
-    `Объем: ${result.pages} экран(ов)/страниц`,
-    `Срок: около ${result.weeks} нед.`,
+    `Проект: ${fl.label}, ${data.pages} экр./стр.`,
     "",
-    `Бюджет: ${money(result.min)} — ${money(result.max)}`,
-    "",
+    "── Фрилансер ──────────────────────",
+    `Бюджет: ${money(fl.min)} — ${money(fl.max)}`,
+    `Срок:   ~${fl.weeks} нед.`,
     "Что учтено:",
-    `- Базовая стоимость для типа проекта`,
-    `- Масштаб по объему страниц/экранов`,
-    ...(result.additions.length ? result.additions.map((item) => `- ${item}`) : ["- Без дополнительных опций"]),
+    addsList(fl.additions),
     "",
-    "Комментарий:",
-    "Точная смета формируется после брифа и согласования состава работ.",
+    "── Агентство ──────────────────────",
+    `Бюджет: ${money(ag.min)} — ${money(ag.max)}`,
+    `Срок:   ~${ag.weeks} нед.`,
+    "Что учтено:",
+    addsList(ag.additions),
+    "",
+    "Это ориентир. Финальная смета — после брифа и согласования состава работ.",
   ].join("\n");
 }
 
@@ -116,13 +119,16 @@ export function mountBudgetCalculator() {
     const raw = Object.fromEntries(new FormData(form).entries());
     const data = {
       ...raw,
+      pages: Math.max(1, Number(raw.pages || 1)),
       brandbook: form.elements.brandbook.checked,
       copywriting: form.elements.copywriting.checked,
       analytics: form.elements.analytics.checked,
     };
 
-    const result = calculateBudget(data);
-    output.textContent = budgetText(data, result);
+    const fl = calcFor(data.type, data.pages, data, "freelancer");
+    const ag = calcFor(data.type, data.pages, data, "agency");
+
+    output.textContent = budgetText(data, fl, ag);
     resultBox.hidden = false;
     resultBox.scrollIntoView({ behavior: "smooth", block: "start" });
   });
@@ -134,8 +140,6 @@ export function mountBudgetCalculator() {
     await copyText(text);
     const oldLabel = copyBtn.textContent;
     copyBtn.textContent = "Скопировано";
-    setTimeout(() => {
-      copyBtn.textContent = oldLabel;
-    }, 1400);
+    setTimeout(() => { copyBtn.textContent = oldLabel; }, 1400);
   });
 }

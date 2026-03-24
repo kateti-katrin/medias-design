@@ -13,14 +13,14 @@ gem "jbuilder"
 # Pin psych to exactly bundled version (avoids libyaml native build)
 gem "psych", "= 5.0.1"
 
-gem "tzinfo-data", platforms: %i[ windows jruby ]
+gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "solid_cache"
 gem "solid_queue"
 gem "solid_cable"
 gem "bootsnap", require: false
 
 group :development, :test do
-  gem "debug", platforms: %i[ mri windows ], require: "debug/prelude"
+  gem "debug", platforms: %i[ mri mingw mswin x64_mingw ], require: "debug/prelude"
 end
 
 group :development do
