@@ -1,0 +1,49 @@
+// _reset.scss — Base reset and body styles
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: $font-body;
+  line-height: 1.2;
+  min-width: 0;
+  position: relative;
+  overflow-x: hidden;
+}
+
+img {
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+// Background grid decoration
+.bg-grid {
+  position: absolute;
+  left:   2.083vw;
+  top:    0;
+  width:  95.833vw;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+
+  img {
+    width:  100%;
+    height: 100%;
+  }
+}

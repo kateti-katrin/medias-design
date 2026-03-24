@@ -1,0 +1,211 @@
+// _articles.scss — Articles grid and cards
+
+// ── Grid ────────────────────────────────────────────────────────────────────
+
+.articles {
+  width:          var(--w-content);
+  display:        flex;
+  flex-direction: column;
+  gap:            var(--gap-group);
+}
+
+.articles-row {
+  display:         flex;
+  justify-content: space-between;
+  align-items:     flex-start;
+  width:           var(--w-content);
+}
+
+// ── Card ────────────────────────────────────────────────────────────────────
+
+.article-card {
+  display:        flex;
+  flex-direction: column;
+  gap:            var(--gap-element);
+
+  &--large {
+    width:       var(--w-col-large);
+    align-items: center;
+  }
+
+  &--small {
+    width:       var(--w-col-small);
+    align-items: flex-start;
+  }
+}
+
+.article-card__body {
+  display:        flex;
+  flex-direction: column;
+  gap:            var(--gap-tight);
+  width:          var(--w-col-small);
+
+  &--large {
+    width: var(--w-col-body-large);
+  }
+}
+
+.article-card__tag {
+  font-family:    $font-body;
+  font-weight:    400;
+  font-size:      var(--fs-label);
+  line-height:    1.2;
+  text-transform: uppercase;
+  color:          var(--color-text);
+}
+
+.article-card__title {
+  font-family: $font-body;
+  font-weight: 400;
+  font-size:   var(--fs-body-md);
+  line-height: 1.2;
+  color:       var(--color-text);
+}
+
+// ── Image containers ─────────────────────────────────────────────────────────
+
+.article-img--large {
+  width:       var(--w-col-large);
+  height:      var(--h-article-large);
+  position:    relative;
+  overflow:    hidden;
+  flex-shrink: 0;
+}
+
+.article-img--small {
+  width:        var(--w-col-small);
+  height:       var(--h-article-small);
+  position:     relative;
+  overflow:     hidden;
+  flex-shrink:  0;
+  border-left:  1px solid rgba(216, 216, 216, 0.1);
+  border-right: 1px solid rgba(216, 216, 216, 0.1);
+}
+
+.article-img__photo {
+  position: absolute;
+  inset:    0;
+  overflow: hidden;
+
+  img {
+    position:  absolute;
+    max-width: none;
+    display:   block;
+  }
+}
+
+.article-img--large .article-img__photo img {
+  left:       -5%;
+  top:        -5.32%;
+  width:      110.122%;
+  height:     110.836%;
+  object-fit: cover;
+}
+
+.article-img--small .article-img__photo img {
+  left:       -10.5%;
+  top:        -17.25%;
+  width:      283.25%;
+  height:     161.75%;
+  object-fit: cover;
+}
+
+.article-img__overlay {
+  position:       absolute;
+  inset:          0;
+  overflow:       hidden;
+  pointer-events: none;
+
+  img {
+    position:  absolute;
+    max-width: none;
+    display:   block;
+  }
+}
+
+.article-img--large .article-img__overlay img {
+  left:       -29.24%;
+  top:        0;
+  width:      158.47%;
+  height:     100%;
+  object-fit: fill;
+}
+
+.article-img__tint {
+  position:         absolute;
+  inset:            0;
+  background-color: rgba(17, 17, 17, 0.2);
+}
+
+.article-img--small .article-img__overlay img {
+  left:       -34%;
+  top:        -3.5%;
+  width:      184.75%;
+  height:     107.25%;
+  object-fit: cover;
+}
+
+.article-img__gradient {
+  position:   absolute;
+  inset:      0;
+  background: linear-gradient(25.75deg, #111111 14.549%, rgba(17, 17, 17, 0) 48.233%);
+}
+
+// Simple variant (row 2 — no overlay, no gradient, no borders)
+.article-img--simple {
+  .article-img__overlay { display: none; }
+
+  &.article-img--small {
+    border-left:  none;
+    border-right: none;
+  }
+}
+
+// ── Responsive ───────────────────────────────────────────────────────────────
+
+@media (max-width: 1024px) {
+  .articles {
+    width: 100%;
+    gap:   80px;
+  }
+
+  .articles-row {
+    width:          100%;
+    flex-direction: column;
+    gap:            60px;
+    align-items:    flex-start;
+  }
+
+  .article-card--large { width: 100%; }
+  .article-card--small { width: 70%; }
+
+  .article-img--large {
+    width:  100%;
+    height: 380px;
+
+    .article-img__photo img {
+      width:      105%;
+      height:     auto;
+      min-height: 380px;
+      left: -2.5%;
+      top:  0;
+    }
+  }
+
+  .article-img--small {
+    width:  70%;
+    height: 280px;
+
+    .article-img__photo img {
+      width:  100%;
+      height: auto;
+      left:   0;
+      top:    0;
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .article-card--small { width: 100%; }
+  .article-img--small  { width: 100%; height: 240px; }
+}

@@ -1,0 +1,57 @@
+# Ruby / Rails
+/.bundle
+/vendor/bundle
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+/storage/*.sqlite3
+/storage/*.sqlite3-journal
+/db/*.sqlite3
+/db/*.sqlite3-journal
+
+# Built assets (генерируются командой npm run build)
+/app/assets/builds/*
+!/app/assets/builds/.keep
+
+# Node
+/node_modules
+npm-debug.log*
+
+# Credentials & secrets
+/config/master.key
+/config/credentials/*.key
+.env
+.env.*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Backup files from migration
+/D\:/ROOT-9/sites/site-001-assets-backup
+
+# Old static files (superseded by Rails app)
+/assets/
+/index.html
+/styles.css
+/ARCHITECT_PLAN_17-2.md
+/FIGMA_INTAKE.md
+/logo-smysl-footer.png
+/logo-smysl-hero.png
+/article-photo-large.jpg
+/article-photo-small.jpg
+/service-01.jpg
+/service-02.jpg
+
+# Kamal secrets (never commit)
+/.kamal/secrets
+
+# DB schema is auto-generated
+/db/schema.rb

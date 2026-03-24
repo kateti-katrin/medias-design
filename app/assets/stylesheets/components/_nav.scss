@@ -1,0 +1,44 @@
+// _nav.scss — Navigation links
+
+.site-nav {
+  position: absolute;
+  top:      34.878%;
+  left:     0;
+  width:    100%;
+  z-index:  2;
+}
+
+.site-nav__link {
+  position:       absolute;
+  font-family:    $font-heading;
+  font-weight:    700;
+  font-size:      var(--fs-nav);
+  line-height:    1.08;
+  letter-spacing: -0.025vw;
+  text-transform: uppercase;
+  color:          var(--color-text);
+  white-space:    nowrap;
+
+  &:nth-child(1) { left: 2.083%;  }
+  &:nth-child(2) { left: 21.528%; }
+  &:nth-child(3) { left: 40.972%; }
+  &:nth-child(4) { left: 60.417%; }
+  &:nth-child(5) { left: 79.861%; }
+}
+
+@media (max-width: 1024px) {
+  .site-nav {
+    top:   180px;
+    width: 100%;
+  }
+
+  .site-nav__link {
+    font-size: 14px;
+
+    &:nth-child(1) { left: 2.08%;  }
+    &:nth-child(2) { left: 21.5%;  }
+    &:nth-child(3) { left: 40.97%; }
+    &:nth-child(4) { left: 60.4%;  }
+    &:nth-child(5) { left: 79.86%; }
+  }
+}

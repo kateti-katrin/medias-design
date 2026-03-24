@@ -1,0 +1,215 @@
+<% content_for :title, "СМЫСЛ — медиа о дизайне" %>
+
+<!-- ===== BACKGROUND GRID DECORATION ===== -->
+<div class="bg-grid" aria-hidden="true">
+  <%= image_tag "bg-decoration.svg", alt: "" %>
+</div>
+
+<!-- ===== HERO ===== -->
+<header class="site-header">
+
+  <!-- Hero background image + overlay -->
+  <div class="hero-bg" aria-hidden="true">
+    <%= image_tag "hero-bg.png", alt: "" %>
+    <div class="hero-bg__overlay"></div>
+  </div>
+
+  <!-- Logo -->
+  <div class="logo" aria-label="СМЫСЛ">
+    <%= image_tag "logo-smysl-hero.svg", alt: "СМЫСЛ" %>
+  </div>
+
+  <!-- Nav -->
+  <nav class="site-nav" aria-label="Основная навигация">
+    <%= link_to "главная",  root_path,     class: "site-nav__link" %>
+    <%= link_to "Статьи",   articles_path, class: "site-nav__link" %>
+    <%= link_to "Задача",   "#",           class: "site-nav__link" %>
+    <%= link_to "бюджет",   "#",           class: "site-nav__link" %>
+    <%= link_to "о нас",    "#",           class: "site-nav__link" %>
+  </nav>
+
+  <!-- Hero article content -->
+  <div class="hero-content">
+    <div class="hero-content__inner">
+      <p class="hero-content__label">[ Статья месяца ]</p>
+      <h1 class="hero-content__title">Как поставить задачу дизайнеру без хаоса</h1>
+      <%= link_to "читать", "#", class: "btn btn--primary" %>
+    </div>
+  </div>
+
+  <!-- Tagline -->
+  <p class="hero-tagline">Пишем о продающем визуале</p>
+
+</header>
+
+<!-- ===== PAGE CONTENT ===== -->
+<div class="page-content">
+
+  <!-- ===== ABOUT + ARTICLES ===== -->
+  <div class="section-group section-group--articles">
+
+    <!-- About -->
+    <section class="about">
+      <p class="about__text">
+        Медиа о дизайне для тех, кто его заказывает. Мы пишем для владельцев
+        бизнеса и менеджеров, которые работают с дизайнерами и хотят понимать
+        за что платят.
+      </p>
+      <%= link_to "о проекте", "#", class: "btn btn--about" %>
+    </section>
+
+    <!-- Articles -->
+    <div class="articles">
+
+      <!-- Row 1: large LEFT, small RIGHT -->
+      <div class="articles-row">
+
+        <article class="article-card article-card--large">
+          <div class="article-img article-img--large">
+            <div class="article-img__photo">
+              <%= image_tag "article-large.png", alt: "" %>
+            </div>
+            <div class="article-img__overlay" aria-hidden="true">
+              <%= image_tag "article-large-overlay.png", alt: "" %>
+              <div class="article-img__tint"></div>
+            </div>
+          </div>
+          <div class="article-card__body article-card__body--large">
+            <p class="article-card__tag">[ <%= @articles[0]&.tag || "задача" %> ]</p>
+            <p class="article-card__title">
+              <%= @articles[0]&.title || "Как поставить задачу дизайнеру, чтобы не переделывать 3 раза" %>
+            </p>
+          </div>
+        </article>
+
+        <article class="article-card article-card--small">
+          <div class="article-img article-img--small">
+            <div class="article-img__photo">
+              <%= image_tag "article-small.png", alt: "" %>
+            </div>
+            <div class="article-img__overlay" aria-hidden="true">
+              <%= image_tag "article-small-overlay.png", alt: "" %>
+              <div class="article-img__gradient"></div>
+            </div>
+          </div>
+          <div class="article-card__body">
+            <p class="article-card__tag">[ <%= @articles[1]&.tag || "оценка" %> ]</p>
+            <p class="article-card__title">
+              <%= @articles[1]&.title || "Что ломает лендинг ещё до первого экрана" %>
+            </p>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- Row 2: small LEFT, large RIGHT -->
+      <div class="articles-row">
+
+        <article class="article-card article-card--small">
+          <div class="article-img article-img--small article-img--simple">
+            <div class="article-img__photo">
+              <%= image_tag "article-small.png", alt: "" %>
+            </div>
+          </div>
+          <div class="article-card__body">
+            <p class="article-card__tag">[ <%= @articles[2]&.tag || "деньги" %> ]</p>
+            <p class="article-card__title">
+              <%= @articles[2]&.title || "Почему один и тот же сайт стоит по‑разному" %>
+            </p>
+          </div>
+        </article>
+
+        <article class="article-card article-card--large">
+          <div class="article-img article-img--large article-img--simple">
+            <div class="article-img__photo">
+              <%= image_tag "article-large.png", alt: "" %>
+            </div>
+          </div>
+          <div class="article-card__body article-card__body--large">
+            <p class="article-card__tag">[ <%= @articles[3]&.tag || "процесс" %> ]</p>
+            <p class="article-card__title">
+              <%= @articles[3]&.title || "Почему правки в дизайне съедают сроки и результат" %>
+            </p>
+          </div>
+        </article>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== SERVICES ===== -->
+  <div class="section-group section-group--services">
+
+    <!-- Services header -->
+    <div class="services-header">
+      <h2 class="services-header__title">Хорошая работа начинается с ясности</h2>
+      <p class="services-header__sub">
+        Сервисы, которые помогают вам поставить задачу и понять бюджет до начала работы.
+      </p>
+    </div>
+
+    <!-- Services list -->
+    <div class="services-list">
+
+      <!-- Service 1: content LEFT, image RIGHT -->
+      <div class="service-block">
+        <div class="service-block__content">
+          <div class="service-block__top">
+            <div class="service-block__divider">
+              <%= image_tag "divider.svg", alt: "" %>
+            </div>
+            <div class="service-block__text">
+              <h3 class="service-block__heading"><%= @services[0]&.title || "без тз результат хз" %></h3>
+              <p class="service-block__body">
+                <%= @services[0]&.body || "Ответьте на несколько вопросов и получите готовую задачу для дизайнера." %>
+              </p>
+            </div>
+          </div>
+          <%= link_to "Открыть", "#", class: "btn btn--primary" %>
+        </div>
+        <div class="service-img service-img--01">
+          <%= image_tag "service-01.jpg", alt: "" %>
+        </div>
+      </div>
+
+      <!-- Service 2: image LEFT, content RIGHT -->
+      <div class="service-block service-block--reverse">
+        <div class="service-img service-img--02">
+          <%= image_tag "service-02.png", alt: "" %>
+        </div>
+        <div class="service-block__content">
+          <div class="service-block__top">
+            <div class="service-block__divider">
+              <%= image_tag "divider.svg", alt: "" %>
+            </div>
+            <div class="service-block__text">
+              <h3 class="service-block__heading"><%= @services[1]&.title || "Калькулятор бюджета" %></h3>
+              <p class="service-block__body">
+                <%= @services[1]&.body || "Получите ориентир по стоимости и поймите, откуда берётся разброс в цене." %>
+              </p>
+            </div>
+          </div>
+          <%= link_to "Открыть", "#", class: "btn btn--primary" %>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="site-footer__logo">
+      <%= image_tag "logo-smysl-footer.svg", alt: "СМЫСЛ" %>
+    </div>
+    <p class="site-footer__tagline">Пишем о продающем визуале</p>
+    <nav class="site-footer__nav" aria-label="Навигация в подвале">
+      <%= link_to "главная",  root_path,     class: "site-nav__link" %>
+      <%= link_to "Статьи",   articles_path, class: "site-nav__link" %>
+      <%= link_to "Задача",   "#",           class: "site-nav__link" %>
+      <%= link_to "бюджет",   "#",           class: "site-nav__link" %>
+      <%= link_to "о нас",    "#",           class: "site-nav__link" %>
+    </nav>
+  </footer>
+
+</div>

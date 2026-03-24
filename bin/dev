@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby.exe
+# Development server: build assets then start Rails
+
+system("npm run build") || abort("JS build failed")
+system("npm run build:css") || abort("CSS build failed")
+exec "./bin/rails", "server", "-p", "3000", *ARGV

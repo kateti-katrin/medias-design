@@ -1,0 +1,88 @@
+// _page.scss — Main page content layout
+
+.page-content {
+  position:        relative;
+  z-index:         1;
+  display:         flex;
+  flex-direction:  column;
+  align-items:     center;
+  gap:             var(--gap-section);
+  padding-top:     var(--gap-block);
+  width:           100%;
+}
+
+// Articles group: 1380px, items-end (about right-aligned)
+.section-group--articles {
+  width:          var(--w-content);
+  display:        flex;
+  flex-direction: column;
+  align-items:    flex-end;
+  gap:            var(--gap-section);
+}
+
+// Services group: 1380px, items-start
+.section-group--services {
+  width:          var(--w-content);
+  display:        flex;
+  flex-direction: column;
+  align-items:    flex-start;
+  gap:            var(--gap-section);
+}
+
+// About section
+.about {
+  width:          var(--w-col-about);
+  display:        flex;
+  flex-direction: column;
+  gap:            var(--gap-element);
+
+  &__text {
+    font-family: $font-body;
+    font-weight: 400;
+    font-size:   var(--fs-body-lg);
+    line-height: 1.2;
+    color:       var(--color-text);
+    width:       var(--w-col-about);
+  }
+}
+
+// ── Responsive: 1024px ──────────────────────────────────────────────────────
+
+@media (max-width: 1024px) {
+  .page-content {
+    gap:         120px;
+    padding-top: 60px;
+  }
+
+  .section-group--articles,
+  .section-group--services {
+    width: calc(100% - 40px);
+    gap:   120px;
+  }
+
+  .about {
+    width: 60%;
+
+    &__text {
+      width:     100%;
+      font-size: 22px;
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .page-content {
+    gap:         80px;
+    padding-top: 40px;
+  }
+
+  .section-group--articles,
+  .section-group--services {
+    width: calc(100% - 24px);
+    gap:   80px;
+  }
+
+  .about {
+    width: 100%;
+  }
+}

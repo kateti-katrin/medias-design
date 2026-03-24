@@ -1,0 +1,41 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__claude_ai_Figma__get_design_context",
+      "Bash(mv hero-bg.jpg hero-bg.png)",
+      "Bash(mv logo-smysl-hero.png logo-smysl-hero.svg)",
+      "Bash(mv logo-smysl-footer.png logo-smysl-footer.svg)",
+      "Bash(mv article-photo-large.jpg article-photo-large.png)",
+      "Bash(mv article-photo-small.jpg article-photo-small.png)",
+      "Bash(curl -sL -o \"D:/ROOT-9/sites/site-001/assets/logo-smysl-hero.svg\" \"https://www.figma.com/api/mcp/asset/3bf6c187-6dce-4145-9d5c-1853ea725bdf\")",
+      "Bash(curl -sL -o \"D:/ROOT-9/sites/site-001/assets/logo-smysl-footer.svg\" \"https://www.figma.com/api/mcp/asset/25728516-bb75-4e9a-86ce-26e266358f60\")",
+      "Bash(curl -sL -o \"D:/ROOT-9/sites/site-001/assets/article-photo-large.png\" \"https://www.figma.com/api/mcp/asset/c8f7aa8b-e33e-40ce-9183-9ba4988071e5\")",
+      "Bash(curl -sL -o \"D:/ROOT-9/sites/site-001/assets/article-photo-small.png\" \"https://www.figma.com/api/mcp/asset/4137d7dd-e15b-48de-9c7f-a615b3ab3e34\")",
+      "Bash(curl -sL -o \"D:/ROOT-9/sites/site-001/assets/service-01.jpg\" \"https://www.figma.com/api/mcp/asset/9c144ba1-fd4e-4818-8ee3-39821b4cc85f\")",
+      "mcp__claude_ai_Figma__get_screenshot",
+      "mcp__claude_ai_Figma__get_metadata",
+      "Bash(curl -L -o \"D:/ROOT-9/sites/site-001/assets/hero-bg.png\" \"https://www.figma.com/api/mcp/asset/3a425042-b0f9-4523-9cfb-76f457efa7cf\")",
+      "Bash(echo \"EXIT:$?\")",
+      "Bash(python3:*)",
+      "Bash(python:*)",
+      "Bash(where python:*)",
+      "Bash(where python3:*)",
+      "Bash(where py:*)",
+      "Bash(command -v python python3 py)",
+      "Bash(ls /c/Python* /c/Users/user/AppData/Local/Programs/Python/*/python.exe)",
+      "Bash(/c/Users/user/AppData/Local/Microsoft/WindowsApps/python --version)",
+      "Read(//c/Program Files/**)",
+      "Bash(powershell -Command \"Get-Command python | Select-Object -ExpandProperty Source\")",
+      "Bash(/c/Users/user/AppData/Local/Programs/Python/Python313/python.exe -c \"from PIL import Image; print\\('PIL ok'\\)\" 2>&1)",
+      "Bash(powershell -Command \"& 'C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python313\\\\Scripts\\\\..\\\\python.exe' -c \\\\\"from PIL import Image; print\\('PIL ok'\\)\\\\\"\" 2>&1)",
+      "Bash(powershell -Command \"Get-ChildItem 'C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python313' -Recurse -Filter 'python.exe' 2>/dev/null | Select-Object FullName\")",
+      "Bash(powershell -Command \"Get-ChildItem 'C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python313' -Recurse -Filter 'python.exe' | ForEach-Object { $_.FullName }\")",
+      "Bash(powershell -Command \"Get-ChildItem 'C:\\\\Users\\\\user\\\\AppData\\\\Local\\\\Programs\\\\Python' -Recurse -Include '*.exe' | ForEach-Object { $_.FullName }\")",
+      "Bash(command -v magick convert node)",
+      "Bash(powershell -Command \"Test-Path ''C:\\\\Program Files\\\\ImageMagick*'' ; \\(Get-Command magick -ErrorAction SilentlyContinue\\)?.Source\")",
+      "Bash(node -e \"require\\(''sharp''\\); console.log\\(''sharp ok''\\)\")",
+      "Bash(node -e \"require\\(''jimp''\\); console.log\\(''jimp ok''\\)\")",
+      "Bash(curl -L -o \"D:/ROOT-9/sites/site-001/assets/hero-bg-original.png\" \"https://www.figma.com/api/mcp/asset/3a425042-b0f9-4523-9cfb-76f457efa7cf\")"
+    ]
+  }
+}

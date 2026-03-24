@@ -1,0 +1,55 @@
+// _variables.scss — Design tokens (all vw values based on 1440px reference)
+
+:root {
+  // WIDTHS
+  --w-content:        95.833vw;   // 1380px
+  --w-hero-logo:      95.625vw;   // 1377px
+  --w-hero-content:   66.667vw;   // 960px
+  --w-col-large:      56.944vw;   // 820px
+  --w-col-small:      27.778vw;   // 400px
+  --w-col-text:       47.222vw;   // 680px
+  --w-col-about:      47.222vw;   // 680px
+  --w-col-body-large: 37.5vw;     // 540px
+  --w-btn-primary:    27.778vw;   // 400px
+  --w-btn-about:      8.333vw;    // 120px
+  --w-footer-logo:    37.5vw;     // 540px
+  --w-tagline:        16.181vw;   // 233px
+  --w-tagline-hero:   15.208vw;   // 219px
+
+  // HEIGHTS
+  --h-hero:           56.944vw;   // 820px
+  --h-article-large:  36.528vw;   // 526px
+  --h-article-small:  27.778vw;   // 400px
+  --h-service-img:    36.528vw;   // 526px
+  --h-footer:         24.028vw;   // 346px
+  --h-logo-hero:      15.000vw;   // 216px
+  --h-logo-footer:    5.833vw;    // 84px
+
+  // FONT SIZES
+  --fs-h1:      4.861vw;   // 70px
+  --fs-h2:      5.556vw;   // 80px
+  --fs-h3:      4.167vw;   // 60px
+  --fs-body-lg: 2.292vw;   // 33px
+  --fs-body-md: 1.736vw;   // 25px
+  --fs-body:    1.25vw;    // 18px
+  --fs-label:   0.972vw;   // 14px
+  --fs-nav:     1.25vw;    // 18px
+
+  // GAPS
+  --gap-section:  18.75vw;  // 270px
+  --gap-group:    12.5vw;   // 180px
+  --gap-block:    6.25vw;   // 90px
+  --gap-element:  2.083vw;  // 30px
+  --gap-tight:    1.389vw;  // 20px
+  --gap-service:  17.639vw; // 254px
+
+  // COLORS
+  --color-bg:   #111111;
+  --color-text: #fcf8c9;
+}
+
+// SCSS variables (for use in SCSS logic)
+$font-heading: 'Bounded', system-ui, sans-serif;
+$font-body:    'Inter', sans-serif;
+$color-bg:     #111111;
+$color-text:   #fcf8c9;

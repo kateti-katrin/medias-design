@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440">
+  <title>СМЫСЛ — медиа о дизайне</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ===== BACKGROUND GRID DECORATION ===== -->
+  <div class="bg-grid" aria-hidden="true">
+    <img src="assets/bg-decoration.svg" alt="">
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <header class="site-header">
+
+    <!-- Hero background image + overlay -->
+    <div class="hero-bg" aria-hidden="true">
+      <img src="assets/hero-bg.png" alt="">
+      <div class="hero-bg__overlay"></div>
+    </div>
+
+    <!-- Logo -->
+    <div class="logo" aria-label="СМЫСЛ">
+      <img src="assets/logo-smysl-hero.svg" alt="СМЫСЛ">
+    </div>
+
+    <!-- Nav -->
+    <nav class="site-nav" aria-label="Основная навигация">
+      <a href="#" class="site-nav__link">главная</a>
+      <a href="#" class="site-nav__link">Статьи</a>
+      <a href="#" class="site-nav__link">Задача</a>
+      <a href="#" class="site-nav__link">бюджет</a>
+      <a href="#" class="site-nav__link">о нас</a>
+    </nav>
+
+    <!-- Hero article content -->
+    <div class="hero-content">
+      <div class="hero-content__inner">
+        <p class="hero-content__label">[ Статья месяца ]</p>
+        <h1 class="hero-content__title">Как поставить задачу дизайнеру без хаоса</h1>
+        <a href="#" class="btn btn--primary">читать</a>
+      </div>
+    </div>
+
+    <!-- Tagline -->
+    <p class="hero-tagline">Пишем о продающем визуале</p>
+
+  </header>
+
+  <!-- ===== PAGE CONTENT ===== -->
+  <div class="page-content">
+
+    <!-- ===== ABOUT + ARTICLES ===== -->
+    <div class="section-group section-group--articles">
+
+      <!-- About -->
+      <section class="about">
+        <p class="about__text">
+          Медиа о дизайне для тех, кто его заказывает. Мы пишем для владельцев
+          бизнеса и менеджеров, которые работают с дизайнерами и хотят понимать
+          за что платят.
+        </p>
+        <a href="#" class="btn btn--about">о проекте</a>
+      </section>
+
+      <!-- Articles -->
+      <div class="articles">
+
+        <!-- Row 1: large LEFT, small RIGHT -->
+        <div class="articles-row">
+
+          <article class="article-card article-card--large">
+            <div class="article-img article-img--large">
+              <div class="article-img__photo">
+                <img src="assets/article-large.png" alt="">
+              </div>
+              <div class="article-img__overlay" aria-hidden="true">
+                <img src="assets/article-large-overlay.png" alt="">
+                <div class="article-img__tint"></div>
+              </div>
+            </div>
+            <div class="article-card__body article-card__body--large">
+              <p class="article-card__tag">[ задача ]</p>
+              <p class="article-card__title">
+                Как поставить задачу дизайнеру, чтобы не переделывать 3 раза
+              </p>
+            </div>
+          </article>
+
+          <article class="article-card article-card--small">
+            <div class="article-img article-img--small">
+              <div class="article-img__photo">
+                <img src="assets/article-small.png" alt="">
+              </div>
+              <div class="article-img__overlay" aria-hidden="true">
+                <img src="assets/article-small-overlay.png" alt="">
+                <div class="article-img__gradient"></div>
+              </div>
+            </div>
+            <div class="article-card__body">
+              <p class="article-card__tag">[ оценка ]</p>
+              <p class="article-card__title">
+                Что ломает лендинг ещё до первого экрана
+              </p>
+            </div>
+          </article>
+
+        </div>
+
+        <!-- Row 2: small LEFT, large RIGHT -->
+        <div class="articles-row">
+
+          <article class="article-card article-card--small">
+            <div class="article-img article-img--small article-img--simple">
+              <div class="article-img__photo">
+                <img src="assets/article-small.png" alt="">
+              </div>
+            </div>
+            <div class="article-card__body">
+              <p class="article-card__tag">[ деньги ]</p>
+              <p class="article-card__title">
+                Почему один и тот же сайт стоит по‑разному
+              </p>
+            </div>
+          </article>
+
+          <article class="article-card article-card--large">
+            <div class="article-img article-img--large article-img--simple">
+              <div class="article-img__photo">
+                <img src="assets/article-large.png" alt="">
+              </div>
+            </div>
+            <div class="article-card__body article-card__body--large">
+              <p class="article-card__tag">[ процесс ]</p>
+              <p class="article-card__title">
+                Почему правки в дизайне съедают сроки и результат
+              </p>
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ===== SERVICES ===== -->
+    <div class="section-group section-group--services">
+
+      <!-- Services header -->
+      <div class="services-header">
+        <h2 class="services-header__title">Хорошая работа начинается с ясности</h2>
+        <p class="services-header__sub">
+          Сервисы, которые помогают вам поставить задачу и понять бюджет до начала работы.
+        </p>
+      </div>
+
+      <!-- Services list -->
+      <div class="services-list">
+
+        <!-- Service 1: content LEFT, image RIGHT -->
+        <div class="service-block">
+          <div class="service-block__content">
+            <div class="service-block__top">
+              <div class="service-block__divider">
+                <img src="assets/divider.svg" alt="">
+              </div>
+              <div class="service-block__text">
+                <h3 class="service-block__heading">без тз результат хз</h3>
+                <p class="service-block__body">
+                  Ответьте на несколько вопросов и получите готовую задачу для дизайнера.
+                </p>
+              </div>
+            </div>
+            <a href="#" class="btn btn--primary">Открыть</a>
+          </div>
+          <div class="service-img service-img--01">
+            <img src="assets/service-01.jpg" alt="">
+          </div>
+        </div>
+
+        <!-- Service 2: image LEFT, content RIGHT -->
+        <div class="service-block service-block--reverse">
+          <div class="service-img service-img--02">
+            <img src="assets/service-02.png" alt="">
+          </div>
+          <div class="service-block__content">
+            <div class="service-block__top">
+              <div class="service-block__divider">
+                <img src="assets/divider.svg" alt="">
+              </div>
+              <div class="service-block__text">
+                <h3 class="service-block__heading">Калькулятор бюджета</h3>
+                <p class="service-block__body">
+                  Получите ориентир по стоимости и поймите, откуда берётся разброс в цене.
+                </p>
+              </div>
+            </div>
+            <a href="#" class="btn btn--primary">Открыть</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="site-footer">
+      <div class="site-footer__logo">
+        <img src="assets/logo-smysl-footer.svg" alt="СМЫСЛ">
+      </div>
+      <p class="site-footer__tagline">Пишем о продающем визуале</p>
+      <nav class="site-footer__nav" aria-label="Навигация в подвале">
+        <a href="#" class="site-nav__link">главная</a>
+        <a href="#" class="site-nav__link">Статьи</a>
+        <a href="#" class="site-nav__link">Задача</a>
+        <a href="#" class="site-nav__link">бюджет</a>
+        <a href="#" class="site-nav__link">о нас</a>
+      </nav>
+    </footer>
+
+  </div>
+
+</body>
+</html>
