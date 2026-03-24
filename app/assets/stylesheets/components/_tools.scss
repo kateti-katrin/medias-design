@@ -1,0 +1,170 @@
+// _tools.scss — Service tool pages (brief quiz + budget calculator)
+
+.tool-page {
+  position: relative;
+  z-index: 1;
+  width: min(980px, calc(100% - 40px));
+  margin: 48px auto 80px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.tool-page__header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.tool-page__back {
+  width: fit-content;
+  font-family: $font-body;
+  font-size: 14px;
+  color: var(--color-text);
+  opacity: 0.85;
+}
+
+.tool-page__title {
+  font-family: $font-heading;
+  font-size: clamp(34px, 4.2vw, 60px);
+  line-height: 1.08;
+  letter-spacing: -1.1px;
+  text-transform: uppercase;
+  color: var(--color-text);
+}
+
+.tool-page__lead {
+  max-width: 760px;
+  font-family: $font-body;
+  font-size: clamp(18px, 2vw, 28px);
+  line-height: 1.2;
+  color: var(--color-text);
+}
+
+.tool-card {
+  background: rgba(252, 248, 201, 0.04);
+  border: 1px solid rgba(252, 248, 201, 0.25);
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.tool-form {
+  display: grid;
+  gap: 18px;
+}
+
+.tool-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  span {
+    font-family: $font-body;
+    font-size: 16px;
+    line-height: 1.2;
+    color: var(--color-text);
+  }
+
+  input,
+  select,
+  textarea {
+    width: 100%;
+    border: 1px solid rgba(252, 248, 201, 0.35);
+    background: rgba(17, 17, 17, 0.55);
+    color: var(--color-text);
+    font-family: $font-body;
+    font-size: 16px;
+    line-height: 1.2;
+    padding: 10px 12px;
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 68px;
+  }
+}
+
+.tool-field--checkbox {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: start;
+  gap: 10px;
+
+  input {
+    width: 18px;
+    height: 18px;
+    margin-top: 2px;
+    accent-color: #fcf8c9;
+    cursor: pointer;
+  }
+
+  span {
+    font-size: 16px;
+  }
+}
+
+.tool-submit {
+  justify-self: start;
+}
+
+.tool-result {
+  border-top: 1px solid rgba(252, 248, 201, 0.3);
+  padding-top: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  pre {
+    margin: 0;
+    border: 1px solid rgba(252, 248, 201, 0.25);
+    background: rgba(17, 17, 17, 0.75);
+    color: var(--color-text);
+    font-family: "SFMono-Regular", Menlo, Consolas, monospace;
+    font-size: 14px;
+    line-height: 1.45;
+    padding: 14px;
+    white-space: pre-wrap;
+  }
+}
+
+.tool-result__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+
+  h2 {
+    margin: 0;
+    font-family: $font-heading;
+    font-size: clamp(22px, 2.4vw, 34px);
+    line-height: 1.08;
+    text-transform: uppercase;
+    color: var(--color-text);
+  }
+}
+
+.tool-result__note {
+  margin: 0;
+  font-family: $font-body;
+  font-size: 14px;
+  color: var(--color-text);
+  opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+  .tool-page {
+    width: calc(100% - 24px);
+    margin: 28px auto 48px;
+  }
+
+  .tool-card {
+    padding: 16px;
+  }
+
+  .tool-result__head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

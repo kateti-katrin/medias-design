@@ -23,8 +23,8 @@
   <nav class="site-nav" aria-label="Основная навигация">
     <%= link_to "главная",  root_path,     class: "site-nav__link" %>
     <%= link_to "Статьи",   articles_path, class: "site-nav__link" %>
-    <%= link_to "Задача",   "#",           class: "site-nav__link" %>
-    <%= link_to "бюджет",   "#",           class: "site-nav__link" %>
+    <%= link_to "Задача",   brief_services_path,      class: "site-nav__link" %>
+    <%= link_to "бюджет",   calculator_services_path, class: "site-nav__link" %>
     <%= link_to "о нас",    "#",           class: "site-nav__link" %>
   </nav>
 
@@ -166,7 +166,7 @@
               </p>
             </div>
           </div>
-          <%= link_to "Открыть", "#", class: "btn btn--primary" %>
+          <%= link_to "Открыть", brief_services_path, class: "btn btn--primary" %>
         </div>
         <div class="service-img service-img--01">
           <%= image_tag "service-01.jpg", alt: "" %>
@@ -190,7 +190,7 @@
               </p>
             </div>
           </div>
-          <%= link_to "Открыть", "#", class: "btn btn--primary" %>
+          <%= link_to "Открыть", calculator_services_path, class: "btn btn--primary" %>
         </div>
       </div>
 
@@ -206,8 +206,8 @@
     <nav class="site-footer__nav" aria-label="Навигация в подвале">
       <%= link_to "главная",  root_path,     class: "site-nav__link" %>
       <%= link_to "Статьи",   articles_path, class: "site-nav__link" %>
-      <%= link_to "Задача",   "#",           class: "site-nav__link" %>
-      <%= link_to "бюджет",   "#",           class: "site-nav__link" %>
+      <%= link_to "Задача",   brief_services_path,      class: "site-nav__link" %>
+      <%= link_to "бюджет",   calculator_services_path, class: "site-nav__link" %>
       <%= link_to "о нас",    "#",           class: "site-nav__link" %>
     </nav>
   </footer>

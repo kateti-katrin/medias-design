@@ -6,4 +6,10 @@ class ServicesController < ApplicationController
   def show
     @service = Service.find(params[:id])
   end
+
+  def brief
+  end
+
+  def calculator
+  end
 end
