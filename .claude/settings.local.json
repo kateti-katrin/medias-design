@@ -42,7 +42,9 @@
       "Bash(gem install:*)",
       "Bash(bundle lock:*)",
       "Bash(bundle install:*)",
-      "Bash(bin/rails server:*)"
+      "Bash(bin/rails server:*)",
+      "Bash(ls /Users/kateti_katrin/Documents/site-001/*.css /Users/kateti_katrin/Documents/site-001/*.js)",
+      "Bash(ls /Users/kateti_katrin/Documents/site-001/*.css)"
     ]
   }
 }
