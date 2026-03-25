@@ -108,6 +108,8 @@
     position:  absolute;
     max-width: none;
     display:   block;
+    border-radius: inherit;
+    transition: inherit;
   }
 
   &--01 img {
@@ -125,10 +127,10 @@
   }
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .service-block:hover .service-img {
-    border-radius: 9999px;
-  }
+.service-block:hover .service-img,
+.service-block:focus-within .service-img,
+.service-img:hover {
+  border-radius: 9999px;
 }
 
 // ── Responsive ───────────────────────────────────────────────────────────────

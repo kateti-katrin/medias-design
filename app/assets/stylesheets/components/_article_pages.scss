@@ -156,6 +156,8 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: inherit;
+  transition: inherit;
 }
 
 .art-col {
@@ -326,13 +328,15 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: inherit;
+  transition: inherit;
 }
 
-@media (hover: hover) and (pointer: fine) {
-  .art-cover:hover,
-  .art-more__card:hover .art-more__img {
-    border-radius: 9999px;
-  }
+.art-cover:hover,
+.art-more__card:hover .art-more__img,
+.art-more__card:focus-visible .art-more__img,
+.art-more__img:hover {
+  border-radius: 9999px;
 }
 
 .art-more__tag {
