@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_25_000500) do
+ActiveRecord::Schema[8.1].define(version: 2026_03_25_110000) do
   create_table "articles", force: :cascade do |t|
     t.text "body"
     t.string "cover_image"
@@ -58,6 +58,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_25_000500) do
     t.integer "likeable_id", null: false
     t.string "likeable_type", null: false
     t.datetime "updated_at", null: false
+    t.string "visitor_token", null: false
+    t.index ["likeable_type", "likeable_id", "visitor_token"], name: "index_likes_on_likeable_and_visitor", unique: true
     t.index ["likeable_type", "likeable_id"], name: "index_likes_on_likeable"
   end
 

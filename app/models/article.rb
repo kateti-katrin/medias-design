@@ -24,8 +24,8 @@ class Article < ApplicationRecord
   scope :recent, ->(limit_count = 5) { newest_first.limit(limit_count) }
 
   scope :by_tag, ->(value) do
-    normalized_name = normalize_tag_name(value)
-    normalized_slug = normalize_tag_slug(normalized_name)
+    normalized_name = Article.send(:normalize_tag_name, value)
+    normalized_slug = Article.send(:normalize_tag_slug, normalized_name)
 
     joins(:primary_tag).where(
       "LOWER(tags.name) = :name OR tags.slug = :slug",

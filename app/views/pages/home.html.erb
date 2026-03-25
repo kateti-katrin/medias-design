@@ -33,15 +33,15 @@
     <%= link_to "Статьи",   articles_path, class: "site-nav__link" %>
     <%= link_to "Задача",   brief_services_path,      class: "site-nav__link" %>
     <%= link_to "бюджет",   calculator_services_path, class: "site-nav__link" %>
-    <%= link_to "о нас",    "#",           class: "site-nav__link" %>
+    <%= link_to "о нас",    root_path(anchor: "about"), class: "site-nav__link" %>
   </nav>
 
   <!-- Hero article content -->
   <div class="hero-content">
     <div class="hero-content__inner">
       <p class="hero-content__label">[ Статья месяца ]</p>
-      <h1 class="hero-content__title">Как поставить задачу дизайнеру без хаоса</h1>
-      <%= link_to "читать", "#", class: "btn btn--primary" %>
+      <h1 class="hero-content__title"><%= @articles.first&.title || "Как поставить задачу дизайнеру без хаоса" %></h1>
+      <%= link_to "читать", (@articles.first ? article_path(@articles.first) : articles_path), class: "btn btn--primary" %>
     </div>
   </div>
 
@@ -57,13 +57,13 @@
   <div class="section-group section-group--articles">
 
     <!-- About -->
-    <section class="about">
+    <section class="about" id="about">
       <p class="about__text">
         Медиа о дизайне для тех, кто его заказывает. Мы пишем для владельцев
         бизнеса и менеджеров, которые работают с дизайнерами и хотят понимать
         за что платят.
       </p>
-      <%= link_to "о проекте", "#", class: "btn btn--about" %>
+      <%= link_to "о проекте", root_path(anchor: "about"), class: "btn btn--about" %>
     </section>
 
     <!-- Articles -->
@@ -216,7 +216,7 @@
       <%= link_to "Статьи",   articles_path, class: "site-nav__link" %>
       <%= link_to "Задача",   brief_services_path,      class: "site-nav__link" %>
       <%= link_to "бюджет",   calculator_services_path, class: "site-nav__link" %>
-      <%= link_to "о нас",    "#",           class: "site-nav__link" %>
+      <%= link_to "о нас",    root_path(anchor: "about"), class: "site-nav__link" %>
     </nav>
   </footer>
 

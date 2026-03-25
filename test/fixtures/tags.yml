@@ -1,0 +1,15 @@
+task:
+  name: задача
+  slug: zadacha
+
+review:
+  name: оценка
+  slug: otsenka
+
+money:
+  name: деньги
+  slug: dengi
+
+process:
+  name: процесс
+  slug: process

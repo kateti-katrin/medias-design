@@ -3,15 +3,7 @@ class ArticlesController < ApplicationController
   before_action :find_article_by_param, only: [:show, :track_view]
 
   def index
-    @articles = Article.order(:id)
-    tag_value = selected_tag_from_params_or_session
-    return if tag_value.blank?
-
-    filtered_articles = @articles.by_tag(tag_value)
-    return if filtered_articles.blank?
-
-    @articles = filtered_articles
-    session[:articles_last_tag] = tag_value
+    @articles = Article.with_primary_tag.order(:id)
   end
 
   def show
@@ -42,13 +34,6 @@ class ArticlesController < ApplicationController
     @article = Article.find_by(slug: params[:id])
     @article ||= Article.find_by(id: params[:id]) if params[:id].to_s.match?(/\A\d+\z/)
     raise ActiveRecord::RecordNotFound unless @article
-  end
-
-  def selected_tag_from_params_or_session
-    from_params = params[:tag].to_s.strip
-    return from_params if from_params.present?
-
-    session[:articles_last_tag].to_s.strip.presence
   end
 
   def track_recent_articles(article)
