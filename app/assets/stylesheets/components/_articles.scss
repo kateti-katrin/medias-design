@@ -34,6 +34,12 @@
   }
 }
 
+.article-img {
+  border-radius: 0;
+  transition: border-radius 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: border-radius;
+}
+
 .article-card__body {
   display:        flex;
   flex-direction: column;
@@ -86,6 +92,8 @@
   position: absolute;
   inset:    0;
   overflow: hidden;
+  border-radius: inherit;
+  transition: inherit;
 
   img {
     position:  absolute;
@@ -115,6 +123,8 @@
   inset:          0;
   overflow:       hidden;
   pointer-events: none;
+  border-radius:  inherit;
+  transition:     inherit;
 
   img {
     position:  absolute;
@@ -158,6 +168,12 @@
   &.article-img--small {
     border-left:  none;
     border-right: none;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .article-card:hover .article-img {
+    border-radius: 9999px;
   }
 }
 

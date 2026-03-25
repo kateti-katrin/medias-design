@@ -100,6 +100,9 @@
   position:    relative;
   overflow:    hidden;
   flex-shrink: 0;
+  border-radius: 0;
+  transition: border-radius 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: border-radius;
 
   img {
     position:  absolute;
@@ -119,6 +122,12 @@
     top:    -28.707%;
     width:  155.147%;
     height: 157.605%;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .service-block:hover .service-img {
+    border-radius: 9999px;
   }
 }
 
