@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Калькулятор бюджета — СМЫСЛ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css">
+  <script src="./tools.js" defer></script>
+</head>
+<body>
+  <div class="tool-page">
+    <header class="tool-page__header">
+      <a href="../index.html" class="tool-page__back">← на главную</a>
+      <h1 class="tool-page__title">Калькулятор бюджета</h1>
+      <p class="tool-page__lead">Выберите параметры проекта и получите ориентир по бюджету и срокам.</p>
+    </header>
+
+    <section class="tool-card" id="budget-calculator" aria-label="Калькулятор бюджета">
+      <form class="tool-form" id="budget-form">
+        <label class="tool-field">
+          <span>Тип проекта</span>
+          <select name="type" required>
+            <option value="landing">Лендинг</option>
+            <option value="corporate">Корпоративный сайт</option>
+            <option value="shop">Интернет-магазин</option>
+            <option value="presentation">Презентация</option>
+          </select>
+        </label>
+
+        <label class="tool-field">
+          <span>Количество ключевых экранов/страниц</span>
+          <input type="number" name="pages" min="1" max="30" value="5" required>
+        </label>
+
+        <label class="tool-field tool-field--checkbox">
+          <input type="checkbox" name="brandbook">
+          <span>Нужна разработка фирменного стиля / mini-brandbook</span>
+        </label>
+
+        <label class="tool-field tool-field--checkbox">
+          <input type="checkbox" name="copywriting">
+          <span>Нужна помощь с текстами (редактура/написание)</span>
+        </label>
+
+        <label class="tool-field tool-field--checkbox">
+          <input type="checkbox" name="analytics">
+          <span>Нужен анализ конкурентов и структуры</span>
+        </label>
+
+        <label class="tool-field">
+          <span>Срочность</span>
+          <select name="urgency" required>
+            <option value="normal">Стандартный срок</option>
+            <option value="fast">Нужно быстрее обычного</option>
+            <option value="rush">Очень срочно</option>
+          </select>
+        </label>
+
+        <button type="submit" class="btn btn--primary tool-submit">Рассчитать</button>
+      </form>
+
+      <div class="tool-result" id="budget-result" hidden>
+        <div class="tool-result__head">
+          <h2>Ориентир бюджета</h2>
+          <button type="button" class="btn btn--about" id="budget-copy">Скопировать</button>
+        </div>
+        <pre id="budget-output"></pre>
+        <p class="tool-result__note">Это предварительная оценка, финальная смета зависит от деталей задачи.</p>
+      </div>
+    </section>
+  </div>
+</body>
+</html>
