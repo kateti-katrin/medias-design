@@ -81,7 +81,7 @@ GEM
     bcrypt (3.1.22)
     bigdecimal (4.0.1)
     bindex (0.8.1)
-    bootsnap (1.23.0)
+    bootsnap (1.24.0)
       msgpack (~> 1.2)
     builder (3.3.0)
     carrierwave (3.1.2)
@@ -129,6 +129,7 @@ GEM
       tzinfo
     ffi (1.17.3-arm64-darwin)
     ffi (1.17.3-x64-mingw-ucrt)
+    ffi (1.17.3-x86_64-linux-gnu)
     fugit (1.12.1)
       et-orbi (~> 1.4)
       raabro (~> 1.4)
@@ -186,6 +187,8 @@ GEM
     nokogiri (1.19.2-arm64-darwin)
       racc (~> 1.4)
     nokogiri (1.19.2-x64-mingw-ucrt)
+      racc (~> 1.4)
+    nokogiri (1.19.2-x86_64-linux-gnu)
       racc (~> 1.4)
     orm_adapter (0.5.0)
     pp (0.6.3)
@@ -281,6 +284,7 @@ GEM
       thor (>= 1.3.1)
     sqlite3 (2.9.2-arm64-darwin)
     sqlite3 (2.9.2-x64-mingw-ucrt)
+    sqlite3 (2.9.2-x86_64-linux-gnu)
     ssrf_filter (1.3.0)
     stimulus-rails (1.3.4)
       railties (>= 6.0.0)
@@ -318,6 +322,7 @@ PLATFORMS
   arm64-darwin
   arm64-darwin-24
   x64-mingw-ucrt
+  x86_64-linux
 
 DEPENDENCIES
   bootsnap
