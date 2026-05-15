@@ -15,39 +15,9 @@ function copyText(text) {
   return Promise.resolve();
 }
 
-function buildBrief(data) {
-  const brandNote =
-    data.brand === "Есть брендбук и готовые материалы"
-      ? "Фирменный стиль готов — брендбук и материалы предоставим."
-      : data.brand === "Есть логотип, но нет системы"
-      ? "Есть логотип, но единого стиля нет. Нужно выстроить систему."
-      : "Фирменного стиля нет. Потребуется разработка с нуля.";
-
-  const notesLine = data.notes?.trim()
-    ? `\nДополнительно\n${data.notes.trim()}`
-    : "";
-
-  return `ТЕХНИЧЕСКОЕ ЗАДАНИЕ НА ДИЗАЙН
-
-Проект: ${data.projectType}
-Срок запуска: ${data.deadline}
-
-Задача
-${data.goal.trim()}
-
-Целевая аудитория
-${data.audience.trim()}
-
-Ключевое действие пользователя
-${data.cta}
-
-Фирменный стиль
-${brandNote}
-
-Состав страницы / экранов
-${data.blocks.trim()}${notesLine}
-
-Ожидаемый результат: готовые макеты для передачи в разработку, соответствующие цели проекта и аудитории.`;
+function csrfToken() {
+  const meta = document.querySelector('meta[name="csrf-token"]');
+  return meta ? meta.getAttribute("content") : "";
 }
 
 export function mountBriefQuiz() {
@@ -57,12 +27,55 @@ export function mountBriefQuiz() {
   const copyBtn = document.getElementById("brief-copy");
   if (!form || !result || !output || !copyBtn) return;
 
-  form.addEventListener("submit", (event) => {
+  form.addEventListener("submit", async (event) => {
     event.preventDefault();
+
     const data = Object.fromEntries(new FormData(form).entries());
-    output.textContent = buildBrief(data);
+    const submitBtn = form.querySelector('button[type="submit"]');
+    if (submitBtn) submitBtn.disabled = true;
+    output.textContent = "Готовим ТЗ…";
     result.hidden = false;
-    result.scrollIntoView({ behavior: "smooth", block: "start" });
+
+    try {
+      const response = await fetch("/api/briefs", {
+        method: "POST",
+        credentials: "same-origin",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          "X-CSRF-Token": csrfToken(),
+        },
+        body: JSON.stringify({
+          brief: {
+            projectType: data.projectType,
+            goal: data.goal,
+            audience: data.audience,
+            cta: data.cta,
+            brand: data.brand,
+            blocks: data.blocks,
+            deadline: data.deadline,
+            notes: data.notes,
+          },
+          contact: {
+            contact_email: data.contact_email || "",
+            contact_name: data.contact_name || "",
+          },
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+
+      const json = await response.json();
+      output.textContent = json.text;
+      result.scrollIntoView({ behavior: "smooth", block: "start" });
+    } catch (err) {
+      output.textContent = "Не удалось получить ТЗ. Попробуйте позже.";
+      console.error(err);
+    } finally {
+      if (submitBtn) submitBtn.disabled = false;
+    }
   });
 
   copyBtn.addEventListener("click", async () => {

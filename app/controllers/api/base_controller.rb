@@ -18,12 +18,9 @@ module Api
     end
 
     def find_article_by_api_param
-      article = Article.find_by(slug: params[:article_id] || params[:id])
-      article ||= Article.find_by(public_uuid: params[:article_id] || params[:id])
-      article ||= begin
-        raw_id = (params[:article_id] || params[:id]).to_s
-        Article.find(raw_id) if raw_id.match?(/\A\d+\z/)
-      end
+      identifier = (params[:article_id] || params[:id]).to_s
+      article = Article.find_by(slug: identifier)
+      article ||= Article.find_by(public_uuid: identifier)
 
       raise ActiveRecord::RecordNotFound unless article
 

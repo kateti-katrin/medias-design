@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_25_110000) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_14_120000) do
   create_table "articles", force: :cascade do |t|
     t.text "body"
     t.string "cover_image"
@@ -51,6 +51,23 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_25_110000) do
     t.datetime "updated_at", null: false
     t.index ["exp"], name: "index_jwt_denylists_on_exp"
     t.index ["jti"], name: "index_jwt_denylists_on_jti", unique: true
+  end
+
+  create_table "leads", force: :cascade do |t|
+    t.bigint "amount_max_cents"
+    t.bigint "amount_min_cents"
+    t.string "contact_email"
+    t.string "contact_name"
+    t.datetime "created_at", null: false
+    t.integer "duration_weeks"
+    t.string "ip_address"
+    t.string "kind", null: false
+    t.json "payload", null: false
+    t.json "result"
+    t.datetime "updated_at", null: false
+    t.string "user_agent", limit: 500
+    t.index ["created_at"], name: "index_leads_on_created_at"
+    t.index ["kind"], name: "index_leads_on_kind"
   end
 
   create_table "likes", force: :cascade do |t|

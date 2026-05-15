@@ -1,0 +1,39 @@
+# Серверный прайс. ИСТОЧНИК ПРАВДЫ для калькулятора.
+# Не дублировать в JS — клиент не должен видеть эти числа.
+# Стоимость указана в рублях.
+
+shared:
+  base:
+    freelancer:
+      landing:      { label: "Лендинг",             min: 30000,  max: 55000,  weeks: 2 }
+      corporate:    { label: "Корпоративный сайт",  min: 60000,  max: 110000, weeks: 4 }
+      shop:         { label: "Интернет-магазин",    min: 80000,  max: 150000, weeks: 5 }
+      presentation: { label: "Презентация",         min: 20000,  max: 45000,  weeks: 2 }
+    agency:
+      landing:      { label: "Лендинг",             min: 65000,  max: 130000, weeks: 3 }
+      corporate:    { label: "Корпоративный сайт",  min: 140000, max: 260000, weeks: 6 }
+      shop:         { label: "Интернет-магазин",    min: 200000, max: 390000, weeks: 8 }
+      presentation: { label: "Презентация",         min: 50000,  max: 110000, weeks: 3 }
+
+  addons:
+    brandbook:
+      freelancer: { min: 15000, max: 30000, weeks: 1 }
+      agency:     { min: 35000, max: 70000, weeks: 1 }
+    copywriting:
+      freelancer: { min: 8000,  max: 18000, weeks: 0 }
+      agency:     { min: 18000, max: 38000, weeks: 0 }
+    analytics:
+      freelancer: { min: 10000, max: 20000, weeks: 0 }
+      agency:     { min: 22000, max: 45000, weeks: 0 }
+
+  urgency:
+    fast: { multiplier: 1.2, weeks_delta: -1 }
+    rush: { multiplier: 1.4, weeks_delta: -2 }
+
+  pages:
+    factor_per_extra_page: 0.12
+    max_pages: 30
+
+development:
+production:
+test:

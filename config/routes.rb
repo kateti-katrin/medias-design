@@ -17,6 +17,9 @@ Rails.application.routes.draw do
       resource :like, only: [:show, :create, :destroy], controller: "article_likes"
       resources :comments, only: [:index, :create], controller: "article_comments"
     end
+
+    resources :quotes, only: [:create]
+    resources :briefs, only: [:create]
   end
 
   resources :articles, only: [:index, :show] do

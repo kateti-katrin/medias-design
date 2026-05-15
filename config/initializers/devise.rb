@@ -13,8 +13,8 @@ Devise.setup do |config|
 
   config.reconfirmable = false
   config.expire_all_remember_me_on_sign_out = true
-  config.password_length = 6..128
-  config.email_regexp = /\A[^@\s]+@[^@\s]+\z/
+  config.password_length = 10..128
+  config.email_regexp = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
 
   config.timeout_in = 30.minutes
 

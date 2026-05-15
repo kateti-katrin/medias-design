@@ -5,6 +5,7 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+*.log
 /storage/*.sqlite3
 /storage/*.sqlite3-journal
 /db/*.sqlite3

@@ -3,7 +3,13 @@ class Profile < ApplicationRecord
 
   validates :display_name, length: { maximum: 100 }, allow_blank: true
   validates :bio, length: { maximum: 1000 }, allow_blank: true
-  validates :avatar_url, length: { maximum: 500 }, allow_blank: true
+  validates :avatar_url,
+            length: { maximum: 500 },
+            format: {
+              with: %r{\Ahttps?://[^\s<>"']+\z},
+              message: "must start with http:// or https://"
+            },
+            allow_blank: true
 
   before_validation :normalize_fields
 
