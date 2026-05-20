@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Кабинет — СМЫСЛ</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./profile.js" defer></script>
+</head>
+<body>
+  <div class="profile-page">
+
+    <header class="profile-page__header">
+      <a href="./index.html" class="profile-page__back">← на&nbsp;главную</a>
+      <h1 class="profile-page__title">Твой кабинет</h1>
+      <p class="profile-page__sub">Здесь живёт всё, что ты&nbsp;собрал в&nbsp;смысле&nbsp;— ТЗ, расчёты, статьи и&nbsp;понимание.</p>
+    </header>
+
+    <!-- ─ Hero: профиль ─────────────────────────────────────── -->
+    <section class="profile-hero">
+      <div class="profile-hero__main">
+        <div class="profile-avatar" aria-hidden="true"><span>КК</span></div>
+
+        <div class="profile-hero__info">
+          <p class="profile-hero__role">[ предприниматель · Москва ]</p>
+          <h2 class="profile-hero__name">Катерина Котляренко</h2>
+          <p class="profile-hero__meta">в&nbsp;смысле с&nbsp;марта 2026</p>
+        </div>
+
+        <div class="profile-hero__actions">
+          <button type="button" class="btn btn--about profile-hero__btn" data-action="edit">редактировать</button>
+          <button type="button" class="btn btn--about profile-hero__btn" data-action="logout">выйти</button>
+        </div>
+      </div>
+
+      <ul class="profile-stats">
+        <li class="profile-stat">
+          <span class="profile-stat__value">3</span>
+          <span class="profile-stat__label">ТЗ собрано</span>
+        </li>
+        <li class="profile-stat">
+          <span class="profile-stat__value">2</span>
+          <span class="profile-stat__label">бюджета посчитано</span>
+        </li>
+        <li class="profile-stat">
+          <span class="profile-stat__value">12</span>
+          <span class="profile-stat__label">статей прочитано</span>
+        </li>
+        <li class="profile-stat">
+          <span class="profile-stat__value">4</span>
+          <span class="profile-stat__label">в&nbsp;закладках</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ─ Где ты сейчас (прогресс по рубрикам) ───────────────── -->
+    <section class="profile-section">
+      <header class="profile-section__head">
+        <div>
+          <h3 class="profile-section__title">Где ты сейчас</h3>
+          <p class="profile-section__sub">Чем больше тем закрыто&nbsp;— тем меньше шансов, что дизайнер тебя удивит.</p>
+        </div>
+        <p class="profile-section__counter">14 из&nbsp;24 тем</p>
+      </header>
+
+      <ul class="profile-progress">
+        <li class="profile-progress__row">
+          <span class="profile-progress__label">Задача</span>
+          <div class="profile-progress__bar"><div class="profile-progress__fill" style="width: 100%"></div></div>
+          <span class="profile-progress__value">6/6 ✓</span>
+        </li>
+        <li class="profile-progress__row">
+          <span class="profile-progress__label">Оценка</span>
+          <div class="profile-progress__bar"><div class="profile-progress__fill" style="width: 50%"></div></div>
+          <span class="profile-progress__value">3/6</span>
+        </li>
+        <li class="profile-progress__row">
+          <span class="profile-progress__label">Деньги</span>
+          <div class="profile-progress__bar"><div class="profile-progress__fill" style="width: 66%"></div></div>
+          <span class="profile-progress__value">4/6</span>
+        </li>
+        <li class="profile-progress__row">
+          <span class="profile-progress__label">Процесс</span>
+          <div class="profile-progress__bar"><div class="profile-progress__fill" style="width: 16%"></div></div>
+          <span class="profile-progress__value">1/6</span>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ─ Мои ТЗ ──────────────────────────────────────────────── -->
+    <section class="profile-section">
+      <header class="profile-section__head">
+        <div>
+          <h3 class="profile-section__title">Мои ТЗ</h3>
+          <p class="profile-section__sub">Можно копировать, переименовывать, возвращаться через месяц.</p>
+        </div>
+        <a class="btn btn--about profile-section__action" href="./services/brief.html">+ собрать новое</a>
+      </header>
+
+      <ul class="profile-list">
+        <li class="profile-item">
+          <div class="profile-item__main">
+            <p class="profile-item__title">Лендинг для онлайн-курса по копирайтингу</p>
+            <p class="profile-item__meta">собран 15 мая · 8&nbsp;пунктов · 4&nbsp;856 знаков</p>
+          </div>
+          <div class="profile-item__actions">
+            <button type="button" class="profile-icon-btn" data-action="open">открыть</button>
+            <button type="button" class="profile-icon-btn" data-action="copy">копировать</button>
+            <button type="button" class="profile-icon-btn profile-icon-btn--danger" data-action="delete">удалить</button>
+          </div>
+        </li>
+        <li class="profile-item">
+          <div class="profile-item__main">
+            <p class="profile-item__title">Интернет-магазин кофе с&nbsp;подпиской</p>
+            <p class="profile-item__meta">собран 12 мая · 8&nbsp;пунктов · 6&nbsp;120 знаков</p>
+          </div>
+          <div class="profile-item__actions">
+            <button type="button" class="profile-icon-btn" data-action="open">открыть</button>
+            <button type="button" class="profile-icon-btn" data-action="copy">копировать</button>
+            <button type="button" class="profile-icon-btn profile-icon-btn--danger" data-action="delete">удалить</button>
+          </div>
+        </li>
+        <li class="profile-item">
+          <div class="profile-item__main">
+            <p class="profile-item__title">Презентация для инвестора, seed-раунд</p>
+            <p class="profile-item__meta">собран 8 мая · 8&nbsp;пунктов · 3&nbsp;204 знака</p>
+          </div>
+          <div class="profile-item__actions">
+            <button type="button" class="profile-icon-btn" data-action="open">открыть</button>
+            <button type="button" class="profile-icon-btn" data-action="copy">копировать</button>
+            <button type="button" class="profile-icon-btn profile-icon-btn--danger" data-action="delete">удалить</button>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ─ Мои расчёты бюджета ────────────────────────────────── -->
+    <section class="profile-section">
+      <header class="profile-section__head">
+        <div>
+          <h3 class="profile-section__title">Мои расчёты бюджета</h3>
+          <p class="profile-section__sub">Сравни варианты, перешли команде или дизайнеру.</p>
+        </div>
+        <a class="btn btn--about profile-section__action" href="./services/calculator.html">+ посчитать</a>
+      </header>
+
+      <ul class="profile-list">
+        <li class="profile-item">
+          <div class="profile-item__main">
+            <p class="profile-item__title">Лендинг, 5&nbsp;экранов · со&nbsp;срочностью</p>
+            <p class="profile-item__meta">фриланс: 71–134 тыс ₽ · агентство: 157–315 тыс ₽ · 14&nbsp;мая</p>
+          </div>
+          <div class="profile-item__actions">
+            <button type="button" class="profile-icon-btn" data-action="open">открыть</button>
+            <button type="button" class="profile-icon-btn" data-action="copy">копировать</button>
+            <button type="button" class="profile-icon-btn profile-icon-btn--danger" data-action="delete">удалить</button>
+          </div>
+        </li>
+        <li class="profile-item">
+          <div class="profile-item__main">
+            <p class="profile-item__title">Интернет-магазин, 8&nbsp;экранов · с&nbsp;брендбуком</p>
+            <p class="profile-item__meta">фриланс: 192–384 тыс ₽ · агентство: 425–847 тыс ₽ · 11&nbsp;мая</p>
+          </div>
+          <div class="profile-item__actions">
+            <button type="button" class="profile-icon-btn" data-action="open">открыть</button>
+            <button type="button" class="profile-icon-btn" data-action="copy">копировать</button>
+            <button type="button" class="profile-icon-btn profile-icon-btn--danger" data-action="delete">удалить</button>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ─ В закладках ─────────────────────────────────────────── -->
+    <section class="profile-section">
+      <header class="profile-section__head">
+        <div>
+          <h3 class="profile-section__title">В&nbsp;закладках</h3>
+          <p class="profile-section__sub">Звезда ☆&nbsp;под статьёй отправляет её сюда.</p>
+        </div>
+      </header>
+
+      <ul class="profile-list">
+        <li class="profile-item">
+          <div class="profile-item__main">
+            <p class="profile-item__title">Как поставить задачу дизайнеру без хаоса</p>
+            <p class="profile-item__meta">рубрика «Задача» · 7&nbsp;мин чтения</p>
+          </div>
+          <div class="profile-item__actions">
+            <a class="profile-icon-btn" href="./articles/article-1.html">читать</a>
+            <button type="button" class="profile-icon-btn profile-icon-btn--danger" data-action="unbookmark">убрать</button>
+          </div>
+        </li>
+        <li class="profile-item">
+          <div class="profile-item__main">
+            <p class="profile-item__title">Почему дизайн стоит дорого</p>
+            <p class="profile-item__meta">рубрика «Деньги» · 5&nbsp;мин чтения</p>
+          </div>
+          <div class="profile-item__actions">
+            <a class="profile-icon-btn" href="./articles/article-3.html">читать</a>
+            <button type="button" class="profile-icon-btn profile-icon-btn--danger" data-action="unbookmark">убрать</button>
+          </div>
+        </li>
+        <li class="profile-item">
+          <div class="profile-item__main">
+            <p class="profile-item__title">Как оценить макет, если ты&nbsp;не&nbsp;дизайнер</p>
+            <p class="profile-item__meta">рубрика «Оценка» · 6&nbsp;мин чтения</p>
+          </div>
+          <div class="profile-item__actions">
+            <a class="profile-icon-btn" href="./articles/article-2.html">читать</a>
+            <button type="button" class="profile-icon-btn profile-icon-btn--danger" data-action="unbookmark">убрать</button>
+          </div>
+        </li>
+        <li class="profile-item">
+          <div class="profile-item__main">
+            <p class="profile-item__title">Бриф или ТЗ: в&nbsp;чём разница</p>
+            <p class="profile-item__meta">рубрика «Задача» · 4&nbsp;мин чтения</p>
+          </div>
+          <div class="profile-item__actions">
+            <a class="profile-icon-btn" href="./articles/article-4.html">читать</a>
+            <button type="button" class="profile-icon-btn profile-icon-btn--danger" data-action="unbookmark">убрать</button>
+          </div>
+        </li>
+      </ul>
+    </section>
+
+    <!-- ─ Личная заметка ──────────────────────────────────────── -->
+    <section class="profile-section">
+      <header class="profile-section__head">
+        <div>
+          <h3 class="profile-section__title">Личная заметка</h3>
+          <p class="profile-section__sub">Свободный блокнот. Что записать&nbsp;— решай сам.</p>
+        </div>
+      </header>
+
+      <form class="profile-note" id="profile-note-form">
+        <textarea
+          class="profile-note__field"
+          id="profile-note-field"
+          rows="4"
+          placeholder="Например: запустить лендинг до конца июня, не забыть проверить кейсы из ТЗ №2."
+        >Запустить лендинг до конца июня. Не забыть проверить кейсы из ТЗ &#8470;2.
+Уточнить у дизайнера разницу между mockup и prototype.</textarea>
+        <div class="profile-note__bottom">
+          <span class="profile-note__hint" id="profile-note-status">сохранено</span>
+          <button type="submit" class="btn btn--about profile-note__save">сохранить</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- ─ Настройки ───────────────────────────────────────────── -->
+    <section class="profile-section">
+      <header class="profile-section__head">
+        <h3 class="profile-section__title">Настройки</h3>
+      </header>
+
+      <ul class="profile-settings">
+        <li class="profile-setting">
+          <div class="profile-setting__text">
+            <p class="profile-setting__title">Письма о&nbsp;новых статьях</p>
+            <p class="profile-setting__hint">Раз в&nbsp;неделю&nbsp;— только то, что относится к&nbsp;твоим рубрикам.</p>
+          </div>
+          <label class="profile-switch">
+            <input type="checkbox" checked>
+            <span class="profile-switch__track"></span>
+          </label>
+        </li>
+        <li class="profile-setting">
+          <div class="profile-setting__text">
+            <p class="profile-setting__title">Сохранять историю</p>
+            <p class="profile-setting__hint">Чтобы можно было вернуться к&nbsp;старым бюджетам и&nbsp;ТЗ.</p>
+          </div>
+          <label class="profile-switch">
+            <input type="checkbox" checked>
+            <span class="profile-switch__track"></span>
+          </label>
+        </li>
+        <li class="profile-setting">
+          <div class="profile-setting__text">
+            <p class="profile-setting__title">Профиль виден другим читателям</p>
+            <p class="profile-setting__hint">Имя и&nbsp;роль будут видны под комментариями к&nbsp;статьям.</p>
+          </div>
+          <label class="profile-switch">
+            <input type="checkbox">
+            <span class="profile-switch__track"></span>
+          </label>
+        </li>
+      </ul>
+
+      <div class="profile-danger">
+        <button type="button" class="profile-link-btn" data-action="password">Сменить пароль</button>
+        <button type="button" class="profile-link-btn profile-link-btn--danger" data-action="delete-account">Удалить аккаунт</button>
+      </div>
+      <p class="profile-danger__hint">Удалим тебя и&nbsp;всё, что ты&nbsp;собрал. Назад дороги не&nbsp;будет.</p>
+    </section>
+
+  </div>
+</body>
+</html>
