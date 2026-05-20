@@ -1,5 +1,5 @@
 (function () {
-  // Сценарий: смесь техлога и брендового голоса
+  // ── Сценарий ────────────────────────────────────────────────
   var lines = [
     ":/ SMYSL.SYS_404_HANDLER",
     "> ИНИЦИАЛИЗАЦИЯ...",
@@ -49,77 +49,184 @@
     "[ READY TO REBOOT ]"
   ];
 
+  var GLITCH_CHARS = ["▓","░","▒","█","▌","▐","╳","╱","╲","Á","Ω","Σ","Δ","Φ","Ø","§","¤","¥","#","%","&","░","▓","◢","◣","◤","◥"];
+
   var output = document.getElementById("t404-out");
   var actions = document.getElementById("t404-actions");
   var replayBtn = document.getElementById("t404-replay");
+  var body = document.body;
 
   var skipped = false;
   var running = false;
-  var tickAudio = null; // звуковой эффект — пока выключен
+  var flareTimer = null;
+  var tearTimer = null;
+  var glitchTimer = null;
 
   function sleep(ms) {
-    return new Promise(function (resolve) {
-      if (skipped) return resolve();
-      setTimeout(resolve, ms);
-    });
+    return new Promise(function (r) { setTimeout(r, skipped ? 0 : ms); });
+  }
+  function rand(min, max) { return Math.random() * (max - min) + min; }
+  function pickGlitch() { return GLITCH_CHARS[Math.floor(Math.random() * GLITCH_CHARS.length)]; }
+
+  // ── Эффекты (включаются добавлением класса на body) ─────────
+  async function flash(ms) {
+    body.classList.add("t404--flash");
+    await sleep(ms || 80);
+    body.classList.remove("t404--flash");
+  }
+  async function heavy(ms) {
+    body.classList.add("t404--heavy");
+    await sleep(ms || 200);
+    body.classList.remove("t404--heavy");
+  }
+  async function rgbShift(ms) {
+    body.classList.add("t404--rgb");
+    await sleep(ms || 150);
+    body.classList.remove("t404--rgb");
+  }
+  async function blackout() {
+    body.classList.add("t404--blackout");
+    await sleep(1400);
+  }
+  function reveal() {
+    body.classList.add("t404--reveal");
+    actions.classList.add("t404-actions--visible");
   }
 
-  // Случайная задержка между символами — даёт «живое» ощущение печати
-  function charDelay(ch, isHeader) {
-    if (skipped) return 0;
-    if (ch === " ") return 4 + Math.random() * 6;
-    if (isHeader) return 16 + Math.random() * 14;
-    return 6 + Math.random() * 10;
+  // ── Печать одного символа (иногда с «глюком») ────────────────
+  async function typeChar(ch, opts) {
+    opts = opts || {};
+    var glitchChance = opts.glitchChance || 0;
+    var headerMode = !!opts.headerMode;
+
+    if (!skipped && ch !== " " && ch !== "\n" && Math.random() < glitchChance) {
+      // печатаем «не тот» символ, потом стираем и ставим правильный
+      output.textContent += pickGlitch();
+      await sleep(rand(40, 110));
+      output.textContent = output.textContent.slice(0, -1);
+    }
+
+    output.textContent += ch;
+    if (skipped) return;
+
+    var delay;
+    if (ch === " ") delay = rand(3, 9);
+    else if (headerMode) delay = rand(14, 28);
+    else delay = rand(5, 12);
+    await sleep(delay);
   }
 
-  // Пауза после строки — длиннее после заголовков и пустых строк
-  function lineDelay(line) {
-    if (skipped) return 0;
-    if (line === "") return 110;
-    if (line.indexOf("[ ") === 0) return 80;
-    if (line.indexOf("> \"") === 0) return 160; // «киношная» реплика
-    if (line.indexOf(":/") === 0) return 200;
-    return 45;
-  }
-
-  async function typeLine(line) {
+  async function typeLine(line, opts) {
     var isHeader =
       line.indexOf("[ ") === 0 ||
       line.indexOf(":/") === 0 ||
       line.indexOf("> ИНИЦИАЛИЗАЦИЯ") === 0;
 
     for (var i = 0; i < line.length; i++) {
-      var ch = line[i];
-      output.textContent += ch;
-      await sleep(charDelay(ch, isHeader));
+      await typeChar(line[i], {
+        glitchChance: opts && opts.glitchChance || 0,
+        headerMode: isHeader
+      });
     }
     output.textContent += "\n";
-    await sleep(lineDelay(line));
+
+    if (skipped) return;
+    if (line === "") await sleep(120);
+    else if (line.indexOf("> \"") === 0) await sleep(180);
+    else if (line.indexOf("[ ") === 0) await sleep(80);
+    else if (line.indexOf(":/") === 0) await sleep(220);
+    else await sleep(50);
   }
 
+  // ── Случайные глитчи во время печати ─────────────────────────
+  function startAmbientGlitches() {
+    flareTimer = setInterval(function () {
+      if (skipped || !running) return;
+      if (Math.random() < 0.6) flash(rand(40, 90));
+    }, 4200);
+
+    tearTimer = setInterval(function () {
+      if (skipped || !running) return;
+      if (Math.random() < 0.55) heavy(rand(120, 260));
+    }, 2400);
+
+    glitchTimer = setInterval(function () {
+      if (skipped || !running) return;
+      if (Math.random() < 0.5) rgbShift(rand(70, 150));
+    }, 1800);
+  }
+
+  function stopAmbientGlitches() {
+    clearInterval(flareTimer);
+    clearInterval(tearTimer);
+    clearInterval(glitchTimer);
+  }
+
+  // ── Основной цикл ────────────────────────────────────────────
   async function run() {
     if (running) return;
     running = true;
     skipped = false;
+
+    // Сброс состояния
     output.textContent = "";
     actions.classList.remove("t404-actions--visible");
+    body.classList.remove("t404--blackout", "t404--reveal", "t404--heavy", "t404--flash", "t404--rgb");
+
+    startAmbientGlitches();
 
     for (var i = 0; i < lines.length; i++) {
-      await typeLine(lines[i]);
+      var line = lines[i];
+      // Чем дальше — тем выше шанс глюка символа
+      var progress = i / lines.length;
+      var glitchChance = 0.02 + progress * 0.08;
+
+      await typeLine(line, { glitchChance: glitchChance });
+
+      // Драматические события на ключевых строках
+      if (line.indexOf("ARTIFACT DETECTED") !== -1) {
+        await flash(120);
+        await heavy(450);
+      }
+      if (line.indexOf("ERROR 404XAF") !== -1) {
+        await rgbShift(220);
+        await flash(60);
+      }
+      if (line.indexOf("ЭТО АРТЕФАКТ") !== -1) {
+        await heavy(180);
+      }
     }
 
-    actions.classList.add("t404-actions--visible");
+    stopAmbientGlitches();
+
+    if (skipped) {
+      // быстрый финал, если пользователь нажал скип
+      await sleep(200);
+    } else {
+      // Драматическое крещендо
+      await sleep(500);
+      await heavy(700);
+      await flash(120);
+      await heavy(400);
+      await flash(180);
+    }
+
+    await blackout();
+    reveal();
+
     running = false;
   }
 
-  // Скип анимации — клик или любая клавиша
+  // ── Скип анимации и горячие клавиши ──────────────────────────
   function skipAnimation() {
     if (running) skipped = true;
   }
+
   document.addEventListener("click", function (e) {
     if (e.target && e.target.closest && e.target.closest(".t404-actions")) return;
     skipAnimation();
   });
+
   document.addEventListener("keydown", function (e) {
     if (e.key === "Enter") {
       window.location.href = "./index.html";
@@ -132,13 +239,8 @@
     skipAnimation();
   });
 
-  // Replay
-  if (replayBtn) {
-    replayBtn.addEventListener("click", function () {
-      run();
-    });
-  }
+  if (replayBtn) replayBtn.addEventListener("click", run);
 
-  // Запуск
+  // Старт
   run();
 })();

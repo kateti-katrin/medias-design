@@ -2646,9 +2646,10 @@ body.t404 {
   overflow-x: hidden;
   overflow-y: auto;
   text-shadow: 0 0 4px rgba(252, 248, 201, 0.32);
+  transition: background 0.8s ease;
 }
 
-/* Сканлайны как у CRT-монитора */
+/* CRT-сканлайны */
 .t404-scanlines {
   position: fixed;
   inset: 0;
@@ -2661,6 +2662,29 @@ body.t404 {
     rgba(0, 0, 0, 0.18) 2px,
     rgba(0, 0, 0, 0.18) 3px
   );
+  transition: opacity 0.8s ease;
+}
+
+/* TV-шум */
+.t404-noise {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 6;
+  opacity: 0.07;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.92' numOctaves='3' stitchTiles='stitch'/></filter><rect width='200' height='200' filter='url(%23n)'/></svg>");
+  background-size: 200px 200px;
+  animation: t404-noise-shift 0.14s steps(2) infinite;
+  transition: opacity 0.8s ease;
+}
+
+@keyframes t404-noise-shift {
+  0%   { background-position: 0 0; }
+  25%  { background-position: -18px 7px; }
+  50%  { background-position: 14px -11px; }
+  75%  { background-position: -9px -16px; }
+  100% { background-position: 22px 13px; }
 }
 
 /* Виньетка по краям */
@@ -2669,8 +2693,8 @@ body.t404 {
   inset: 0;
   pointer-events: none;
   z-index: 7;
-  background:
-    radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, 0.55) 100%);
+  background: radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, 0.55) 100%);
+  transition: opacity 0.8s ease;
 }
 
 .t404-screen {
@@ -2681,14 +2705,15 @@ body.t404 {
   margin: 0 auto;
   min-height: 100vh;
   box-sizing: border-box;
-  animation: t404-glitch 7s infinite;
+  animation: t404-baseline-jitter 7s infinite;
+  transition: opacity 0.8s ease;
 }
 
-@keyframes t404-glitch {
-  0%, 92%, 100% { transform: translate(0, 0); filter: none; }
-  93% { transform: translate(-1px, 0); filter: hue-rotate(-4deg); }
+@keyframes t404-baseline-jitter {
+  0%, 92%, 100% { transform: translate(0, 0); }
+  93% { transform: translate(-1px, 0); }
   94% { transform: translate(1px, 0); }
-  95% { transform: translate(0, 0); filter: none; }
+  95% { transform: translate(0, 0); }
 }
 
 .t404-out {
@@ -2703,7 +2728,7 @@ body.t404 {
   font-weight: 500;
 }
 
-/* Курсор-каретка, всегда мигает в конце текста */
+/* Каретка */
 .t404-out::after {
   content: "▌";
   display: inline-block;
@@ -2716,6 +2741,70 @@ body.t404 {
   50% { opacity: 0; }
 }
 
+/* ── Активные эффекты, включаются JS через class на body ────── */
+
+/* RGB-сдвиг (хроматическая аберрация) */
+body.t404--rgb .t404-out {
+  text-shadow:
+    -2px 0 #ff2256,
+    2px 0 #00d3ff,
+    0 0 4px rgba(252, 248, 201, 0.32);
+}
+
+/* Тяжёлый глитч — разрыв экрана + сильная аберрация */
+body.t404--heavy .t404-out {
+  text-shadow:
+    -3px 0 #ff2256,
+    3px 0 #00d3ff,
+    0 0 4px rgba(252, 248, 201, 0.32);
+  animation: t404-tear-x 0.18s infinite;
+}
+
+body.t404--heavy .t404-screen {
+  animation: t404-tear-clip 0.16s infinite, t404-baseline-jitter 7s infinite;
+}
+
+@keyframes t404-tear-x {
+  0%   { transform: translate(0, 0); }
+  20%  { transform: translate(-3px, 0); }
+  40%  { transform: translate(2px, 0); }
+  60%  { transform: translate(-1px, 1px); }
+  80%  { transform: translate(2px, -1px); }
+  100% { transform: translate(0, 0); }
+}
+
+@keyframes t404-tear-clip {
+  0%   { clip-path: inset(0); }
+  25%  { clip-path: inset(20% 0 60% 0); transform: translate(-8px, 0); }
+  50%  { clip-path: inset(60% 0 20% 0); transform: translate(6px, 0); }
+  75%  { clip-path: inset(40% 0 40% 0); transform: translate(-3px, 0); }
+  100% { clip-path: inset(0); }
+}
+
+/* Вспышка экрана */
+body.t404--flash::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(252, 248, 201, 0.22);
+  z-index: 9;
+  pointer-events: none;
+  mix-blend-mode: screen;
+}
+
+/* Blackout — гасим всё, кроме action кнопки */
+body.t404--blackout {
+  background: #000;
+}
+body.t404--blackout .t404-screen,
+body.t404--blackout .t404-scanlines,
+body.t404--blackout .t404-vignette,
+body.t404--blackout .t404-noise {
+  opacity: 0;
+}
+
+/* ── Кнопки ──────────────────────────────────────────────────── */
+
 .t404-actions {
   margin-top: 36px;
   display: flex;
@@ -2723,7 +2812,7 @@ body.t404 {
   gap: 14px;
   opacity: 0;
   transform: translateY(6px);
-  transition: opacity 0.5s ease 0.2s, transform 0.5s ease 0.2s;
+  transition: opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s;
 }
 .t404-actions--visible {
   opacity: 1;
@@ -2750,10 +2839,46 @@ body.t404 {
   text-shadow: none;
 }
 .t404-btn--secondary {
-  opacity: 0.7;
+  opacity: 0.55;
 }
 .t404-btn--secondary:hover {
   opacity: 1;
+}
+
+/* ── Финальное состояние: одна кнопка в пустоте ─────────────── */
+
+body.t404--reveal .t404-actions {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 22px;
+  margin: 0;
+  padding: 24px;
+  z-index: 10;
+}
+
+body.t404--reveal .t404-btn--main {
+  font-size: 20px;
+  padding: 18px 56px;
+  animation: t404-breathe 3s ease infinite;
+}
+
+body.t404--reveal .t404-btn--secondary {
+  display: none;
+}
+
+@keyframes t404-breathe {
+  0%, 100% {
+    text-shadow: 0 0 4px rgba(252, 248, 201, 0.4);
+    box-shadow: 0 0 0 0 rgba(252, 248, 201, 0);
+  }
+  50% {
+    text-shadow: 0 0 10px rgba(252, 248, 201, 0.75);
+    box-shadow: 0 0 30px rgba(252, 248, 201, 0.18);
+  }
 }
 
 @media (max-width: 768px) {
@@ -2769,6 +2894,10 @@ body.t404 {
   .t404-btn {
     width: 100%;
     text-align: center;
+  }
+  body.t404--reveal .t404-btn--main {
+    font-size: 17px;
+    padding: 16px 36px;
   }
 }
 
