@@ -828,7 +828,7 @@ a {
 
 .tool-form {
   display: grid;
-  gap: 54px;
+  gap: 40px;
 }
 
 .tool-field {
