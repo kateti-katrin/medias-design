@@ -12,14 +12,14 @@
 </head>
 <body>
   <div class="auth-page">
-    <a href="./index.html" class="auth-back">← на главную</a>
+    <header class="auth-page__header">
+      <a href="./index.html" class="auth-page__back">← на главную</a>
+      <h1 class="auth-page__title">С возвращением в смысл</h1>
+    </header>
 
-    <main class="auth-card">
-      <header class="auth-card__header">
-        <p class="auth-card__overline">[ Личный кабинет ]</p>
-        <h1 class="auth-card__title">С возвращением в смысл</h1>
-        <p class="auth-card__lead">Здесь ждут твои ТЗ, расчёты бюджета и статьи, которые помогли разобраться. Войди, чтобы продолжить.</p>
-      </header>
+    <section class="auth-card">
+      <h2 class="auth-card__title">Личный кабинет</h2>
+      <p class="auth-card__lead">Здесь ждут твои ТЗ, расчёты бюджета и статьи, которые помогли разобраться. Войди, чтобы продолжить.</p>
 
       <form class="auth-form" id="login-form" novalidate>
         <label class="auth-field">
@@ -60,12 +60,11 @@
         <button type="button" class="auth-social" data-provider="google" aria-label="Войти через Google">
           <span>Google</span>
         </button>
-
         <button type="button" class="auth-social" data-provider="vk" aria-label="Войти через ВКонтакте">
           <span>ВКонтакте</span>
         </button>
       </div>
-    </main>
+    </section>
   </div>
 </body>
 </html>
