@@ -7,16 +7,21 @@
   <title>404 — СМЫСЛ</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./404.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-  <div class="grid" aria-hidden="true"></div>
-  <main class="frame" aria-labelledby="not-found-title">
-    <p class="label">[ 404 ]</p>
-    <h1 id="not-found-title">ОЙ. СМЫСЛА<br>ЗДЕСЬ НЕТ.</h1>
-    <p class="lead">Похоже, адрес ушёл в правки раньше, чем мы успели согласовать финальную версию.</p>
-    <a class="home-btn" href="./index.html">НА ГЛАВНУЮ</a>
+  <div class="not-found-grid" aria-hidden="true"></div>
+
+  <main class="not-found" aria-labelledby="not-found-title">
+    <header class="not-found__header">
+      <p class="not-found__overline">[ 404 ]</p>
+      <h1 id="not-found-title" class="not-found__title">Ой. Смысла<br>здесь нет.</h1>
+    </header>
+
+    <p class="not-found__lead">Похоже, адрес ушёл в правки раньше, чем мы успели согласовать финальную версию.</p>
+
+    <a class="btn btn--primary not-found__btn" href="./index.html">На главную</a>
   </main>
 </body>
 </html>
