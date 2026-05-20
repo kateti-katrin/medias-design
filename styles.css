@@ -1516,10 +1516,10 @@ a {
 }
 
 .auth-card {
-  width: min(460px, 100%);
+  width: min(980px, 100% - 40px);
   background: rgba(252, 248, 201, 0.04);
   border: 1px solid rgba(252, 248, 201, 0.18);
-  padding: 44px 40px;
+  padding: 48px 56px;
   display: flex;
   flex-direction: column;
   gap: 32px;
@@ -1621,6 +1621,9 @@ a {
 }
 .auth-password__icon {
   display: block;
+}
+.auth-password__icon[hidden] {
+  display: none;
 }
 
 .auth-submit {
