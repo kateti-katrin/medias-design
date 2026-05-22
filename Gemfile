@@ -15,11 +15,18 @@ gem "devise-i18n"
 gem "devise-jwt"
 gem "rack-cors"
 gem "carrierwave", "~> 3.0"
+# carrierwave-imageoptimizer не совместим с carrierwave 3.0 — добавим при апгрейде carrierwave до 2.x или замене
 gem "ruby-vips"
 gem "image_processing"
 gem "marcel"
 gem "russian"
 gem "will_paginate", "~> 4.0"
+
+# Деплой как Docker-контейнер (Kamal) — как у преподавателя
+gem "kamal", require: false
+
+# HTTP/2 + asset caching + X-Sendfile поверх Puma
+gem "thruster", require: false
 
 # Pin psych to exactly bundled version (avoids libyaml native build)
 gem "psych", "= 5.0.1"
@@ -32,8 +39,18 @@ gem "bootsnap", require: false
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw mswin x64_mingw ], require: "debug/prelude"
+
+  # Security & style — как у преподавателя
+  gem "brakeman", require: false
+  gem "rubocop-rails-omakase", require: false
 end
 
 group :development do
   gem "web-console"
+end
+
+group :test do
+  # System tests через браузер
+  gem "capybara"
+  gem "selenium-webdriver"
 end

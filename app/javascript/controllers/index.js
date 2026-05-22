@@ -1,5 +1,8 @@
 // Stimulus controllers entry point
-import { Application } from "@hotwired/stimulus";
+import { Application } from "@hotwired/stimulus"
+import HelloController from "./hello_controller"
 
-const application = Application.start();
-export { application };
+const application = Application.start()
+application.register("hello", HelloController)
+
+export { application }

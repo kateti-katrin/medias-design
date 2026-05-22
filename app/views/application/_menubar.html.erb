@@ -1,0 +1,25 @@
+<%# Общий партиал-меню для всех страниц.
+    Подключается как: <%= render "application/menubar" %>
+    Структура копирует подход преподавателя (app/views/application/_menubar.html.erb). %>
+
+<nav class="site-menubar" aria-label="Главное меню">
+  <%= link_to root_path, class: "site-menubar__logo" do %>
+    <span>СМЫСЛ</span>
+  <% end %>
+
+  <div class="site-menubar__links">
+    <%= link_to "Читать",     articles_path,             class: "site-menubar__link" %>
+    <%= link_to "Задача",     brief_services_path,       class: "site-menubar__link" %>
+    <%= link_to "Бюджет",     calculator_services_path,  class: "site-menubar__link" %>
+    <%= link_to "Подписка",   pricing_path,              class: "site-menubar__link" %>
+  </div>
+
+  <div class="site-menubar__user">
+    <% if user_signed_in? %>
+      <%= link_to "Кабинет", profile_path, class: "site-menubar__user-link" %>
+      <%= button_to "Выйти", destroy_user_session_path, method: :delete, class: "site-menubar__user-btn" %>
+    <% else %>
+      <%= link_to "Войти", new_user_session_path, class: "site-menubar__user-link" %>
+    <% end %>
+  </div>
+</nav>
