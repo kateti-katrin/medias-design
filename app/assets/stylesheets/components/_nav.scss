@@ -63,3 +63,10 @@
     &:nth-child(5) { left: 79.86%; }
   }
 }
+
+/* На узких экранах nav в hero скрываем — навигация остаётся в footer */
+@media (max-width: 768px) {
+  .site-nav {
+    display: none !important;
+  }
+}
