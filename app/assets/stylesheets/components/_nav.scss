@@ -8,6 +8,27 @@
   z-index:  2;
 }
 
+/* Закреплённое состояние — при скролле вниз nav прилипает к верху экрана */
+.site-nav.site-nav--pinned {
+  position: fixed;
+  top:      24px;
+  z-index:  100;
+}
+
+/* Подложка под закреплённым nav, чтобы текст под ним не проступал */
+.site-nav.site-nav--pinned::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -14px;
+  bottom: -14px;
+  background: rgba(17, 17, 17, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: -1;
+}
+
 .site-nav__link {
   position:       absolute;
   font-family:    $font-heading;

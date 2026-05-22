@@ -27,14 +27,7 @@
     <%= image_tag "logo-smysl-hero.svg", alt: "СМЫСЛ" %>
   </div>
 
-  <!-- Nav -->
-  <nav class="site-nav" aria-label="Основная навигация">
-    <%= link_to "главная",  root_path,     class: "site-nav__link" %>
-    <%= link_to "Статьи",   articles_path, class: "site-nav__link" %>
-    <%= link_to "Задача",   brief_services_path,      class: "site-nav__link" %>
-    <%= link_to "бюджет",   calculator_services_path, class: "site-nav__link" %>
-    <%= link_to "о нас",    root_path(anchor: "about"), class: "site-nav__link" %>
-  </nav>
+  <%= render "application/site_nav" %>
 
   <!-- Hero article content -->
   <div class="hero-content">

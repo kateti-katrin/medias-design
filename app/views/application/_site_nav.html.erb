@@ -1,0 +1,13 @@
+<%# Главная навигация — подключается через render "application/site_nav".
+    При скролле фиксируется наверху через JS (mountStickyNav в site_nav.js). %>
+<nav class="site-nav" data-sticky-nav aria-label="Основная навигация">
+  <%= link_to "главная",  root_path,                  class: "site-nav__link" %>
+  <%= link_to "статьи",   articles_path,              class: "site-nav__link" %>
+  <%= link_to "задача",   brief_services_path,        class: "site-nav__link" %>
+  <%= link_to "бюджет",   calculator_services_path,   class: "site-nav__link" %>
+  <% if user_signed_in? %>
+    <%= link_to "кабинет",  profile_path,             class: "site-nav__link" %>
+  <% else %>
+    <%= link_to "войти",    new_user_session_path,    class: "site-nav__link" %>
+  <% end %>
+</nav>
