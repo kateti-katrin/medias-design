@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react'
 
 import A_Text from '../components/A_Text.jsx'
-import A_Button from '../components/A_Button.jsx'
 import O_PageHeader from '../components/O_PageHeader.jsx'
 
 /* Совет дня — выбирается по дню месяца, чтобы не повторяться часто */
@@ -43,6 +42,27 @@ const TIPS = [
   }
 ]
 
+const QUICK_ACTIONS = [
+  {
+    key: 'references',
+    emoji: '📸',
+    title: 'Сохранить референс',
+    sub: 'Увидел крутой дизайн — забери в коллекцию'
+  },
+  {
+    key: 'checklist',
+    emoji: '✅',
+    title: 'Оценить макет',
+    sub: '10 вопросов, чтобы понять, годится ли'
+  },
+  {
+    key: 'glossary',
+    emoji: '📖',
+    title: 'Глянуть в словарь',
+    sub: 'Что значит «лидинг», «грид», «дескриптор»'
+  }
+]
+
 export default class T_Today extends PureComponent {
   constructor(props) {
     super(props)
@@ -78,6 +98,7 @@ export default class T_Today extends PureComponent {
 
         <div className="T_Today__body">
 
+          {/* Совет дня — с overline-тегом в скобках, это уместно */}
           <section className="T_Today__tip">
             <A_Text type="overline" text={tip.overline} />
             <A_Text type="display-heading-2" text={tip.title} />
@@ -87,48 +108,30 @@ export default class T_Today extends PureComponent {
             </button>
           </section>
 
+          {/* Что сделать сейчас — обычный заголовок (без скобок), карточки горизонтально */}
           <section className="T_Today__quick">
-            <A_Text type="overline" text="[ что сделать сейчас ]" />
+            <h3 className="T_Today__section-title">Что сделать сейчас</h3>
 
-            <button
-              type="button"
-              className="T_Today__action"
-              onClick={() => handleQuickAction && handleQuickAction('references')}
-            >
-              <span className="T_Today__action-emoji">📸</span>
-              <span className="T_Today__action-text">
-                <span className="T_Today__action-title">Сохранить референс</span>
-                <span className="T_Today__action-sub">Увидел крутой дизайн — забери в коллекцию</span>
-              </span>
-            </button>
-
-            <button
-              type="button"
-              className="T_Today__action"
-              onClick={() => handleQuickAction && handleQuickAction('checklist')}
-            >
-              <span className="T_Today__action-emoji">✅</span>
-              <span className="T_Today__action-text">
-                <span className="T_Today__action-title">Оценить макет</span>
-                <span className="T_Today__action-sub">10 вопросов, чтобы понять, годится ли</span>
-              </span>
-            </button>
-
-            <button
-              type="button"
-              className="T_Today__action"
-              onClick={() => handleQuickAction && handleQuickAction('glossary')}
-            >
-              <span className="T_Today__action-emoji">📖</span>
-              <span className="T_Today__action-text">
-                <span className="T_Today__action-title">Глянуть в словарь</span>
-                <span className="T_Today__action-sub">Что значит «лидинг», «грид», «дескриптор»</span>
-              </span>
-            </button>
+            <div className="T_Today__cards" role="list">
+              {QUICK_ACTIONS.map((a) => (
+                <button
+                  key={a.key}
+                  type="button"
+                  className="T_Today__card"
+                  onClick={() => handleQuickAction && handleQuickAction(a.key)}
+                  role="listitem"
+                >
+                  <span className="T_Today__card-emoji">{a.emoji}</span>
+                  <span className="T_Today__card-title">{a.title}</span>
+                  <span className="T_Today__card-sub">{a.sub}</span>
+                </button>
+              ))}
+            </div>
           </section>
 
+          {/* Полная версия — тоже обычный заголовок */}
           <section className="T_Today__media">
-            <A_Text type="overline" text="[ читать на полной версии ]" />
+            <h3 className="T_Today__section-title">Читать полную версию</h3>
             <a className="T_Today__media-link" href="https://kateti-katrin.github.io/medias-design/" target="_blank" rel="noopener noreferrer">
               <span>СМЫСЛ — медиа о&nbsp;дизайне</span>
               <span aria-hidden="true">↗</span>

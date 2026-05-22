@@ -5,10 +5,10 @@
 }
 
 .T_References__body {
-  padding: 20px var(--padding) 32px;
+  padding: 28px var(--padding) 40px;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 22px;
 }
 
 /* Фильтры-чипы */
@@ -109,13 +109,13 @@
 .T_References__grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 10px;
+  gap: 14px 12px;
 }
 
 .T_References__card {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 
 .T_References__cover {

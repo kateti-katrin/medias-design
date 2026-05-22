@@ -5,32 +5,33 @@
 }
 
 .T_Profile__body {
-  padding: 20px var(--padding) 40px;
+  padding: 28px var(--padding) 40px;
   display: flex;
   flex-direction: column;
-  gap: 28px;
+  gap: 36px;
 }
 
-/* Аватар + имя */
+/* Аватар + имя — круглый аватар (личный элемент → round) */
 .T_Profile__hero {
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 16px;
+  gap: 18px;
+  padding: 20px;
   border: 1px solid var(--color-border);
 }
 
 .T_Profile__avatar {
-  width: 64px;
-  height: 64px;
+  width: 72px;
+  height: 72px;
   border: 1px solid var(--color-fg);
+  border-radius: 50%;
   background: rgba(252, 248, 201, 0.08);
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: var(--font-accent);
   font-weight: 700;
-  font-size: 20px;
+  font-size: 22px;
   letter-spacing: -0.3px;
   color: var(--color-fg);
   flex-shrink: 0;
@@ -111,14 +112,15 @@
   color: var(--color-fg-muted);
 }
 
-/* Toggle */
+/* Toggle — круглые «pill»-капсулы с круглым knob */
 .T_Profile__switch {
   flex-shrink: 0;
   display: inline-block;
-  width: 40px;
-  height: 22px;
+  width: 46px;
+  height: 26px;
   background: rgba(252, 248, 201, 0.12);
   border: 1px solid var(--color-border);
+  border-radius: 9999px; /* полностью полукруглые края */
   position: relative;
   transition: background 0.2s ease, border-color 0.2s ease;
   cursor: pointer;
@@ -128,11 +130,12 @@
   position: absolute;
   top: 2px;
   left: 2px;
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
   background: var(--color-fg);
+  border-radius: 50%; /* круглый бегунок */
   opacity: 0.6;
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  transition: transform 0.22s ease, opacity 0.22s ease;
 }
 
 .T_Profile__switch.is-on {
@@ -141,7 +144,7 @@
 }
 
 .T_Profile__switch.is-on .T_Profile__switch-knob {
-  transform: translateX(18px);
+  transform: translateX(20px);
   opacity: 1;
 }
 

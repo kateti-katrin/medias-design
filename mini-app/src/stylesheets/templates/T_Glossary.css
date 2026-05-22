@@ -5,15 +5,15 @@
 }
 
 .T_Glossary__body {
-  padding: 20px var(--padding) 32px;
+  padding: 28px var(--padding) 40px;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 24px;
 }
 
 .T_Glossary__search input {
   width: 100%;
-  padding: 12px 14px;
+  padding: 14px 16px;
   background: rgba(252, 248, 201, 0.05);
   border: 1px solid var(--color-border);
   color: var(--color-fg);
@@ -23,6 +23,7 @@
   border-radius: 0;
   -webkit-appearance: none;
   appearance: none;
+  transition: border-color 0.15s ease;
 }
 .T_Glossary__search input:focus {
   border-color: var(--color-fg);
@@ -40,40 +41,48 @@
 }
 
 .T_Glossary__item {
-  padding: 14px 0;
-  border-top: 1px solid rgba(252, 248, 201, 0.1);
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(252, 248, 201, 0.08);
   cursor: pointer;
+  transition: background 0.15s ease;
 }
-.T_Glossary__item:first-child {
-  border-top: none;
-  padding-top: 4px;
+.T_Glossary__item:last-child {
+  border-bottom: none;
+}
+.T_Glossary__item:hover {
+  background: rgba(252, 248, 201, 0.03);
+}
+.T_Glossary__item.is-open {
+  background: rgba(252, 248, 201, 0.05);
 }
 
 .T_Glossary__head {
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  gap: 10px;
+  gap: 12px;
 }
 
 .T_Glossary__term {
   font-family: var(--font-accent);
   font-weight: 700;
-  font-size: 16px;
+  font-size: 17px;
   text-transform: uppercase;
-  letter-spacing: -0.1px;
+  letter-spacing: -0.15px;
+  color: var(--color-fg);
 }
 
 .T_Glossary__en {
   font-size: 12px;
   color: var(--color-fg-muted);
   font-style: italic;
+  flex-shrink: 0;
 }
 
 .T_Glossary__def {
-  margin: 8px 0 0;
+  margin: 12px 0 0;
   font-size: 14px;
-  line-height: 1.5;
+  line-height: 1.55;
   color: var(--color-fg-muted);
 }
 
