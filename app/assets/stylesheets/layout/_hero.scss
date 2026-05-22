@@ -74,9 +74,10 @@
 .hero-content__title {
   font-family:    $font-heading;
   font-weight:    700;
-  font-size:      var(--fs-h1);
-  line-height:    1.08;
-  letter-spacing: -1.4px;
+  // Уменьшено, чтобы длинные заголовки помещались в hero без обрезки
+  font-size:      clamp(32px, 3.4vw, 52px);
+  line-height:    1.05;
+  letter-spacing: -1px;
   text-transform: uppercase;
   color:          var(--color-text);
 }
