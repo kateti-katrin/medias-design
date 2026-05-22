@@ -52,7 +52,7 @@
 
 .tool-form {
   display: grid;
-  gap: 18px;
+  gap: 40px;
 }
 
 .tool-field {
@@ -71,7 +71,7 @@
   select,
   textarea {
     width: 100%;
-    border: 1px solid rgba(252, 248, 201, 0.35);
+    border: 1px solid rgba(252, 248, 201, 0.18);
     background: rgba(17, 17, 17, 0.55);
     color: var(--color-text);
     font-family: $font-body;
@@ -111,7 +111,7 @@
 
 .tool-result {
   border-top: 1px solid rgba(252, 248, 201, 0.3);
-  padding-top: 18px;
+  padding-top: 60px;
   display: flex;
   flex-direction: column;
   gap: 12px;

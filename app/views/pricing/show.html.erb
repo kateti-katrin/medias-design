@@ -1,0 +1,194 @@
+<% content_for :title, "Подписка PRO — СМЫСЛ" %>
+<% set_meta_tags(
+  description: "Подписка СМЫСЛ PRO: без лимитов на ТЗ и расчёты, AI-помощник, закрытые статьи, Q&A с редакцией.",
+  canonical: pricing_url
+) %>
+
+<div class="pricing-page">
+
+  <header class="pricing-page__header">
+    <%= link_to "← на главную".html_safe, root_path, class: "pricing-page__back" %>
+    <p class="pricing-page__overline">[ подписка ]</p>
+    <h1 class="pricing-page__title">Смысл PRO</h1>
+    <p class="pricing-page__sub">Чтобы дизайн больше не&nbsp;был чёрной коробкой. Без лимитов, с&nbsp;инструментами и&nbsp;поддержкой редакции.</p>
+  </header>
+
+  <%# ─ Hero CTA ─ %>
+  <section class="pricing-hero">
+    <div class="pricing-hero__main">
+      <p class="pricing-hero__price">от&nbsp;<strong>249&nbsp;₽</strong> в&nbsp;месяц</p>
+      <p class="pricing-hero__lead">14 дней&nbsp;— возврат без вопросов. Отменить можно за&nbsp;два клика.</p>
+      <button type="button" class="btn btn--primary pricing-hero__btn" data-cta="hero">попробовать pro</button>
+    </div>
+    <div class="pricing-hero__side">
+      <p class="pricing-hero__quote">«Раньше я&nbsp;три раза переделывала ТЗ. Теперь дизайнер с&nbsp;первого раза понимает, что нужно.»</p>
+      <p class="pricing-hero__author">— Анна, маркетолог-фрилансер</p>
+    </div>
+  </section>
+
+  <%# ─ Что даёт PRO ─ %>
+  <section class="pricing-values">
+    <header class="pricing-section__head">
+      <h2 class="pricing-section__title">Что снимаем за&nbsp;деньги</h2>
+      <p class="pricing-section__sub">Четыре вещи, которые в&nbsp;бесплатной версии либо ограничены, либо недоступны.</p>
+    </header>
+
+    <ul class="pricing-values__grid">
+      <li class="pricing-value">
+        <span class="pricing-value__num">01</span>
+        <h3 class="pricing-value__title">Без лимитов на&nbsp;ТЗ и&nbsp;расчёты</h3>
+        <p class="pricing-value__text">В&nbsp;бесплатной версии&nbsp;— три ТЗ и&nbsp;три расчёта в&nbsp;месяц. В&nbsp;PRO&nbsp;— столько, сколько нужно проекту.</p>
+      </li>
+      <li class="pricing-value">
+        <span class="pricing-value__num">02</span>
+        <h3 class="pricing-value__title">AI-помощник по&nbsp;ТЗ</h3>
+        <p class="pricing-value__text">Описал проект двумя фразами&nbsp;— получил структурированный черновик. Дальше дорабатываешь сам.</p>
+      </li>
+      <li class="pricing-value">
+        <span class="pricing-value__num">03</span>
+        <h3 class="pricing-value__title">Закрытые статьи и&nbsp;кейсы</h3>
+        <p class="pricing-value__text">Реальные брифы, цифры по&nbsp;ценам, переговорные приёмы. То, чего нет в&nbsp;открытом доступе.</p>
+      </li>
+      <li class="pricing-value">
+        <span class="pricing-value__num">04</span>
+        <h3 class="pricing-value__title">Q&amp;A с&nbsp;редакцией</h3>
+        <p class="pricing-value__text">Раз в&nbsp;неделю можно прислать свой вопрос&nbsp;— получишь разбор от&nbsp;человека, а&nbsp;не&nbsp;от&nbsp;бота.</p>
+      </li>
+    </ul>
+  </section>
+
+  <%# ─ Сравнение Free vs PRO ─ %>
+  <section class="pricing-compare">
+    <header class="pricing-section__head">
+      <h2 class="pricing-section__title">Free и&nbsp;PRO рядом</h2>
+      <p class="pricing-section__sub">Что входит в&nbsp;каждый тариф.</p>
+    </header>
+
+    <table class="pricing-table">
+      <thead>
+        <tr>
+          <th scope="col"></th>
+          <th scope="col">Бесплатно</th>
+          <th scope="col" class="pricing-table__pro">PRO</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">ТЗ в&nbsp;месяц</th><td>3</td><td class="pricing-table__pro">без лимита</td></tr>
+        <tr><th scope="row">Расчёты бюджета</th><td>3</td><td class="pricing-table__pro">без лимита</td></tr>
+        <tr><th scope="row">Закладки на&nbsp;статьи</th><td>10</td><td class="pricing-table__pro">без лимита</td></tr>
+        <tr><th scope="row">Шаблоны ТЗ</th><td>1 базовый</td><td class="pricing-table__pro">12 под разные проекты</td></tr>
+        <tr><th scope="row">AI-помощник по&nbsp;ТЗ</th><td>—</td><td class="pricing-table__pro">✓</td></tr>
+        <tr><th scope="row">Закрытые статьи и&nbsp;кейсы</th><td>—</td><td class="pricing-table__pro">✓</td></tr>
+        <tr><th scope="row">Q&amp;A с&nbsp;редакцией</th><td>—</td><td class="pricing-table__pro">✓</td></tr>
+        <tr><th scope="row">Шеринг ТЗ команде по&nbsp;ссылке</th><td>—</td><td class="pricing-table__pro">✓</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <%# ─ Тарифы ─ %>
+  <section class="pricing-plans">
+    <header class="pricing-section__head">
+      <h2 class="pricing-section__title">Тарифы</h2>
+      <p class="pricing-section__sub">Можно платить помесячно или забрать год сразу со&nbsp;скидкой.</p>
+    </header>
+
+    <div class="pricing-plans__grid">
+
+      <article class="pricing-plan">
+        <header class="pricing-plan__head">
+          <h3 class="pricing-plan__name">Месяц</h3>
+          <p class="pricing-plan__hint">Попробовать без обязательств</p>
+        </header>
+        <p class="pricing-plan__price"><strong>390</strong>&nbsp;₽<span>/мес</span></p>
+        <ul class="pricing-plan__list">
+          <li>Всё, что в&nbsp;PRO</li>
+          <li>Без лимитов на&nbsp;ТЗ и&nbsp;расчёты</li>
+          <li>AI-помощник, кейсы, Q&amp;A</li>
+          <li>Отмена в&nbsp;любой момент</li>
+        </ul>
+        <button type="button" class="btn btn--primary pricing-plan__btn" data-cta="month">выбрать месяц</button>
+      </article>
+
+      <article class="pricing-plan pricing-plan--featured">
+        <p class="pricing-plan__badge">выгодно</p>
+        <header class="pricing-plan__head">
+          <h3 class="pricing-plan__name">Год</h3>
+          <p class="pricing-plan__hint">−36% к&nbsp;месячному</p>
+        </header>
+        <p class="pricing-plan__price"><strong>2&nbsp;990</strong>&nbsp;₽<span>/год</span></p>
+        <p class="pricing-plan__price-sub">это 249&nbsp;₽ в&nbsp;месяц</p>
+        <ul class="pricing-plan__list">
+          <li>Всё, что в&nbsp;PRO</li>
+          <li>Без лимитов на&nbsp;ТЗ и&nbsp;расчёты</li>
+          <li>AI-помощник, кейсы, Q&amp;A</li>
+          <li>Один год покоя&nbsp;— и&nbsp;никаких напоминаний</li>
+        </ul>
+        <button type="button" class="btn btn--primary pricing-plan__btn" data-cta="year">выбрать год</button>
+      </article>
+
+      <article class="pricing-plan">
+        <header class="pricing-plan__head">
+          <h3 class="pricing-plan__name">С куратором</h3>
+          <p class="pricing-plan__hint">Для проектов от&nbsp;500&nbsp;тыс ₽</p>
+        </header>
+        <p class="pricing-plan__price"><strong>1&nbsp;490</strong>&nbsp;₽<span>/мес</span></p>
+        <ul class="pricing-plan__list">
+          <li>Всё, что в&nbsp;PRO</li>
+          <li>Личный куратор-дизайнер</li>
+          <li>Одна созвон-консультация в&nbsp;месяц</li>
+          <li>Помощь с&nbsp;подбором дизайнера или агентства</li>
+        </ul>
+        <button type="button" class="btn btn--primary pricing-plan__btn" data-cta="mentor">выбрать с&nbsp;куратором</button>
+      </article>
+
+    </div>
+  </section>
+
+  <%# ─ FAQ ─ %>
+  <section class="pricing-faq">
+    <header class="pricing-section__head">
+      <h2 class="pricing-section__title">Частые вопросы</h2>
+    </header>
+
+    <div class="pricing-faq__list">
+      <details class="pricing-faq__item">
+        <summary>Можно ли вернуть деньги?</summary>
+        <p>Да, в&nbsp;течение 14 дней после оплаты&nbsp;— без вопросов. Напиши на&nbsp;<%= mail_to "hello@smysl.media" %>, вернём в&nbsp;течение трёх рабочих дней.</p>
+      </details>
+
+      <details class="pricing-faq__item">
+        <summary>Что будет с&nbsp;моими ТЗ, если я&nbsp;отменю подписку?</summary>
+        <p>Останутся в&nbsp;кабинете. Их&nbsp;можно открывать, копировать и&nbsp;удалять. Но&nbsp;собирать новые сверх лимита (3&nbsp;в&nbsp;месяц)&nbsp;— только при возобновлённом PRO.</p>
+      </details>
+
+      <details class="pricing-faq__item">
+        <summary>Это для дизайнеров?</summary>
+        <p>Нет, ровно наоборот. СМЫСЛ&nbsp;— для тех, кто заказывает дизайн: предпринимателей, маркетологов, проджектов. Хотим сделать так, чтобы дизайнерам с&nbsp;вами было приятно работать.</p>
+      </details>
+
+      <details class="pricing-faq__item">
+        <summary>Карты каких стран принимаете?</summary>
+        <p>Пока только РФ&nbsp;— МИР и&nbsp;Visa/Mastercard российских банков. Международная оплата появится во&nbsp;второй половине года.</p>
+      </details>
+
+      <details class="pricing-faq__item">
+        <summary>А&nbsp;если я&nbsp;уже умею ставить ТЗ?</summary>
+        <p>Тогда AI-помощник и&nbsp;готовые шаблоны просто сэкономят тебе время. Закрытые кейсы и&nbsp;цифры по&nbsp;ценам&nbsp;— про&nbsp;то, что в&nbsp;любом случае стоит знать.</p>
+      </details>
+
+      <details class="pricing-faq__item">
+        <summary>Можно купить курс / гайд отдельно, без подписки?</summary>
+        <p>Скоро. Готовим pdf-гайд «Как заказывать дизайн, чтобы не&nbsp;было хаоса» и&nbsp;воркшоп для команд. Подпишись в&nbsp;кабинете на&nbsp;уведомления&nbsp;— расскажем первым.</p>
+      </details>
+    </div>
+  </section>
+
+  <%# ─ Финальный CTA ─ %>
+  <section class="pricing-final">
+    <h2 class="pricing-final__title">Готов попробовать?</h2>
+    <p class="pricing-final__sub">14 дней&nbsp;— возврат без вопросов. Отменить можно за&nbsp;два клика.</p>
+    <button type="button" class="btn btn--primary pricing-final__btn" data-cta="final">оформить pro</button>
+    <p class="pricing-final__legal">Подписка автоматически продлевается. Условия и&nbsp;возврат&nbsp;— в&nbsp;<%= link_to "политике", "#" %>.</p>
+  </section>
+
+</div>

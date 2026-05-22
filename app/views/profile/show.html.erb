@@ -1,74 +1,180 @@
 <% content_for :title, "Кабинет — СМЫСЛ" %>
 
-<div class="profile-page" style="position: relative; z-index: 1; width: min(980px, 100% - 40px); margin: 48px auto 80px; display: flex; flex-direction: column; gap: 28px; color: var(--color-text); font-family: 'Inter', sans-serif;">
+<div class="profile-page">
 
-  <header style="display: flex; flex-direction: column; gap: 16px;">
-    <%= link_to "← на главную", root_path, style: "width: fit-content; font-size: 14px; opacity: 0.85;" %>
-    <h1 style="font-family: 'Bounded', system-ui, sans-serif; font-size: clamp(34px, 4.2vw, 60px); line-height: 1.08; letter-spacing: -1.1px; text-transform: uppercase;">Твой кабинет</h1>
-    <p style="max-width: 760px; font-size: clamp(16px, 1.6vw, 20px); line-height: 1.4; opacity: 0.85;">Здесь живёт всё, что ты&nbsp;собрал в&nbsp;смысле&nbsp;— избранные статьи, реакции и&nbsp;настройки.</p>
+  <header class="profile-page__header">
+    <%= link_to "← на главную".html_safe, root_path, class: "profile-page__back" %>
+    <h1 class="profile-page__title">Твой кабинет</h1>
+    <p class="profile-page__sub">Здесь живёт всё, что ты&nbsp;собрал в&nbsp;смысле&nbsp;— ТЗ, расчёты, статьи и&nbsp;понимание.</p>
   </header>
 
   <% if notice.present? %>
-    <p style="padding: 12px 16px; border: 1px solid rgba(252, 248, 201, 0.4); background: rgba(252, 248, 201, 0.08);"><%= notice %></p>
+    <p style="padding: 12px 16px; border: 1px solid rgba(252, 248, 201, 0.4); background: rgba(252, 248, 201, 0.08); color: var(--color-text);"><%= notice %></p>
   <% end %>
 
-  <section style="background: rgba(252, 248, 201, 0.04); border: 1px solid rgba(252, 248, 201, 0.18); padding: 28px;">
-    <div style="display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 24px;">
-      <div style="width: 96px; height: 96px; border: 1px solid rgba(252, 248, 201, 0.4); background: rgba(252, 248, 201, 0.08); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Bounded', system-ui, sans-serif; font-weight: 700; font-size: 28px;">
-        <%= (@profile.display_name.presence || current_user.email).first(2).upcase %>
+  <%# ─ Hero: профиль ─ %>
+  <section class="profile-hero">
+    <div class="profile-hero__main">
+      <% initials = (@profile.display_name.presence || current_user.email).to_s.first(2).upcase %>
+      <div class="profile-avatar" aria-hidden="true"><span><%= initials %></span></div>
+
+      <div class="profile-hero__info">
+        <p class="profile-hero__role">[ читатель смысла ]</p>
+        <h2 class="profile-hero__name"><%= @profile.display_name.presence || current_user.email %></h2>
+        <p class="profile-hero__meta">в&nbsp;смысле с&nbsp;<%= I18n.l(current_user.created_at, format: "%B %Y") rescue current_user.created_at.strftime("%b %Y") %></p>
       </div>
-      <div style="display: flex; flex-direction: column; gap: 6px;">
-        <p style="font-size: 13px; text-transform: uppercase; opacity: 0.7; margin: 0;">[ читатель смысла ]</p>
-        <h2 style="font-family: 'Bounded', system-ui, sans-serif; font-size: clamp(22px, 2.6vw, 32px); text-transform: uppercase; line-height: 1.1; margin: 0;"><%= @profile.display_name.presence || current_user.email %></h2>
-        <p style="font-size: 14px; opacity: 0.7; margin: 0;">в&nbsp;смысле с&nbsp;<%= I18n.l(current_user.created_at, format: "%B %Y") rescue current_user.created_at.strftime("%b %Y") %></p>
-      </div>
-      <div style="display: flex; flex-direction: column; gap: 10px;">
-        <%= link_to "редактировать", edit_profile_path, class: "btn btn--about", style: "background: transparent;" %>
-        <%= button_to "выйти", destroy_user_session_path, method: :delete, class: "btn btn--about", style: "background: transparent;" %>
+
+      <div class="profile-hero__actions">
+        <%= link_to "редактировать", edit_profile_path, class: "btn btn--about profile-hero__btn" %>
+        <%= button_to "выйти", destroy_user_session_path, method: :delete, class: "btn btn--about profile-hero__btn" %>
       </div>
     </div>
 
-    <ul style="list-style: none; margin: 24px 0 0; padding: 24px 0 0; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid rgba(252, 248, 201, 0.15);">
-      <li style="padding: 0 16px; border-right: 1px solid rgba(252, 248, 201, 0.15);">
-        <p style="font-family: 'Bounded', system-ui, sans-serif; font-size: clamp(28px, 3vw, 40px); margin: 0;"><%= @favourites.size %></p>
-        <p style="font-size: 13px; opacity: 0.75; margin: 4px 0 0;">в избранном</p>
+    <ul class="profile-stats">
+      <li class="profile-stat">
+        <span class="profile-stat__value"><%= @favourites.size %></span>
+        <span class="profile-stat__label">в&nbsp;закладках</span>
       </li>
-      <li style="padding: 0 16px; border-right: 1px solid rgba(252, 248, 201, 0.15);">
-        <p style="font-family: 'Bounded', system-ui, sans-serif; font-size: clamp(28px, 3vw, 40px); margin: 0;"><%= @reactions_count %></p>
-        <p style="font-size: 13px; opacity: 0.75; margin: 4px 0 0;">реакций оставлено</p>
+      <li class="profile-stat">
+        <span class="profile-stat__value"><%= @reactions_count %></span>
+        <span class="profile-stat__label">реакций оставлено</span>
       </li>
-      <li style="padding: 0 16px;">
-        <p style="font-family: 'Bounded', system-ui, sans-serif; font-size: clamp(28px, 3vw, 40px); margin: 0;"><%= Article.count %></p>
-        <p style="font-size: 13px; opacity: 0.75; margin: 4px 0 0;">статей в смысле</p>
+      <li class="profile-stat">
+        <span class="profile-stat__value"><%= Article.count %></span>
+        <span class="profile-stat__label">статей доступно</span>
+      </li>
+      <li class="profile-stat">
+        <span class="profile-stat__value">∞</span>
+        <span class="profile-stat__label">в&nbsp;PRO без лимитов</span>
       </li>
     </ul>
   </section>
 
-  <%# Избранное %>
-  <section style="background: rgba(252, 248, 201, 0.04); border: 1px solid rgba(252, 248, 201, 0.18); padding: 28px;">
-    <header style="display: flex; justify-content: space-between; align-items: flex-start; gap: 18px; margin-bottom: 22px;">
+  <%# ─ Где ты сейчас (mock-прогресс по рубрикам) ─ %>
+  <% total_tags = Tag.count %>
+  <% read_total = [@favourites.size + @reactions_count, total_tags * 6].min %>
+  <section class="profile-section">
+    <header class="profile-section__head">
       <div>
-        <h3 style="font-family: 'Bounded', system-ui, sans-serif; font-size: clamp(22px, 2.4vw, 30px); text-transform: uppercase; margin: 0 0 6px;">В&nbsp;закладках</h3>
-        <p style="font-size: 14px; opacity: 0.75; margin: 0;">Что зацепило&nbsp;— добавь в&nbsp;избранное звездой ★ под статьёй.</p>
+        <h3 class="profile-section__title">Где ты сейчас</h3>
+        <p class="profile-section__sub">Чем больше тем закрыто&nbsp;— тем меньше шансов, что дизайнер тебя удивит.</p>
       </div>
-      <%= link_to "все →", favourites_path, class: "btn btn--about", style: "background: transparent;" %>
+      <p class="profile-section__counter"><%= read_total %> из&nbsp;<%= total_tags * 6 %> тем</p>
+    </header>
+
+    <ul class="profile-progress">
+      <% ["задача", "оценка", "деньги", "процесс"].each_with_index do |tag, i| %>
+        <% percent = [100, 50, 66, 16][i] %>
+        <% value = ["6/6 ✓", "3/6", "4/6", "1/6"][i] %>
+        <li class="profile-progress__row">
+          <span class="profile-progress__label"><%= tag.capitalize %></span>
+          <div class="profile-progress__bar"><div class="profile-progress__fill" style="width: <%= percent %>%"></div></div>
+          <span class="profile-progress__value"><%= value %></span>
+        </li>
+      <% end %>
+    </ul>
+  </section>
+
+  <%# ─ Мои закладки (реальные данные) ─ %>
+  <section class="profile-section">
+    <header class="profile-section__head">
+      <div>
+        <h3 class="profile-section__title">В&nbsp;закладках</h3>
+        <p class="profile-section__sub">Звезда ★&nbsp;под статьёй отправляет её сюда.</p>
+      </div>
+      <%= link_to "все →", favourites_path, class: "btn btn--about profile-section__action" %>
     </header>
 
     <% if @favourites.any? %>
-      <ul style="list-style: none; margin: 0; padding: 0;">
-        <% @favourites.each_with_index do |fav, i| %>
-          <li style="display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 16px 0; <%= i > 0 ? 'border-top: 1px solid rgba(252, 248, 201, 0.12);' : '' %>">
-            <div style="display: flex; flex-direction: column; gap: 4px;">
-              <%= link_to fav.article.title, article_path(fav.article), style: "font-size: 16px; line-height: 1.3;" %>
-              <p style="font-size: 13px; opacity: 0.65; margin: 0;">рубрика «<%= fav.article.primary_tag&.name %>» · добавлено <%= I18n.l(fav.created_at, format: :short) rescue fav.created_at.strftime("%d.%m.%Y") %></p>
+      <ul class="profile-list">
+        <% @favourites.each do |fav| %>
+          <li class="profile-item">
+            <div class="profile-item__main">
+              <%= link_to fav.article.title, article_path(fav.article), class: "profile-item__title", style: "text-decoration: none;" %>
+              <p class="profile-item__meta">рубрика «<%= fav.article.primary_tag&.name %>» · добавлено <%= I18n.l(fav.created_at, format: :short) rescue fav.created_at.strftime("%d.%m.%Y") %></p>
             </div>
-            <%= button_to "★ убрать", toggle_favourite_article_path(fav.article), method: :get, class: "profile-icon-btn profile-icon-btn--danger", style: "background: transparent; border: none; cursor: pointer; font-size: 13px; opacity: 0.7;" %>
+            <div class="profile-item__actions">
+              <%= link_to "читать", article_path(fav.article), class: "profile-icon-btn" %>
+              <%= button_to "★ убрать", toggle_favourite_article_path(fav.article), method: :get, class: "profile-icon-btn profile-icon-btn--danger" %>
+            </div>
           </li>
         <% end %>
       </ul>
     <% else %>
       <p style="opacity: 0.7;">Пока пусто. Зайди в&nbsp;<%= link_to "статьи", articles_path %> и&nbsp;нажми ★ под той, что помогла разобраться.</p>
     <% end %>
+  </section>
+
+  <%# ─ Мои ТЗ (mock — будет реальным после Action Text) ─ %>
+  <section class="profile-section">
+    <header class="profile-section__head">
+      <div>
+        <h3 class="profile-section__title">Мои ТЗ</h3>
+        <p class="profile-section__sub">Можно копировать, переименовывать, возвращаться через месяц.</p>
+      </div>
+      <%= link_to "+ собрать новое", brief_services_path, class: "btn btn--about profile-section__action" %>
+    </header>
+
+    <p style="opacity: 0.7; padding: 16px 0;">Здесь будут твои сохранённые ТЗ. Сделай первое через <%= link_to "генератор ТЗ", brief_services_path %>.</p>
+  </section>
+
+  <%# ─ Мои расчёты (mock) ─ %>
+  <section class="profile-section">
+    <header class="profile-section__head">
+      <div>
+        <h3 class="profile-section__title">Мои расчёты бюджета</h3>
+        <p class="profile-section__sub">Сравни варианты, перешли команде или дизайнеру.</p>
+      </div>
+      <%= link_to "+ посчитать", calculator_services_path, class: "btn btn--about profile-section__action" %>
+    </header>
+
+    <p style="opacity: 0.7; padding: 16px 0;">Здесь будут твои расчёты бюджета. Сделай первый через <%= link_to "калькулятор", calculator_services_path %>.</p>
+  </section>
+
+  <%# ─ Настройки ─ %>
+  <section class="profile-section">
+    <header class="profile-section__head">
+      <h3 class="profile-section__title">Настройки</h3>
+    </header>
+
+    <ul class="profile-settings">
+      <li class="profile-setting">
+        <div class="profile-setting__text">
+          <p class="profile-setting__title">Письма о&nbsp;новых статьях</p>
+          <p class="profile-setting__hint">Раз в&nbsp;неделю&nbsp;— только то, что относится к&nbsp;твоим рубрикам.</p>
+        </div>
+        <label class="profile-switch">
+          <input type="checkbox" checked>
+          <span class="profile-switch__track"></span>
+        </label>
+      </li>
+      <li class="profile-setting">
+        <div class="profile-setting__text">
+          <p class="profile-setting__title">Сохранять историю</p>
+          <p class="profile-setting__hint">Чтобы можно было вернуться к&nbsp;старым бюджетам и&nbsp;ТЗ.</p>
+        </div>
+        <label class="profile-switch">
+          <input type="checkbox" checked>
+          <span class="profile-switch__track"></span>
+        </label>
+      </li>
+      <li class="profile-setting">
+        <div class="profile-setting__text">
+          <p class="profile-setting__title">Профиль виден другим читателям</p>
+          <p class="profile-setting__hint">Имя и&nbsp;роль будут видны под комментариями к&nbsp;статьям.</p>
+        </div>
+        <label class="profile-switch">
+          <input type="checkbox">
+          <span class="profile-switch__track"></span>
+        </label>
+      </li>
+    </ul>
+
+    <div class="profile-danger">
+      <%= link_to "Сменить пароль", edit_user_registration_path, class: "profile-link-btn" %>
+      <%= button_to "Удалить аккаунт", registration_path(current_user), method: :delete, data: { confirm: "Удалим тебя и всё, что ты собрал. Назад дороги не будет. Уверен?" }, class: "profile-link-btn profile-link-btn--danger" %>
+    </div>
+    <p class="profile-danger__hint">Удалим тебя и&nbsp;всё, что ты&nbsp;собрал. Назад дороги не&nbsp;будет.</p>
   </section>
 
 </div>

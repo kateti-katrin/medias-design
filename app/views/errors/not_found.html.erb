@@ -1,31 +1,14 @@
 <% content_for :title, "404 — СМЫСЛ" %>
 
-<div class="bg-grid" aria-hidden="true">
-  <%= image_tag "bg-decoration.svg", alt: "" %>
-</div>
+<div class="not-found-grid" aria-hidden="true"></div>
 
-<div class="err-wrap">
-  <p class="err-number" aria-hidden="true">404</p>
+<main class="not-found" aria-labelledby="not-found-title">
+  <header class="not-found__header">
+    <p class="not-found__overline">[ 404 ]</p>
+    <h1 id="not-found-title" class="not-found__title">Ой. Смысла<br>здесь нет.</h1>
+  </header>
 
-  <div class="err-content">
-    <h1 class="err-title">Страница пропала без объяснений</h1>
-    <p class="err-sub">Как дизайн без брифа — что-то, возможно, и было, но непонятно что и зачем.</p>
-    <div class="err-cta">
-      <%= link_to "← На главную", root_path, class: "btn btn--primary" %>
-    </div>
-  </div>
-</div>
+  <p class="not-found__lead">Похоже, адрес ушёл в&nbsp;правки раньше, чем мы&nbsp;успели согласовать финальную версию.</p>
 
-<footer class="site-footer">
-  <div class="site-footer__logo">
-    <%= image_tag "logo-smysl-footer.svg", alt: "СМЫСЛ" %>
-  </div>
-  <p class="site-footer__tagline">Пишем о продающем визуале</p>
-  <nav class="site-footer__nav" aria-label="Навигация в подвале">
-    <%= link_to "главная",  root_path,                class: "site-nav__link" %>
-    <%= link_to "Статьи",   articles_path,            class: "site-nav__link" %>
-    <%= link_to "Задача",   brief_services_path,      class: "site-nav__link" %>
-    <%= link_to "бюджет",   calculator_services_path, class: "site-nav__link" %>
-    <%= link_to "о нас",    root_path(anchor: "about"), class: "site-nav__link" %>
-  </nav>
-</footer>
+  <%= link_to "На главную", root_path, class: "btn btn--primary not-found__btn" %>
+</main>
