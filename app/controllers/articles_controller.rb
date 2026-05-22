@@ -14,22 +14,37 @@ class ArticlesController < ApplicationController
   end
 
   def toggle_favourite
-    return redirect_to new_user_session_path, alert: "Войди, чтобы добавлять в избранное" unless user_signed_in?
+    unless user_signed_in?
+      respond_to do |format|
+        format.html { redirect_to new_user_session_path, alert: "Войди, чтобы добавлять в избранное" }
+        format.json { render json: { error: "auth_required", redirect: new_user_session_path }, status: :unauthorized }
+      end
+      return
+    end
 
     fav = current_user.favourite_articles.find_by(article: @article)
     if fav
       fav.destroy
-      redirect_back fallback_location: article_path(@article), allow_other_host: false, notice: "Убрали из избранного"
+      is_favourite = false
     else
       current_user.favourite_articles.create!(article: @article)
-      redirect_back fallback_location: article_path(@article), allow_other_host: false, notice: "Добавили в избранное"
+      is_favourite = true
+    end
+
+    respond_to do |format|
+      format.html { redirect_back fallback_location: article_path(@article), allow_other_host: false, notice: is_favourite ? "Добавили в избранное" : "Убрали из избранного" }
+      format.json { render json: { favourite: is_favourite } }
     end
   end
 
   def toggle_reaction
     kind = params[:kind].to_s.downcase
     unless Reaction::KINDS.include?(kind)
-      return redirect_back fallback_location: article_path(@article), alert: "Неизвестная реакция"
+      respond_to do |format|
+        format.html { redirect_back fallback_location: article_path(@article), alert: "Неизвестная реакция" }
+        format.json { render json: { error: "unknown_kind" }, status: :unprocessable_entity }
+      end
+      return
     end
 
     scope_attrs = { article: @article, kind: kind }
@@ -46,7 +61,10 @@ class ArticlesController < ApplicationController
       Reaction.create!(scope_attrs)
     end
 
-    redirect_back fallback_location: article_path(@article), allow_other_host: false
+    respond_to do |format|
+      format.html { redirect_back fallback_location: article_path(@article), allow_other_host: false }
+      format.json { render json: { reactions: build_reactions_payload(@article) } }
+    end
   end
 
   def track_view
