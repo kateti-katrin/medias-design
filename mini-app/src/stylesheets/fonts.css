@@ -1,2 +1,11 @@
-/* Inter подгружается через CDN в src/index.html не нужен — берём через @import из Google Fonts */
+/* Inter — через Google Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Bounded — акцентный шрифт основного сайта */
+@font-face {
+  font-family: "Bounded";
+  src: url("../fonts/Bounded-Bold.otf") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}

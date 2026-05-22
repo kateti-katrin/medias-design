@@ -9,16 +9,16 @@
 @import 'stylesheets/components/A_Text.css';
 
 @import 'stylesheets/components/M_Field.css';
-@import 'stylesheets/components/M_ArticleCard.css';
 
 @import 'stylesheets/components/O_PageHeader.css';
 @import 'stylesheets/components/O_Navigation.css';
 @import 'stylesheets/components/O_Form.css';
 
 @import 'stylesheets/templates/T_SignIn.css';
-@import 'stylesheets/templates/T_Articles.css';
-@import 'stylesheets/templates/T_Article.css';
-@import 'stylesheets/templates/T_Brief.css';
+@import 'stylesheets/templates/T_Today.css';
+@import 'stylesheets/templates/T_References.css';
+@import 'stylesheets/templates/T_Checklist.css';
+@import 'stylesheets/templates/T_Glossary.css';
 @import 'stylesheets/templates/T_Profile.css';
 
 @import 'stylesheets/layouts/L_CenteredForm.css';

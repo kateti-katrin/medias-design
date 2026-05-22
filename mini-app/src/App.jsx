@@ -4,27 +4,38 @@ import React, { PureComponent } from 'react'
 import { utilities } from './utilities.js'
 
 import T_SignIn from './javascript/templates/T_SignIn.jsx'
-import T_Articles from './javascript/templates/T_Articles.jsx'
-import T_Article from './javascript/templates/T_Article.jsx'
-import T_Brief from './javascript/templates/T_Brief.jsx'
+import T_Today from './javascript/templates/T_Today.jsx'
+import T_References from './javascript/templates/T_References.jsx'
+import T_Checklist from './javascript/templates/T_Checklist.jsx'
+import T_Glossary from './javascript/templates/T_Glossary.jsx'
 import T_Profile from './javascript/templates/T_Profile.jsx'
 
 import O_Navigation from './javascript/components/O_Navigation.jsx'
 
-// Минимальный собственный «роутер» — как у Захара.
-// Страница описывается { name, layout, template, hideNav? }
+/*
+ * Концепция Mini App СМЫСЛ:
+ * это «полевой набор заказчика дизайна» — то, что НЕ дублирует медиа,
+ * а делает то, что удобно с телефона:
+ *  - Сегодня — совет дня + быстрые действия
+ *  - Референсы — фото-коллекция, можно снимать с камеры
+ *  - Чек-лист — оценить макет за 2 минуты
+ *  - Словарь — быстро глянуть незнакомый термин
+ *  - Профиль — настройки (доступен из шапки)
+ */
 const PAGES = {
-  signIn:   { name: 'signIn',   layout: 'L_CenteredForm', template: 'T_SignIn',  hideNav: true },
-  articles: { name: 'articles', layout: 'L_InternalPage', template: 'T_Articles' },
-  article:  { name: 'article',  layout: 'L_InternalPage', template: 'T_Article' },
-  brief:    { name: 'brief',    layout: 'L_InternalPage', template: 'T_Brief' },
-  profile:  { name: 'profile',  layout: 'L_InternalPage', template: 'T_Profile' }
+  signIn:     { name: 'signIn',     layout: 'L_CenteredForm', template: 'T_SignIn',     hideNav: true },
+  today:      { name: 'today',      layout: 'L_InternalPage', template: 'T_Today' },
+  references: { name: 'references', layout: 'L_InternalPage', template: 'T_References' },
+  checklist:  { name: 'checklist',  layout: 'L_InternalPage', template: 'T_Checklist' },
+  glossary:   { name: 'glossary',   layout: 'L_InternalPage', template: 'T_Glossary' },
+  profile:    { name: 'profile',    layout: 'L_InternalPage', template: 'T_Profile',    hideNav: true }
 }
 
 const NAV_KEY_TO_PAGE = {
-  articles: PAGES.articles,
-  brief: PAGES.brief,
-  profile: PAGES.profile
+  today: PAGES.today,
+  references: PAGES.references,
+  checklist: PAGES.checklist,
+  glossary: PAGES.glossary
 }
 
 export default class App extends PureComponent {
@@ -35,22 +46,15 @@ export default class App extends PureComponent {
     const user = utilities.getUser()
 
     this.state = {
-      page: token ? PAGES.articles : PAGES.signIn,
+      page: token ? PAGES.today : PAGES.signIn,
+      previousPage: PAGES.today,
       user,
-      // sign-in form
       signInFormData: { email: '', password: '' },
-      signInError: null,
-      // articles
-      articles: null,
-      articlesLoading: false,
-      // single article
-      currentArticleId: null,
-      currentArticle: null,
-      articleLoading: false
+      signInError: null
     }
   }
 
-  // ───────────────────────── Навигация ─────────────────────────
+  // ───────────── Навигация ─────────────
 
   goTo = (page, extra = {}) => {
     this.setState({ page, ...extra })
@@ -58,10 +62,23 @@ export default class App extends PureComponent {
 
   handleNavigate = (key) => {
     const page = NAV_KEY_TO_PAGE[key]
-    if (page) this.goTo(page)
+    if (page) this.setState({ page, previousPage: page })
   }
 
-  // ───────────────────────── Sign in ─────────────────────────
+  handleProfileClick = () => {
+    this.setState({ previousPage: this.state.page, page: PAGES.profile })
+  }
+
+  handleProfileBack = () => {
+    this.setState({ page: this.state.previousPage || PAGES.today })
+  }
+
+  handleQuickAction = (key) => {
+    const page = NAV_KEY_TO_PAGE[key]
+    if (page) this.setState({ page, previousPage: page })
+  }
+
+  // ───────────── Auth ─────────────
 
   handleSignInInput = (param, value) => {
     this.setState({
@@ -72,89 +89,40 @@ export default class App extends PureComponent {
   handleSignInSubmit = async () => {
     const { email, password } = this.state.signInFormData
 
-    this.setState({ signInError: null })
-
-    // ── ДЕМО-РЕЖИМ ──────────────────────────────────────────────
-    // На предпросмотре Rails ещё не задеплоен в продакшен.
-    // Чтобы Mini App работал автономно, пускаем по любым email/паролю.
-    // localStorage хранит fake-токен и юзера — после reload пускает дальше.
     if (!email || !password) {
       this.setState({ signInError: 'Заполни email и пароль' })
       return
     }
 
+    // Демо-режим: пускаем по любому email/паролю, без бэкенда.
     const fakeToken = 'demo-' + Math.random().toString(36).slice(2)
-    const fakeUser = { email: email, display_name: email.split('@')[0] }
+    const fakeUser = { email, display_name: email.split('@')[0] }
 
     utilities.setToken(fakeToken)
     utilities.setUser(fakeUser)
 
     this.setState({
       user: fakeUser,
-      page: PAGES.articles,
-      signInFormData: { email: '', password: '' }
+      page: PAGES.today,
+      previousPage: PAGES.today,
+      signInFormData: { email: '', password: '' },
+      signInError: null
     })
   }
 
-  handleLogout = async () => {
-    await utilities.fetchAPI(utilities.apiPaths.logout, { method: 'DELETE' })
+  handleLogout = () => {
     utilities.clearToken()
     this.setState({
       user: null,
       page: PAGES.signIn,
-      articles: null,
-      currentArticle: null
+      previousPage: PAGES.today
     })
   }
 
-  // ───────────────────────── Articles ─────────────────────────
-
-  initArticlesPage = async () => {
-    if (this.state.articles) return
-    this.setState({ articlesLoading: true })
-
-    const { ok, data } = await utilities.fetchAPI(utilities.apiPaths.articles)
-
-    // Rails-эндпоинт возвращает { data: [...] }
-    const list = (data && (data.data || data.articles)) || []
-
-    this.setState({
-      articles: ok ? list : [],
-      articlesLoading: false
-    })
-  }
-
-  handleArticleShow = (idOrSlug) => {
-    this.setState({
-      currentArticleId: idOrSlug,
-      currentArticle: null,
-      page: PAGES.article
-    })
-  }
-
-  initArticlePage = async (idOrSlug) => {
-    this.setState({ articleLoading: true })
-
-    const { ok, data } = await utilities.fetchAPI(
-      utilities.apiPaths.article(idOrSlug)
-    )
-
-    const article = (data && (data.data || data.article)) || null
-
-    this.setState({
-      currentArticle: ok ? article : null,
-      articleLoading: false
-    })
-  }
-
-  handleArticleBack = () => {
-    this.goTo(PAGES.articles, { currentArticle: null, currentArticleId: null })
-  }
-
-  // ───────────────────────── Render ─────────────────────────
+  // ───────────── Render ─────────────
 
   renderTemplate() {
-    const { page } = this.state
+    const { page, user } = this.state
 
     switch (page.template) {
       case 'T_SignIn':
@@ -169,32 +137,47 @@ export default class App extends PureComponent {
           />
         )
 
-      case 'T_Articles':
+      case 'T_Today':
         return (
-          <T_Articles
-            articles={this.state.articles}
-            loading={this.state.articlesLoading}
-            initArticlesPage={this.initArticlesPage}
-            handleArticleShow={this.handleArticleShow}
+          <T_Today
+            user={user}
+            handleProfileClick={this.handleProfileClick}
+            handleQuickAction={this.handleQuickAction}
           />
         )
 
-      case 'T_Article':
+      case 'T_References':
         return (
-          <T_Article
-            articleId={this.state.currentArticleId}
-            article={this.state.currentArticle}
-            loading={this.state.articleLoading}
-            initArticlePage={this.initArticlePage}
-            handleBack={this.handleArticleBack}
+          <T_References
+            user={user}
+            handleProfileClick={this.handleProfileClick}
           />
         )
 
-      case 'T_Brief':
-        return <T_Brief />
+      case 'T_Checklist':
+        return (
+          <T_Checklist
+            user={user}
+            handleProfileClick={this.handleProfileClick}
+          />
+        )
+
+      case 'T_Glossary':
+        return (
+          <T_Glossary
+            user={user}
+            handleProfileClick={this.handleProfileClick}
+          />
+        )
 
       case 'T_Profile':
-        return <T_Profile user={this.state.user} handleLogout={this.handleLogout} />
+        return (
+          <T_Profile
+            user={user}
+            handleLogout={this.handleLogout}
+            handleBack={this.handleProfileBack}
+          />
+        )
 
       default:
         return null

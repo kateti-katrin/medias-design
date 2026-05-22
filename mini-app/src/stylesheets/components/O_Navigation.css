@@ -5,25 +5,51 @@
   right: 0;
   display: flex;
   justify-content: space-around;
-  align-items: center;
+  align-items: stretch;
   background-color: var(--color-bg);
   border-top: 1px solid var(--color-border);
-  padding: 10px var(--padding) calc(10px + env(safe-area-inset-bottom));
+  padding: 6px var(--padding) calc(6px + env(safe-area-inset-bottom));
   z-index: 10;
 
   & .O_Navigation__item {
     flex: 1;
-    text-align: center;
-    padding: 8px 4px;
-    font-size: 12px;
-    color: var(--color-fg-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
     cursor: pointer;
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
+    padding: 12px 4px;
+    color: var(--color-fg-muted);
+    transition: color 0.15s ease, transform 0.1s ease;
+
+    & svg {
+      display: block;
+    }
+
+    &:hover {
+      color: var(--color-fg);
+    }
+
+    &:active {
+      transform: scale(0.92);
+    }
 
     &.active {
       color: var(--color-fg);
-      font-weight: 600;
+      position: relative;
+    }
+
+    /* Маленькая полоска-индикатор под активной иконкой */
+    &.active::after {
+      content: '';
+      position: absolute;
+      bottom: 4px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 18px;
+      height: 2px;
+      background: var(--color-fg);
     }
   }
 }

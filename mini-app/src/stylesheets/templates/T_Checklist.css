@@ -1,0 +1,165 @@
+.T_Checklist {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.T_Checklist__body {
+  padding: 20px var(--padding) 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Прогресс-бар */
+.T_Checklist__progress {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.T_Checklist__bar {
+  height: 4px;
+  background: rgba(252, 248, 201, 0.1);
+  overflow: hidden;
+}
+
+.T_Checklist__bar-fill {
+  height: 100%;
+  background: var(--color-fg);
+  transition: width 0.25s ease;
+}
+
+/* Список вопросов */
+.T_Checklist__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.T_Checklist__item {
+  display: flex;
+  gap: 12px;
+}
+
+.T_Checklist__num {
+  flex-shrink: 0;
+  font-family: var(--font-accent);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--color-fg-muted);
+  letter-spacing: -0.1px;
+  padding-top: 2px;
+}
+
+.T_Checklist__q {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.T_Checklist__block {
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-fg-muted);
+}
+
+.T_Checklist__text {
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.T_Checklist__options {
+  display: flex;
+  gap: 6px;
+  margin-top: 4px;
+}
+
+.T_Checklist__opt {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  background: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-fg-muted);
+  font-family: inherit;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 8px 4px;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+
+.T_Checklist__opt:hover {
+  color: var(--color-fg);
+}
+
+.T_Checklist__opt.is-picked {
+  color: var(--color-fg);
+  border-color: var(--color-fg);
+  background: rgba(252, 248, 201, 0.1);
+}
+
+.T_Checklist__opt-emoji {
+  font-size: 14px;
+  line-height: 1;
+}
+
+/* CTA */
+.T_Checklist__cta {
+  margin-top: 4px;
+  background: var(--color-fg);
+  color: var(--color-bg);
+  border: 1px solid var(--color-fg);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 14px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, opacity 0.15s;
+}
+.T_Checklist__cta:disabled {
+  background: transparent;
+  color: var(--color-fg-muted);
+  border-color: var(--color-border);
+  cursor: not-allowed;
+}
+.T_Checklist__cta:not(:disabled):hover {
+  background: transparent;
+  color: var(--color-fg);
+}
+
+/* Результат */
+.T_Checklist__result {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 22px 18px;
+  border: 1px solid var(--color-fg);
+  background: rgba(252, 248, 201, 0.06);
+}
+
+.T_Checklist__reset {
+  align-self: flex-start;
+  margin-top: 8px;
+  background: transparent;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--color-fg);
+  opacity: 0.7;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.T_Checklist__reset:hover { opacity: 1; }

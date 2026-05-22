@@ -1,8 +1,42 @@
 .O_PageHeader {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
-  padding: var(--padding);
+  align-items: center;
+  padding: 18px var(--padding) 16px;
   border-bottom: 1px solid var(--color-border);
-  gap: 12px;
+  gap: 14px;
+
+  & .O_PageHeader__text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0;
+    flex: 1;
+  }
+
+  & .O_PageHeader__profile {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: 1px solid var(--color-border);
+    color: var(--color-fg);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+
+  & .O_PageHeader__profile:hover {
+    border-color: var(--color-fg);
+    background: rgba(252, 248, 201, 0.08);
+  }
+
+  & .O_PageHeader__avatar {
+    font-family: var(--font-accent);
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: -0.2px;
+  }
 }
