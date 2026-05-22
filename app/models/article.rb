@@ -2,6 +2,9 @@ class Article < ApplicationRecord
   belongs_to :primary_tag, class_name: "Tag", foreign_key: :tag_id, inverse_of: :articles
   has_many :likes, as: :likeable, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :favourite_articles, dependent: :destroy
+  has_many :favourited_by, through: :favourite_articles, source: :user
+  has_many :reactions, dependent: :destroy
   mount_uploader :cover_image, ArticleCoverUploader
 
   validates :title, presence: true, length: { maximum: 255 }

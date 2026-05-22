@@ -1,0 +1,36 @@
+<% content_for :title, "Редактировать профиль — СМЫСЛ" %>
+
+<div style="position: relative; z-index: 1; width: min(620px, 100% - 40px); margin: 60px auto 80px; color: var(--color-text); font-family: 'Inter', sans-serif;">
+  <%= link_to "← в кабинет", profile_path, style: "font-size: 14px; opacity: 0.85;" %>
+  <h1 style="font-family: 'Bounded', system-ui, sans-serif; font-size: clamp(28px, 3.2vw, 40px); text-transform: uppercase; line-height: 1.1; margin: 16px 0 28px;">Редактировать профиль</h1>
+
+  <%= form_with model: @profile, url: profile_path, method: :patch, local: true, html: { style: "display: flex; flex-direction: column; gap: 18px;" } do |f| %>
+    <% if @profile.errors.any? %>
+      <ul style="padding: 12px; border: 1px solid #f3b6b6;">
+        <% @profile.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    <% end %>
+
+    <label style="display: flex; flex-direction: column; gap: 8px;">
+      <span style="font-size: 14px;">Имя</span>
+      <%= f.text_field :display_name, style: "width: 100%; border: 1px solid rgba(252, 248, 201, 0.18); background: rgba(17, 17, 17, 0.55); color: var(--color-text); font-family: 'Inter', sans-serif; font-size: 16px; padding: 12px 14px;" %>
+    </label>
+
+    <label style="display: flex; flex-direction: column; gap: 8px;">
+      <span style="font-size: 14px;">О&nbsp;себе</span>
+      <%= f.text_area :bio, rows: 4, style: "width: 100%; border: 1px solid rgba(252, 248, 201, 0.18); background: rgba(17, 17, 17, 0.55); color: var(--color-text); font-family: 'Inter', sans-serif; font-size: 16px; padding: 12px 14px;" %>
+    </label>
+
+    <label style="display: flex; flex-direction: column; gap: 8px;">
+      <span style="font-size: 14px;">URL аватара (опционально)</span>
+      <%= f.url_field :avatar_url, placeholder: "https://...", style: "width: 100%; border: 1px solid rgba(252, 248, 201, 0.18); background: rgba(17, 17, 17, 0.55); color: var(--color-text); font-family: 'Inter', sans-serif; font-size: 16px; padding: 12px 14px;" %>
+    </label>
+
+    <div style="display: flex; gap: 16px; margin-top: 8px;">
+      <%= f.submit "Сохранить", class: "btn btn--primary" %>
+      <%= link_to "Отмена", profile_path, class: "btn btn--about", style: "background: transparent;" %>
+    </div>
+  <% end %>
+</div>

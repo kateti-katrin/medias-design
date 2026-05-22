@@ -19,6 +19,7 @@ gem "ruby-vips"
 gem "image_processing"
 gem "marcel"
 gem "russian"
+gem "will_paginate", "~> 4.0"
 
 # Pin psych to exactly bundled version (avoids libyaml native build)
 gem "psych", "= 5.0.1"

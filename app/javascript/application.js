@@ -12,3 +12,6 @@ document.addEventListener("turbo:load", () => {
   mountArticlesFilters();
   mountArticleEngagement();
 });
+
+import "trix"
+import "@rails/actiontext"

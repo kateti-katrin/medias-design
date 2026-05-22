@@ -90,6 +90,22 @@
       </button>
 
       <span class="art-engage__views" id="views-count" aria-label="Просмотры"><%= number_with_delimiter(@article.views_count, delimiter: " ") %> просмотров</span>
+
+      <%# Кнопка избранного %>
+      <%= button_to toggle_favourite_article_path(@article), method: :get, class: "art-engage__btn", style: "background: transparent; border: none; cursor: pointer; color: inherit; padding: 0; display: inline-flex; align-items: center; gap: 6px;" do %>
+        <span style="font-size: 16px;"><%= @is_favourite ? "★" : "☆" %></span>
+        <span style="font-size: 13px;"><%= @is_favourite ? "в избранном" : "в избранное" %></span>
+      <% end %>
+    </div>
+
+    <%# Виджет реакций %>
+    <div class="art-reactions" style="display: flex; flex-wrap: wrap; gap: 10px; padding: 20px 0; border-top: 1px solid rgba(252, 248, 201, 0.12); margin-top: 20px;">
+      <% @reactions.each do |r| %>
+        <%= button_to toggle_reaction_article_path(@article, kind: r[:kind]), method: :get, class: "art-reaction#{' is-mine' if r[:mine]}", style: "display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; background: #{r[:mine] ? 'rgba(252, 248, 201, 0.12)' : 'transparent'}; border: 1px solid rgba(252, 248, 201, #{r[:mine] ? '0.55' : '0.22'}); color: var(--color-text); font-family: Inter, sans-serif; font-size: 14px; cursor: pointer;" do %>
+          <span style="font-size: 16px;"><%= r[:emoji] %></span>
+          <span><%= r[:count] %></span>
+        <% end %>
+      <% end %>
     </div>
 
   </div>

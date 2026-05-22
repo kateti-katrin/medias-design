@@ -10,7 +10,45 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_03_25_110000) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_22_083028) do
+  create_table "action_text_rich_texts", force: :cascade do |t|
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.bigint "record_id", null: false
+    t.string "record_type", null: false
+    t.datetime "updated_at", null: false
+    t.index ["record_type", "record_id", "name"], name: "index_action_text_rich_texts_uniqueness", unique: true
+  end
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.bigint "blob_id", null: false
+    t.datetime "created_at", null: false
+    t.string "name", null: false
+    t.bigint "record_id", null: false
+    t.string "record_type", null: false
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.bigint "byte_size", null: false
+    t.string "checksum"
+    t.string "content_type"
+    t.datetime "created_at", null: false
+    t.string "filename", null: false
+    t.string "key", null: false
+    t.text "metadata"
+    t.string "service_name", null: false
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "active_storage_variant_records", force: :cascade do |t|
+    t.bigint "blob_id", null: false
+    t.string "variation_digest", null: false
+    t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+  end
+
   create_table "articles", force: :cascade do |t|
     t.text "body"
     t.string "cover_image"
@@ -44,6 +82,16 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_25_110000) do
     t.index ["parent_id"], name: "index_comments_on_parent_id"
   end
 
+  create_table "favourite_articles", force: :cascade do |t|
+    t.integer "article_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id", null: false
+    t.index ["article_id"], name: "index_favourite_articles_on_article_id"
+    t.index ["user_id", "article_id"], name: "index_favourite_articles_on_user_id_and_article_id", unique: true
+    t.index ["user_id"], name: "index_favourite_articles_on_user_id"
+  end
+
   create_table "jwt_denylists", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "exp", null: false
@@ -71,6 +119,20 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_25_110000) do
     t.datetime "updated_at", null: false
     t.integer "user_id", null: false
     t.index ["user_id"], name: "index_profiles_on_user_id", unique: true
+  end
+
+  create_table "reactions", force: :cascade do |t|
+    t.integer "article_id", null: false
+    t.datetime "created_at", null: false
+    t.string "kind", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.string "visitor_token"
+    t.index ["article_id", "kind"], name: "index_reactions_on_article_id_and_kind"
+    t.index ["article_id"], name: "index_reactions_on_article_id"
+    t.index ["user_id", "article_id", "kind"], name: "idx_user_article_kind", unique: true, where: "user_id IS NOT NULL"
+    t.index ["user_id"], name: "index_reactions_on_user_id"
+    t.index ["visitor_token", "article_id", "kind"], name: "idx_token_article_kind", unique: true, where: "visitor_token IS NOT NULL"
   end
 
   create_table "services", force: :cascade do |t|
@@ -102,8 +164,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_03_25_110000) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "articles", "tags"
   add_foreign_key "comments", "articles"
   add_foreign_key "comments", "comments", column: "parent_id"
+  add_foreign_key "favourite_articles", "articles"
+  add_foreign_key "favourite_articles", "users"
   add_foreign_key "profiles", "users"
+  add_foreign_key "reactions", "articles"
+  add_foreign_key "reactions", "users"
 end

@@ -1,0 +1,74 @@
+<% content_for :title, "Кабинет — СМЫСЛ" %>
+
+<div class="profile-page" style="position: relative; z-index: 1; width: min(980px, 100% - 40px); margin: 48px auto 80px; display: flex; flex-direction: column; gap: 28px; color: var(--color-text); font-family: 'Inter', sans-serif;">
+
+  <header style="display: flex; flex-direction: column; gap: 16px;">
+    <%= link_to "← на главную", root_path, style: "width: fit-content; font-size: 14px; opacity: 0.85;" %>
+    <h1 style="font-family: 'Bounded', system-ui, sans-serif; font-size: clamp(34px, 4.2vw, 60px); line-height: 1.08; letter-spacing: -1.1px; text-transform: uppercase;">Твой кабинет</h1>
+    <p style="max-width: 760px; font-size: clamp(16px, 1.6vw, 20px); line-height: 1.4; opacity: 0.85;">Здесь живёт всё, что ты&nbsp;собрал в&nbsp;смысле&nbsp;— избранные статьи, реакции и&nbsp;настройки.</p>
+  </header>
+
+  <% if notice.present? %>
+    <p style="padding: 12px 16px; border: 1px solid rgba(252, 248, 201, 0.4); background: rgba(252, 248, 201, 0.08);"><%= notice %></p>
+  <% end %>
+
+  <section style="background: rgba(252, 248, 201, 0.04); border: 1px solid rgba(252, 248, 201, 0.18); padding: 28px;">
+    <div style="display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 24px;">
+      <div style="width: 96px; height: 96px; border: 1px solid rgba(252, 248, 201, 0.4); background: rgba(252, 248, 201, 0.08); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Bounded', system-ui, sans-serif; font-weight: 700; font-size: 28px;">
+        <%= (@profile.display_name.presence || current_user.email).first(2).upcase %>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 6px;">
+        <p style="font-size: 13px; text-transform: uppercase; opacity: 0.7; margin: 0;">[ читатель смысла ]</p>
+        <h2 style="font-family: 'Bounded', system-ui, sans-serif; font-size: clamp(22px, 2.6vw, 32px); text-transform: uppercase; line-height: 1.1; margin: 0;"><%= @profile.display_name.presence || current_user.email %></h2>
+        <p style="font-size: 14px; opacity: 0.7; margin: 0;">в&nbsp;смысле с&nbsp;<%= I18n.l(current_user.created_at, format: "%B %Y") rescue current_user.created_at.strftime("%b %Y") %></p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <%= link_to "редактировать", edit_profile_path, class: "btn btn--about", style: "background: transparent;" %>
+        <%= button_to "выйти", destroy_user_session_path, method: :delete, class: "btn btn--about", style: "background: transparent;" %>
+      </div>
+    </div>
+
+    <ul style="list-style: none; margin: 24px 0 0; padding: 24px 0 0; display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid rgba(252, 248, 201, 0.15);">
+      <li style="padding: 0 16px; border-right: 1px solid rgba(252, 248, 201, 0.15);">
+        <p style="font-family: 'Bounded', system-ui, sans-serif; font-size: clamp(28px, 3vw, 40px); margin: 0;"><%= @favourites.size %></p>
+        <p style="font-size: 13px; opacity: 0.75; margin: 4px 0 0;">в избранном</p>
+      </li>
+      <li style="padding: 0 16px; border-right: 1px solid rgba(252, 248, 201, 0.15);">
+        <p style="font-family: 'Bounded', system-ui, sans-serif; font-size: clamp(28px, 3vw, 40px); margin: 0;"><%= @reactions_count %></p>
+        <p style="font-size: 13px; opacity: 0.75; margin: 4px 0 0;">реакций оставлено</p>
+      </li>
+      <li style="padding: 0 16px;">
+        <p style="font-family: 'Bounded', system-ui, sans-serif; font-size: clamp(28px, 3vw, 40px); margin: 0;"><%= Article.count %></p>
+        <p style="font-size: 13px; opacity: 0.75; margin: 4px 0 0;">статей в смысле</p>
+      </li>
+    </ul>
+  </section>
+
+  <%# Избранное %>
+  <section style="background: rgba(252, 248, 201, 0.04); border: 1px solid rgba(252, 248, 201, 0.18); padding: 28px;">
+    <header style="display: flex; justify-content: space-between; align-items: flex-start; gap: 18px; margin-bottom: 22px;">
+      <div>
+        <h3 style="font-family: 'Bounded', system-ui, sans-serif; font-size: clamp(22px, 2.4vw, 30px); text-transform: uppercase; margin: 0 0 6px;">В&nbsp;закладках</h3>
+        <p style="font-size: 14px; opacity: 0.75; margin: 0;">Что зацепило&nbsp;— добавь в&nbsp;избранное звездой ★ под статьёй.</p>
+      </div>
+      <%= link_to "все →", favourites_path, class: "btn btn--about", style: "background: transparent;" %>
+    </header>
+
+    <% if @favourites.any? %>
+      <ul style="list-style: none; margin: 0; padding: 0;">
+        <% @favourites.each_with_index do |fav, i| %>
+          <li style="display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 16px 0; <%= i > 0 ? 'border-top: 1px solid rgba(252, 248, 201, 0.12);' : '' %>">
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <%= link_to fav.article.title, article_path(fav.article), style: "font-size: 16px; line-height: 1.3;" %>
+              <p style="font-size: 13px; opacity: 0.65; margin: 0;">рубрика «<%= fav.article.primary_tag&.name %>» · добавлено <%= I18n.l(fav.created_at, format: :short) rescue fav.created_at.strftime("%d.%m.%Y") %></p>
+            </div>
+            <%= button_to "★ убрать", toggle_favourite_article_path(fav.article), method: :get, class: "profile-icon-btn profile-icon-btn--danger", style: "background: transparent; border: none; cursor: pointer; font-size: 13px; opacity: 0.7;" %>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p style="opacity: 0.7;">Пока пусто. Зайди в&nbsp;<%= link_to "статьи", articles_path %> и&nbsp;нажми ★ под той, что помогла разобраться.</p>
+    <% end %>
+  </section>
+
+</div>

@@ -1,0 +1,31 @@
+<% content_for :title, "Избранное — СМЫСЛ" %>
+
+<div style="position: relative; z-index: 1; width: min(980px, 100% - 40px); margin: 48px auto 80px; display: flex; flex-direction: column; gap: 28px; color: var(--color-text); font-family: 'Inter', sans-serif;">
+
+  <header style="display: flex; flex-direction: column; gap: 16px;">
+    <%= link_to "← в кабинет", profile_path, style: "width: fit-content; font-size: 14px; opacity: 0.85;" %>
+    <h1 style="font-family: 'Bounded', system-ui, sans-serif; font-size: clamp(34px, 4.2vw, 60px); line-height: 1.08; letter-spacing: -1.1px; text-transform: uppercase;">Избранное</h1>
+    <p style="max-width: 760px; font-size: clamp(16px, 1.6vw, 20px); line-height: 1.4; opacity: 0.85;">Статьи, которые ты&nbsp;отметил звездой&nbsp;— в&nbsp;одном месте.</p>
+  </header>
+
+  <% if @favourites.any? %>
+    <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 18px;">
+      <% @favourites.each do |fav| %>
+        <li style="background: rgba(252, 248, 201, 0.04); border: 1px solid rgba(252, 248, 201, 0.18); padding: 20px 24px;">
+          <p style="font-size: 12px; text-transform: uppercase; opacity: 0.7; margin: 0 0 8px;">[ <%= fav.article.primary_tag&.name %> ]</p>
+          <%= link_to fav.article.title, article_path(fav.article), style: "font-size: 22px; line-height: 1.25; text-decoration: none;" %>
+          <p style="margin: 8px 0 12px; opacity: 0.85;"><%= fav.article.excerpt %></p>
+          <div style="display: flex; justify-content: space-between; gap: 16px; font-size: 13px; opacity: 0.65;">
+            <span>добавлено <%= I18n.l(fav.created_at, format: :short) rescue fav.created_at.strftime("%d.%m.%Y") %></span>
+            <%= button_to "★ убрать", toggle_favourite_article_path(fav.article), method: :get, style: "background: transparent; border: none; cursor: pointer; color: inherit; opacity: 0.75; font-family: 'Inter', sans-serif; font-size: 13px;" %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+
+    <%= will_paginate @favourites, class: "pagination" if @favourites.respond_to?(:total_pages) %>
+  <% else %>
+    <p style="opacity: 0.85;">Пока пусто. Загляни на&nbsp;<%= link_to "страницу статей", articles_path %> и&nbsp;нажми ★ под той, что помогла.</p>
+  <% end %>
+
+</div>
