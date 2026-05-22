@@ -6,9 +6,16 @@
   --color-border: rgba(252, 248, 201, 0.25);
   --color-surface: rgba(252, 248, 201, 0.05);
 
+  /* Тёмный «контекст» вокруг Mini App на десктопе */
+  --color-outer-bg: #050608;
+
   --padding: 16px;
   --gap: 8px;
-  --radius: 10px;
+  /* Острые углы как на основном сайте */
+  --radius: 0;
+
+  /* Ширина «телефона» — чтобы на десктопе было видно что это Mini App */
+  --app-max-width: 420px;
 
   --font-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
 }

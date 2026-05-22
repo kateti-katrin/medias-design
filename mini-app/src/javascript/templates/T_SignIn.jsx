@@ -20,7 +20,7 @@ const FIELDS = [
   }
 ]
 
-const BUTTONS = [{ type: 'primary', text: 'Войти в смысл' }]
+const BUTTONS = [{ type: 'primary', text: 'Войти' }]
 
 export default class T_SignIn extends PureComponent {
   render() {

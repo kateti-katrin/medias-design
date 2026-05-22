@@ -1,19 +1,44 @@
 * { box-sizing: border-box; }
 
-html, body, .App {
+html, body {
   min-height: 100%;
 }
 
 body {
   font-family: var(--font-base);
   font-weight: 400;
-  background-color: var(--color-bg);
+  /* Снаружи Mini App — тёмная «комната» (видно границы телефона) */
+  background-color: var(--color-outer-bg);
   color: var(--color-fg);
   -webkit-font-smoothing: antialiased;
+  margin: 0;
+  /* Центрируем «телефон» по горизонтали */
+  display: flex;
+  justify-content: center;
 }
 
 .App {
+  /* Сам Mini App — фиксированная phone-ширина даже на десктопе */
+  width: 100%;
+  max-width: var(--app-max-width);
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  background-color: var(--color-bg);
+  /* Лёгкие бордюры чтобы видеть «корпус телефона» */
+  border-left: 1px solid rgba(252, 248, 201, 0.06);
+  border-right: 1px solid rgba(252, 248, 201, 0.06);
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* На мобильной — Mini App на весь экран, без бордеров */
+@media (max-width: 480px) {
+  body {
+    background-color: var(--color-bg);
+  }
+  .App {
+    border: none;
+    max-width: 100%;
+  }
 }

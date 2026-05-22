@@ -74,43 +74,26 @@ export default class App extends PureComponent {
 
     this.setState({ signInError: null })
 
-    const { ok, data } = await utilities.fetchAPI(utilities.apiPaths.login, {
-      method: 'POST',
-      body: { user: { email, password } }
+    // ── ДЕМО-РЕЖИМ ──────────────────────────────────────────────
+    // На предпросмотре Rails ещё не задеплоен в продакшен.
+    // Чтобы Mini App работал автономно, пускаем по любым email/паролю.
+    // localStorage хранит fake-токен и юзера — после reload пускает дальше.
+    if (!email || !password) {
+      this.setState({ signInError: 'Заполни email и пароль' })
+      return
+    }
+
+    const fakeToken = 'demo-' + Math.random().toString(36).slice(2)
+    const fakeUser = { email: email, display_name: email.split('@')[0] }
+
+    utilities.setToken(fakeToken)
+    utilities.setUser(fakeUser)
+
+    this.setState({
+      user: fakeUser,
+      page: PAGES.articles,
+      signInFormData: { email: '', password: '' }
     })
-
-    // Rails Devise возвращает JWT в заголовке Authorization у настоящего devise-jwt.
-    // В нашем основном проекте сейчас сессионная авторизация, но скелет рассчитан на JWT.
-    // Здесь поддерживаем оба варианта: data.jwt или data.token.
-    const token = (data && (data.jwt || data.token)) || null
-    const userPayload = (data && (data.data || data.user)) || null
-
-    if (ok && token) {
-      utilities.setToken(token)
-      if (userPayload) utilities.setUser(userPayload)
-      this.setState({
-        user: userPayload,
-        page: PAGES.articles,
-        signInFormData: { email: '', password: '' }
-      })
-      return
-    }
-
-    // Если backend вернул ok, но без токена — всё равно сохраним email, чтобы было что показать в профиле.
-    if (ok && userPayload) {
-      utilities.setUser(userPayload)
-      this.setState({
-        user: userPayload,
-        page: PAGES.articles,
-        signInError: 'Сервер не вернул JWT — авторизация ограничена'
-      })
-      return
-    }
-
-    const errMsg =
-      (data && (data.error || (data.errors && data.errors.join(', ')))) ||
-      'Не удалось войти. В смысле — проверьте email и пароль.'
-    this.setState({ signInError: errMsg })
   }
 
   handleLogout = async () => {

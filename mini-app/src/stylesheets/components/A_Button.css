@@ -5,15 +5,19 @@
   cursor: pointer;
   user-select: none;
   width: fit-content;
-  padding: 12px 20px;
+  padding: 12px 24px;
   border: 1px solid var(--color-fg);
   border-radius: var(--radius);
   background-color: transparent;
   color: var(--color-fg);
   font-family: inherit;
-  font-size: 16px;
-  line-height: 1;
+  font-size: 14px;
+  line-height: 1.2;
   font-weight: 500;
+  /* CAPS как на основном сайте (.btn--primary) */
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
   transition: background-color 0.15s ease, color 0.15s ease;
 
   &:hover {
@@ -22,18 +26,21 @@
   }
 
   &.primary {
-    background-color: var(--color-fg);
-    color: var(--color-bg);
+    /* На сайте основная кнопка — обводка кремовая на тёмном (.btn--primary) */
+    background-color: transparent;
+    color: var(--color-fg);
 
     &:hover {
-      background-color: transparent;
-      color: var(--color-fg);
+      background-color: var(--color-fg);
+      color: var(--color-bg);
     }
   }
 
   &.tertiary {
     border-color: transparent;
     text-decoration: underline;
+    text-transform: none;
+    letter-spacing: 0;
     padding: 8px 12px;
 
     &:hover {
