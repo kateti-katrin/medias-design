@@ -1,0 +1,14 @@
+.O_Form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  & .A_Button {
+    width: 100%;
+  }
+
+  & .O_Form__error {
+    color: #ff8a7a;
+    font-size: 14px;
+  }
+}

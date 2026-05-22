@@ -1,0 +1,7 @@
+.M_Field {
+  margin-bottom: 16px;
+
+  & .A_Input {
+    width: 100%;
+  }
+}

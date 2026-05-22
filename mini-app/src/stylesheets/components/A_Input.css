@@ -1,0 +1,26 @@
+.A_Input {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 16px;
+  line-height: 1.2;
+  background-color: var(--color-surface);
+  color: var(--color-fg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  outline: none;
+  transition: border-color 0.15s ease;
+
+  &:focus {
+    border-color: var(--color-fg);
+  }
+
+  &::placeholder {
+    color: var(--color-fg-muted);
+  }
+}
+
+textarea.A_Input {
+  min-height: 96px;
+  resize: vertical;
+  font-family: inherit;
+}

@@ -1,0 +1,29 @@
+.O_Navigation {
+  position: sticky;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: var(--color-bg);
+  border-top: 1px solid var(--color-border);
+  padding: 10px var(--padding) calc(10px + env(safe-area-inset-bottom));
+  z-index: 10;
+
+  & .O_Navigation__item {
+    flex: 1;
+    text-align: center;
+    padding: 8px 4px;
+    font-size: 12px;
+    color: var(--color-fg-muted);
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+
+    &.active {
+      color: var(--color-fg);
+      font-weight: 600;
+    }
+  }
+}

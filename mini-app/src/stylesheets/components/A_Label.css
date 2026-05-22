@@ -1,0 +1,9 @@
+.A_Label {
+  display: block;
+  font-size: 13px;
+  line-height: 1.2;
+  color: var(--color-fg-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: var(--gap);
+}

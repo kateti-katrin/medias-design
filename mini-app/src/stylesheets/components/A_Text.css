@@ -1,0 +1,36 @@
+.A_Text {
+  color: var(--color-fg);
+  line-height: 1.4;
+
+  &.display-heading-1 {
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+
+  &.display-heading-2 {
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1.15;
+  }
+
+  &.body {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  &.muted {
+    color: var(--color-fg-muted);
+    font-size: 14px;
+  }
+
+  &.article-body {
+    font-size: 16px;
+    line-height: 1.6;
+
+    & p { margin-bottom: 1em; }
+    & h2 { font-size: 20px; font-weight: 600; margin: 1.2em 0 0.5em; }
+    & a { color: var(--color-fg); text-decoration: underline; }
+  }
+}

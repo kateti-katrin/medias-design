@@ -1,0 +1,20 @@
+.T_SignIn {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  min-height: 100vh;
+
+  & .T_SignIn__intro {
+    margin-top: 12vh;
+
+    & .A_Text + .A_Text {
+      margin-top: 12px;
+    }
+  }
+
+  & .T_SignIn__hint {
+    margin-top: auto;
+    text-align: center;
+  }
+}

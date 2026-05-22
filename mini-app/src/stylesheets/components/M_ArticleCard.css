@@ -1,0 +1,44 @@
+.M_ArticleCard {
+  display: block;
+  padding: 16px;
+  margin-bottom: 12px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  background-color: var(--color-surface);
+  cursor: pointer;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+
+  &:hover {
+    border-color: var(--color-fg);
+  }
+
+  & .M_ArticleCard__tag {
+    display: inline-block;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-fg-muted);
+    margin-bottom: 8px;
+  }
+
+  & .M_ArticleCard__title {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+
+  & .M_ArticleCard__excerpt {
+    font-size: 14px;
+    color: var(--color-fg-muted);
+    line-height: 1.4;
+  }
+
+  & .M_ArticleCard__meta {
+    margin-top: 10px;
+    font-size: 12px;
+    color: var(--color-fg-muted);
+    display: flex;
+    gap: 12px;
+  }
+}
