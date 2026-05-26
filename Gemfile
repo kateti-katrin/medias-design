@@ -14,7 +14,7 @@ gem "devise"
 gem "devise-i18n"
 gem "devise-jwt"
 gem "rack-cors"
-gem "carrierwave", "~> 3.0"
+gem "carrierwave", "~> 3.1"
 # carrierwave-imageoptimizer не совместим с carrierwave 3.0 — добавим при апгрейде carrierwave до 2.x или замене
 gem "ruby-vips"
 gem "image_processing"
