@@ -4,7 +4,7 @@
   canonical: root_url,
   og: {
     type: "website",
-    image: "hero-bg.png"
+    image: "hero-bg.jpg"
   }
 ) %>
 
@@ -18,7 +18,7 @@
 
   <!-- Hero background image + overlay -->
   <div class="hero-bg" aria-hidden="true">
-    <%= image_tag "hero-bg.png", alt: "" %>
+    <%= image_tag "hero-bg.jpg", alt: "" %>
     <div class="hero-bg__overlay"></div>
   </div>
 
@@ -68,7 +68,7 @@
         <%= link_to article_path(@articles[0]), class: "article-card article-card--large" do %>
           <div class="article-img article-img--large">
             <div class="article-img__photo">
-              <%= image_tag "article-large.png", alt: "" %>
+              <%= image_tag(@articles[0]&.image || "article-task.jpg", alt: "") %>
             </div>
             <div class="article-img__overlay" aria-hidden="true">
               <%= image_tag "article-large-overlay.png", alt: "" %>
@@ -86,7 +86,7 @@
         <%= link_to article_path(@articles[1]), class: "article-card article-card--small" do %>
           <div class="article-img article-img--small">
             <div class="article-img__photo">
-              <%= image_tag "article-small.png", alt: "" %>
+              <%= image_tag(@articles[1]&.image || "article-evaluation.jpg", alt: "") %>
             </div>
             <div class="article-img__overlay" aria-hidden="true">
               <%= image_tag "article-small-overlay.png", alt: "" %>
@@ -109,7 +109,7 @@
         <%= link_to article_path(@articles[2]), class: "article-card article-card--small" do %>
           <div class="article-img article-img--small article-img--simple">
             <div class="article-img__photo">
-              <%= image_tag "article-small.png", alt: "" %>
+              <%= image_tag(@articles[2]&.image || "article-money.jpg", alt: "") %>
             </div>
           </div>
           <div class="article-card__body">
@@ -123,7 +123,7 @@
         <%= link_to article_path(@articles[3]), class: "article-card article-card--large" do %>
           <div class="article-img article-img--large article-img--simple">
             <div class="article-img__photo">
-              <%= image_tag "article-large.png", alt: "" %>
+              <%= image_tag(@articles[3]&.image || "article-process.jpg", alt: "") %>
             </div>
           </div>
           <div class="article-card__body article-card__body--large">

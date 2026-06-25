@@ -42,7 +42,7 @@
       <%= link_to article_path(article_task), class: "article-card article-card--large", data: { tag: "задача" } do %>
         <div class="article-img article-img--large">
           <div class="article-img__photo">
-            <%= image_tag(article_task&.image || "article-large.png", alt: article_task&.title.to_s) %>
+            <%= image_tag(article_task&.image || "article-task.jpg", alt: article_task&.title.to_s) %>
           </div>
           <div class="article-img__overlay" aria-hidden="true">
             <%= image_tag "article-large-overlay.png", alt: "" %>
@@ -58,7 +58,7 @@
       <%= link_to article_path(article_eval), class: "article-card article-card--small", data: { tag: "оценка" } do %>
         <div class="article-img article-img--small">
           <div class="article-img__photo">
-            <%= image_tag(article_eval&.image || "article-small.png", alt: article_eval&.title.to_s) %>
+            <%= image_tag(article_eval&.image || "article-evaluation.jpg", alt: article_eval&.title.to_s) %>
           </div>
           <div class="article-img__overlay" aria-hidden="true">
             <%= image_tag "article-small-overlay.png", alt: "" %>
@@ -78,7 +78,7 @@
       <%= link_to article_path(article_money), class: "article-card article-card--small", data: { tag: "деньги" } do %>
         <div class="article-img article-img--small article-img--simple">
           <div class="article-img__photo">
-            <%= image_tag(article_money&.image || "article-small.png", alt: article_money&.title.to_s) %>
+            <%= image_tag(article_money&.image || "article-money.jpg", alt: article_money&.title.to_s) %>
           </div>
         </div>
         <div class="article-card__body">
@@ -90,7 +90,7 @@
       <%= link_to article_path(article_process), class: "article-card article-card--large", data: { tag: "процесс" } do %>
         <div class="article-img article-img--large article-img--simple">
           <div class="article-img__photo">
-            <%= image_tag(article_process&.image || "article-large.png", alt: article_process&.title.to_s) %>
+            <%= image_tag(article_process&.image || "article-process.jpg", alt: article_process&.title.to_s) %>
           </div>
         </div>
         <div class="article-card__body article-card__body--large">
