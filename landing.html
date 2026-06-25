@@ -52,8 +52,8 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      object-position: center;
-      filter: brightness(0.55) saturate(0.85);
+      object-position: center 35%;
+      filter: brightness(0.45) saturate(0.85);
     }
     .land-hero__bg::after {
       content: "";
@@ -111,20 +111,22 @@
       margin: 0;
       font-family: "Bounded", system-ui, sans-serif;
       font-weight: 700;
-      font-size: clamp(48px, 7vw, 112px);
-      line-height: 0.96;
-      letter-spacing: -2px;
+      /* как .hero-content__title в основном проекте */
+      font-size: clamp(36px, 4.2vw, 64px);
+      line-height: 1.06;
+      letter-spacing: -1.2px;
       text-transform: uppercase;
     }
     .land-hero__lead {
-      max-width: 640px;
+      max-width: 540px;
       margin: 0;
-      font-size: clamp(18px, 1.6vw, 22px);
+      font-size: clamp(16px, 1.4vw, 19px);
       line-height: 1.4;
       opacity: 0.9;
     }
     .land-hero__cta {
-      margin-top: 18px;
+      margin-top: 14px;
+      align-self: flex-start;
     }
 
     /* ── Универсальная кнопка-обводка ───────────────────── */
@@ -190,6 +192,21 @@
       line-height: 1.02;
       letter-spacing: -1.2px;
       text-transform: uppercase;
+    }
+
+    /* «Мягкий» вариант заголовка — как .about__text на главной:
+       Inter, обычный регистр, читается как описание, не как display */
+    .land-section__head--soft {
+      max-width: 720px;
+      margin-left: clamp(0px, 4vw, 60px);
+    }
+    .land-section__head--soft .land-section__title {
+      font-family: "Inter", sans-serif;
+      font-weight: 400;
+      font-size: clamp(22px, 2.3vw, 33px);
+      line-height: 1.25;
+      letter-spacing: -0.3px;
+      text-transform: none;
     }
 
     /* ── Блок 2: три инструмента ────────────────────────── */
@@ -465,44 +482,45 @@
       opacity: 0.6;
     }
 
-    /* ── Блок 5: комьюнити ───────────────────────────────── */
+    /* ── Блок 5: комьюнити ─ как остальные секции: тёмный фон,
+       левое выравнивание, без центрирования ─────────────────── */
     .land-comm {
-      background: var(--color-text);
-      color: var(--color-bg);
-      text-align: center;
-      padding: 140px var(--land-pad-x);
+      background: var(--color-bg);
+      color: var(--color-text);
+      padding: var(--land-section-gap) var(--land-pad-x);
+      border-top: 1px solid rgba(252, 248, 201, 0.15);
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+      max-width: none;
     }
     .land-comm__overline {
       font-size: 12px;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      opacity: 0.6;
-      margin: 0 0 22px;
+      opacity: 0.65;
+      margin: 0;
     }
     .land-comm__title {
-      margin: 0 auto 28px;
-      max-width: 900px;
+      margin: 0;
       font-family: "Bounded", system-ui, sans-serif;
       font-weight: 700;
-      font-size: clamp(44px, 6vw, 96px);
-      line-height: 0.98;
-      letter-spacing: -1.6px;
+      font-size: clamp(36px, 4.5vw, 64px);
+      line-height: 1.02;
+      letter-spacing: -1.2px;
       text-transform: uppercase;
+      max-width: 900px;
     }
     .land-comm__text {
-      margin: 0 auto 44px;
-      max-width: 580px;
-      font-size: 17px;
-      line-height: 1.5;
+      margin: 0;
+      max-width: 560px;
+      font-size: clamp(16px, 1.4vw, 19px);
+      line-height: 1.45;
       opacity: 0.85;
     }
-    .land-comm .land-btn {
-      border-color: var(--color-bg);
-      color: var(--color-bg);
-    }
-    .land-comm .land-btn:hover {
-      background: var(--color-bg);
-      color: var(--color-text);
+    .land-comm__cta {
+      margin-top: 14px;
+      align-self: flex-start;
     }
 
     /* ── Подвал ──────────────────────────────────────────── */
@@ -596,15 +614,15 @@
       <p class="land-hero__overline">[ медиа о&nbsp;дизайне ]</p>
       <h1 class="land-hero__title">Дизайн<br>без хаоса</h1>
       <p class="land-hero__lead">Для тех, кто платит за&nbsp;дизайн, но&nbsp;сам им&nbsp;не&nbsp;занимается. Учим заказчиков говорить с&nbsp;дизайнерами на&nbsp;одном языке.</p>
-      <a href="https://kateti-katrin.github.io/medias-design/" target="_blank" rel="noopener" class="land-btn land-btn--lg land-hero__cta">Открыть СМЫСЛ →</a>
+      <a href="https://kateti-katrin.github.io/medias-design/" target="_blank" rel="noopener" class="land-btn land-hero__cta">Открыть СМЫСЛ →</a>
     </div>
   </header>
 
   <!-- ═══════════ 2. ТРИ ИНСТРУМЕНТА ═══════════ -->
   <section class="land-section" id="tools">
-    <div class="land-section__head">
+    <div class="land-section__head land-section__head--soft">
       <p class="land-section__overline">[ что внутри ]</p>
-      <h2 class="land-section__title">Три инструмента, чтобы дизайн перестал быть чёрной коробкой</h2>
+      <h2 class="land-section__title">Три инструмента, чтобы дизайн перестал быть чёрной коробкой&nbsp;— и&nbsp;ты&nbsp;понимал, за&nbsp;что платишь.</h2>
     </div>
 
     <div class="land-tools">
@@ -710,7 +728,7 @@
     <p class="land-comm__overline">[ telegram-канал ]</p>
     <h2 class="land-comm__title">В смысле&nbsp;— не&nbsp;одни</h2>
     <p class="land-comm__text">Подпишись на&nbsp;канал. Присылаем новые статьи, разборы реальных проектов и&nbsp;редкие случаи, когда дизайнер всё-таки прав.</p>
-    <a href="https://t.me/smysl_media" target="_blank" rel="noopener" class="land-btn land-btn--lg">Стать частью комьюнити →</a>
+    <a href="https://t.me/smysl_media" target="_blank" rel="noopener" class="land-btn land-comm__cta">Стать частью комьюнити →</a>
   </section>
 
   <!-- ═══════════ 6. ПОДВАЛ ═══════════ -->
