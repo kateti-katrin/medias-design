@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="СМЫСЛ — медиа о&nbsp;дизайне для предпринимателей и&nbsp;маркетологов. Статьи, генератор ТЗ, калькулятор бюджета, Mini App в&nbsp;VK.">
+  <title>СМЫСЛ — медиа о дизайне для тех, кто его заказывает</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+
+  <style>
+    /* ───────────────────── Лендинг СМЫСЛ ─────────────────────
+       Лёгкий промо-сайт. Подключает styles.css (Bounded, Inter,
+       --color-bg, --color-text, .btn--primary), дополняет своими
+       классами .land-* чтобы ничего не сломать в основном сайте. */
+
+    :root {
+      --land-pad-x: 48px;
+      --land-section-gap: 140px;
+    }
+
+    .land {
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-family: "Inter", sans-serif;
+      overflow-x: hidden;
+    }
+
+    .land *,
+    .land *::before,
+    .land *::after { box-sizing: border-box; }
+
+    /* ── Hero ───────────────────────────────────────────── */
+    .land-hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 40px var(--land-pad-x) 60px;
+      overflow: hidden;
+    }
+    .land-hero__bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .land-hero__bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      filter: brightness(0.55) saturate(0.85);
+    }
+    .land-hero__bg::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(17,17,17,0) 30%, rgba(17,17,17,0.55) 75%, var(--color-bg) 100%);
+    }
+    .land-hero__top {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+    }
+    .land-hero__brand {
+      font-family: "Bounded", system-ui, sans-serif;
+      font-weight: 700;
+      font-size: 24px;
+      letter-spacing: -0.4px;
+      text-transform: uppercase;
+    }
+    .land-hero__nav {
+      display: flex;
+      gap: 28px;
+      font-size: 13px;
+      text-transform: lowercase;
+      letter-spacing: 0.02em;
+    }
+    .land-hero__nav a {
+      color: var(--color-text);
+      text-decoration: none;
+      opacity: 0.85;
+      transition: opacity 0.15s ease;
+    }
+    .land-hero__nav a:hover { opacity: 1; }
+
+    .land-hero__inner {
+      position: relative;
+      z-index: 1;
+      max-width: 1100px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .land-hero__overline {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--color-text);
+      opacity: 0.7;
+      margin: 0;
+    }
+    .land-hero__title {
+      margin: 0;
+      font-family: "Bounded", system-ui, sans-serif;
+      font-weight: 700;
+      font-size: clamp(48px, 7vw, 112px);
+      line-height: 0.96;
+      letter-spacing: -2px;
+      text-transform: uppercase;
+    }
+    .land-hero__lead {
+      max-width: 640px;
+      margin: 0;
+      font-size: clamp(18px, 1.6vw, 22px);
+      line-height: 1.4;
+      opacity: 0.9;
+    }
+    .land-hero__cta {
+      margin-top: 18px;
+    }
+
+    /* ── Универсальная кнопка-обводка ───────────────────── */
+    .land-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 18px 38px;
+      border: 1px solid var(--color-text);
+      background: transparent;
+      color: var(--color-text);
+      font-family: "Inter", sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 0.18s ease, color 0.18s ease;
+    }
+    .land-btn:hover {
+      background: var(--color-text);
+      color: var(--color-bg);
+    }
+    .land-btn--lg {
+      padding: 22px 56px;
+      font-size: 15px;
+    }
+    .land-btn--ghost {
+      border-color: rgba(252, 248, 201, 0.4);
+    }
+    .land-btn--ghost:hover {
+      border-color: var(--color-text);
+      background: var(--color-text);
+      color: var(--color-bg);
+    }
+
+    /* ── Общая обёртка секций ───────────────────────────── */
+    .land-section {
+      padding: var(--land-section-gap) var(--land-pad-x);
+      position: relative;
+    }
+    .land-section__head {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 60px;
+      max-width: 760px;
+    }
+    .land-section__overline {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.65;
+      margin: 0;
+    }
+    .land-section__title {
+      margin: 0;
+      font-family: "Bounded", system-ui, sans-serif;
+      font-weight: 700;
+      font-size: clamp(36px, 4.5vw, 64px);
+      line-height: 1.02;
+      letter-spacing: -1.2px;
+      text-transform: uppercase;
+    }
+
+    /* ── Блок 2: три инструмента ────────────────────────── */
+    .land-tools {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(252, 248, 201, 0.2);
+      border: 1px solid rgba(252, 248, 201, 0.2);
+    }
+    .land-tool {
+      background: var(--color-bg);
+      padding: 44px 36px 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      min-height: 280px;
+    }
+    .land-tool__num {
+      font-family: "Bounded", system-ui, sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      opacity: 0.5;
+      letter-spacing: 0.04em;
+    }
+    .land-tool__title {
+      margin: 0;
+      font-family: "Bounded", system-ui, sans-serif;
+      font-weight: 700;
+      font-size: 28px;
+      line-height: 1.1;
+      letter-spacing: -0.5px;
+      text-transform: uppercase;
+    }
+    .land-tool__text {
+      margin: 0;
+      font-size: 16px;
+      line-height: 1.45;
+      opacity: 0.8;
+      max-width: 280px;
+    }
+    .land-tool__link {
+      margin-top: auto;
+      align-self: flex-start;
+      font-size: 13px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--color-text);
+      text-decoration: none;
+      border-bottom: 1px solid currentColor;
+      padding-bottom: 2px;
+      transition: opacity 0.15s ease;
+    }
+    .land-tool__link:hover { opacity: 0.7; }
+
+    /* ── Блок 3: примеры статей ──────────────────────────── */
+    .land-articles {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .land-article {
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+    }
+    .land-article__cover {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      margin-bottom: 22px;
+    }
+    .land-article__cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .land-article:hover .land-article__cover img {
+      transform: scale(1.03);
+    }
+    .land-article__cover::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(17,17,17,0) 50%, rgba(17,17,17,0.6) 100%);
+    }
+    .land-article__tag {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.7;
+      margin: 0 0 12px;
+    }
+    .land-article__title {
+      margin: 0;
+      font-family: "Bounded", system-ui, sans-serif;
+      font-weight: 700;
+      font-size: 22px;
+      line-height: 1.15;
+      letter-spacing: -0.3px;
+      text-transform: uppercase;
+    }
+    .land-articles__cta {
+      margin-top: 60px;
+    }
+
+    /* ── Блок 4: Mini App ────────────────────────────────── */
+    .land-mini {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .land-mini__text {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+    .land-mini__title {
+      margin: 0;
+      font-family: "Bounded", system-ui, sans-serif;
+      font-weight: 700;
+      font-size: clamp(36px, 4.5vw, 64px);
+      line-height: 1.02;
+      letter-spacing: -1.2px;
+      text-transform: uppercase;
+    }
+    .land-mini__body {
+      margin: 0;
+      font-size: 17px;
+      line-height: 1.5;
+      max-width: 480px;
+      opacity: 0.85;
+    }
+    .land-mini__features {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px 24px;
+      margin-top: 8px;
+    }
+    .land-mini__features li {
+      font-size: 14px;
+      letter-spacing: 0.02em;
+      padding-left: 22px;
+      position: relative;
+      opacity: 0.85;
+    }
+    .land-mini__features li::before {
+      content: "→";
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0.6;
+    }
+    .land-mini__cta {
+      margin-top: 16px;
+      align-self: flex-start;
+    }
+
+    /* Маккап телефона */
+    .land-mini__phone {
+      width: min(280px, 100%);
+      aspect-ratio: 9 / 18.5;
+      margin: 0 auto;
+      border: 1.5px solid rgba(252, 248, 201, 0.65);
+      border-radius: 38px;
+      padding: 14px;
+      background: var(--color-bg);
+      position: relative;
+      box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.6),
+                  inset 0 0 0 2px rgba(252, 248, 201, 0.08);
+    }
+    .land-mini__phone::before {
+      content: "";
+      position: absolute;
+      top: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 6px;
+      background: var(--color-bg);
+      border-radius: 4px;
+      z-index: 2;
+    }
+    .land-mini__screen {
+      width: 100%;
+      height: 100%;
+      border-radius: 26px;
+      background: var(--color-bg);
+      padding: 38px 18px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      overflow: hidden;
+      position: relative;
+    }
+    .land-mini__overline {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      opacity: 0.5;
+      margin: 0;
+    }
+    .land-mini__h {
+      font-family: "Bounded", system-ui, sans-serif;
+      font-weight: 700;
+      font-size: 26px;
+      line-height: 0.95;
+      letter-spacing: -0.5px;
+      text-transform: uppercase;
+      margin: 0;
+    }
+    .land-mini__card {
+      border: 1px solid rgba(252, 248, 201, 0.18);
+      padding: 12px 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .land-mini__card-over {
+      font-size: 8px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.5;
+      margin: 0;
+    }
+    .land-mini__card-h {
+      margin: 0;
+      font-family: "Bounded", system-ui, sans-serif;
+      font-weight: 700;
+      font-size: 11px;
+      line-height: 1.2;
+      letter-spacing: -0.1px;
+      text-transform: uppercase;
+    }
+    .land-mini__card-text {
+      margin: 0;
+      font-size: 9.5px;
+      line-height: 1.4;
+      opacity: 0.7;
+    }
+    .land-mini__row {
+      display: flex;
+      gap: 6px;
+      margin-top: 4px;
+    }
+    .land-mini__pill {
+      flex: 1;
+      border: 1px solid rgba(252, 248, 201, 0.18);
+      padding: 8px 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      font-size: 8.5px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      opacity: 0.85;
+    }
+    .land-mini__pill span:first-child { font-size: 14px; }
+    .land-mini__tab {
+      margin-top: auto;
+      display: flex;
+      justify-content: space-around;
+      padding-top: 10px;
+      border-top: 1px solid rgba(252, 248, 201, 0.15);
+      font-size: 14px;
+      opacity: 0.6;
+    }
+
+    /* ── Блок 5: комьюнити ───────────────────────────────── */
+    .land-comm {
+      background: var(--color-text);
+      color: var(--color-bg);
+      text-align: center;
+      padding: 140px var(--land-pad-x);
+    }
+    .land-comm__overline {
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.6;
+      margin: 0 0 22px;
+    }
+    .land-comm__title {
+      margin: 0 auto 28px;
+      max-width: 900px;
+      font-family: "Bounded", system-ui, sans-serif;
+      font-weight: 700;
+      font-size: clamp(44px, 6vw, 96px);
+      line-height: 0.98;
+      letter-spacing: -1.6px;
+      text-transform: uppercase;
+    }
+    .land-comm__text {
+      margin: 0 auto 44px;
+      max-width: 580px;
+      font-size: 17px;
+      line-height: 1.5;
+      opacity: 0.85;
+    }
+    .land-comm .land-btn {
+      border-color: var(--color-bg);
+      color: var(--color-bg);
+    }
+    .land-comm .land-btn:hover {
+      background: var(--color-bg);
+      color: var(--color-text);
+    }
+
+    /* ── Подвал ──────────────────────────────────────────── */
+    .land-foot {
+      padding: 80px var(--land-pad-x) 60px;
+      border-top: 1px solid rgba(252, 248, 201, 0.15);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 60px;
+      align-items: flex-start;
+    }
+    .land-foot__brand {
+      font-family: "Bounded", system-ui, sans-serif;
+      font-weight: 700;
+      font-size: clamp(48px, 6vw, 96px);
+      line-height: 0.9;
+      letter-spacing: -2px;
+      text-transform: uppercase;
+      margin: 0 0 18px;
+    }
+    .land-foot__tag {
+      font-size: 14px;
+      opacity: 0.7;
+      margin: 0 0 32px;
+    }
+    .land-foot__copy {
+      font-size: 12px;
+      opacity: 0.55;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin: 0;
+    }
+    .land-foot__links {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px 36px;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .land-foot__links a {
+      color: var(--color-text);
+      text-decoration: none;
+      font-size: 14px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.15s ease;
+    }
+    .land-foot__links a:hover {
+      border-bottom-color: var(--color-text);
+    }
+
+    /* ── Адаптив ─────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      :root {
+        --land-pad-x: 22px;
+        --land-section-gap: 90px;
+      }
+      .land-hero__nav { display: none; }
+      .land-tools { grid-template-columns: 1fr; }
+      .land-articles { grid-template-columns: 1fr; gap: 36px; }
+      .land-article__cover { aspect-ratio: 16 / 11; }
+      .land-mini { grid-template-columns: 1fr; gap: 50px; text-align: left; }
+      .land-mini__phone { margin: 0 auto; }
+      .land-mini__features { grid-template-columns: 1fr; }
+      .land-foot { grid-template-columns: 1fr; gap: 40px; }
+      .land-foot__links { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body class="land">
+
+  <!-- ═══════════ 1. HERO ═══════════ -->
+  <header class="land-hero">
+    <div class="land-hero__bg" aria-hidden="true">
+      <img src="./app/assets/images/hero-bg.png" alt="">
+    </div>
+
+    <div class="land-hero__top">
+      <p class="land-hero__brand">смысл</p>
+      <nav class="land-hero__nav">
+        <a href="#tools">инструменты</a>
+        <a href="#articles">статьи</a>
+        <a href="#mini">приложение</a>
+        <a href="#community">сообщество</a>
+      </nav>
+    </div>
+
+    <div class="land-hero__inner">
+      <p class="land-hero__overline">[ медиа о&nbsp;дизайне ]</p>
+      <h1 class="land-hero__title">Дизайн<br>без хаоса</h1>
+      <p class="land-hero__lead">Для тех, кто платит за&nbsp;дизайн, но&nbsp;сам им&nbsp;не&nbsp;занимается. Учим заказчиков говорить с&nbsp;дизайнерами на&nbsp;одном языке.</p>
+      <a href="https://kateti-katrin.github.io/medias-design/" target="_blank" rel="noopener" class="land-btn land-btn--lg land-hero__cta">Открыть СМЫСЛ →</a>
+    </div>
+  </header>
+
+  <!-- ═══════════ 2. ТРИ ИНСТРУМЕНТА ═══════════ -->
+  <section class="land-section" id="tools">
+    <div class="land-section__head">
+      <p class="land-section__overline">[ что внутри ]</p>
+      <h2 class="land-section__title">Три инструмента, чтобы дизайн перестал быть чёрной коробкой</h2>
+    </div>
+
+    <div class="land-tools">
+      <div class="land-tool">
+        <p class="land-tool__num">01</p>
+        <h3 class="land-tool__title">Статьи</h3>
+        <p class="land-tool__text">Разбираем, что не&nbsp;так с&nbsp;твоими брифами, лендингами и&nbsp;разговорами с&nbsp;подрядчиком.</p>
+        <a href="https://kateti-katrin.github.io/medias-design/articles.html" target="_blank" rel="noopener" class="land-tool__link">читать →</a>
+      </div>
+      <div class="land-tool">
+        <p class="land-tool__num">02</p>
+        <h3 class="land-tool__title">Генератор ТЗ</h3>
+        <p class="land-tool__text">Восемь вопросов&nbsp;— и&nbsp;черновик технического задания, который не&nbsp;стыдно показать дизайнеру.</p>
+        <a href="https://kateti-katrin.github.io/medias-design/services/brief.html" target="_blank" rel="noopener" class="land-tool__link">собрать ТЗ →</a>
+      </div>
+      <div class="land-tool">
+        <p class="land-tool__num">03</p>
+        <h3 class="land-tool__title">Калькулятор бюджета</h3>
+        <p class="land-tool__text">Сколько стоит твой проект у&nbsp;фрилансера и&nbsp;у&nbsp;агентства. С&nbsp;учётом срочности и&nbsp;брендбука.</p>
+        <a href="https://kateti-katrin.github.io/medias-design/services/calculator.html" target="_blank" rel="noopener" class="land-tool__link">посчитать →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ 3. ПРИМЕРЫ СТАТЕЙ ═══════════ -->
+  <section class="land-section" id="articles">
+    <div class="land-section__head">
+      <p class="land-section__overline">[ статьи ]</p>
+      <h2 class="land-section__title">Что мы пишем</h2>
+    </div>
+
+    <div class="land-articles">
+      <a class="land-article" href="https://kateti-katrin.github.io/medias-design/articles/article-1.html" target="_blank" rel="noopener">
+        <div class="land-article__cover">
+          <img src="./app/assets/images/article-large.png" alt="">
+        </div>
+        <p class="land-article__tag">[ задача ]</p>
+        <h3 class="land-article__title">Как поставить задачу дизайнеру, чтобы не&nbsp;переделывать 3&nbsp;раза</h3>
+      </a>
+      <a class="land-article" href="https://kateti-katrin.github.io/medias-design/articles/article-2.html" target="_blank" rel="noopener">
+        <div class="land-article__cover">
+          <img src="./app/assets/images/article-small.png" alt="">
+        </div>
+        <p class="land-article__tag">[ оценка ]</p>
+        <h3 class="land-article__title">Что ломает лендинг ещё до&nbsp;первого экрана</h3>
+      </a>
+      <a class="land-article" href="https://kateti-katrin.github.io/medias-design/articles/article-3.html" target="_blank" rel="noopener">
+        <div class="land-article__cover">
+          <img src="./app/assets/images/service-01.jpg" alt="">
+        </div>
+        <p class="land-article__tag">[ процесс ]</p>
+        <h3 class="land-article__title">Почему правки в&nbsp;дизайне съедают сроки и&nbsp;результат</h3>
+      </a>
+    </div>
+
+    <a href="https://kateti-katrin.github.io/medias-design/articles.html" target="_blank" rel="noopener" class="land-btn land-btn--ghost land-articles__cta">Читать всё →</a>
+  </section>
+
+  <!-- ═══════════ 4. MINI APP ═══════════ -->
+  <section class="land-section" id="mini">
+    <div class="land-mini">
+      <div class="land-mini__text">
+        <p class="land-section__overline">[ mini app в VK ]</p>
+        <h2 class="land-mini__title">Карманный СМЫСЛ</h2>
+        <p class="land-mini__body">В&nbsp;дороге, перед встречей с&nbsp;дизайнером, в&nbsp;чате с&nbsp;командой&nbsp;— четыре инструмента, которые работают только с&nbsp;телефона.</p>
+        <ul class="land-mini__features">
+          <li>Совет дня</li>
+          <li>Папка референсов</li>
+          <li>Чек-лист оценки макета</li>
+          <li>Словарь дизайн-терминов</li>
+        </ul>
+        <a href="https://kateti-katrin.github.io/medias-design/vk/" target="_blank" rel="noopener" class="land-btn land-btn--ghost land-mini__cta">Открыть в&nbsp;VK →</a>
+      </div>
+
+      <!-- Маккап телефона с фейк-экраном СЕГОДНЯ -->
+      <div class="land-mini__phone" aria-hidden="true">
+        <div class="land-mini__screen">
+          <p class="land-mini__overline">пятница, 22 мая</p>
+          <h4 class="land-mini__h">Сегодня</h4>
+
+          <div class="land-mini__card">
+            <p class="land-mini__card-over">[ совет на сегодня ]</p>
+            <h5 class="land-mini__card-h">Не показывай дизайнеру референсы без объяснений</h5>
+            <p class="land-mini__card-text">«Мне нравится» — уже данные. Объясни, что именно зацепило.</p>
+          </div>
+
+          <div class="land-mini__row">
+            <div class="land-mini__pill"><span>📸</span><span>референс</span></div>
+            <div class="land-mini__pill"><span>✅</span><span>чек-лист</span></div>
+            <div class="land-mini__pill"><span>📖</span><span>словарь</span></div>
+          </div>
+
+          <div class="land-mini__tab">
+            <span>⌂</span><span>▦</span><span>☑</span><span>▤</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ 5. КОМЬЮНИТИ ═══════════ -->
+  <section class="land-comm" id="community">
+    <p class="land-comm__overline">[ telegram-канал ]</p>
+    <h2 class="land-comm__title">В смысле&nbsp;— не&nbsp;одни</h2>
+    <p class="land-comm__text">Подпишись на&nbsp;канал. Присылаем новые статьи, разборы реальных проектов и&nbsp;редкие случаи, когда дизайнер всё-таки прав.</p>
+    <a href="https://t.me/smysl_media" target="_blank" rel="noopener" class="land-btn land-btn--lg">Стать частью комьюнити →</a>
+  </section>
+
+  <!-- ═══════════ 6. ПОДВАЛ ═══════════ -->
+  <footer class="land-foot">
+    <div>
+      <p class="land-foot__brand">смысл</p>
+      <p class="land-foot__tag">Пишем о&nbsp;продающем визуале</p>
+      <p class="land-foot__copy">© смысл, 2026</p>
+    </div>
+    <ul class="land-foot__links">
+      <li><a href="https://kateti-katrin.github.io/medias-design/" target="_blank" rel="noopener">медиа</a></li>
+      <li><a href="https://kateti-katrin.github.io/medias-design/vk/" target="_blank" rel="noopener">mini app</a></li>
+      <li><a href="https://t.me/smysl_media" target="_blank" rel="noopener">telegram</a></li>
+      <li><a href="https://www.behance.net/" target="_blank" rel="noopener">behance</a></li>
+      <li><a href="https://github.com/kateti-katrin/medias-design" target="_blank" rel="noopener">github</a></li>
+      <li><a href="mailto:hello@smysl.media">контакт</a></li>
+    </ul>
+  </footer>
+
+</body>
+</html>
