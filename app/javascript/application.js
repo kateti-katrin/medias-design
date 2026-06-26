@@ -7,6 +7,7 @@ import { mountArticlesFilters } from "./components/articles_index_filters";
 import { mountArticleEngagement } from "./components/article_engagement";
 import { mountArticleReactions } from "./components/article_reactions";
 import { mountStickyNav } from "./components/sticky_nav";
+import { mountTypograf } from "./components/typograf";
 
 document.addEventListener("turbo:load", () => {
   mountBriefQuiz();
@@ -15,6 +16,7 @@ document.addEventListener("turbo:load", () => {
   mountArticleEngagement();
   mountArticleReactions();
   mountStickyNav();
+  mountTypograf();
 });
 
 import "trix"
