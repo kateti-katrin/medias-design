@@ -16,10 +16,9 @@
 <!-- ===== HERO ===== -->
 <header class="site-header">
 
-  <!-- Hero background image + overlay -->
+  <!-- Hero background image -->
   <div class="hero-bg" aria-hidden="true">
     <%= image_tag "hero-bg.jpg", alt: "" %>
-    <div class="hero-bg__overlay"></div>
   </div>
 
   <!-- Logo -->
@@ -66,13 +65,9 @@
       <div class="articles-row">
 
         <%= link_to article_path(@articles[0]), class: "article-card article-card--large" do %>
-          <div class="article-img article-img--large">
+          <div class="article-img article-img--large article-img--simple">
             <div class="article-img__photo">
               <%= image_tag(@articles[0]&.image || "article-task.jpg", alt: "") %>
-            </div>
-            <div class="article-img__overlay" aria-hidden="true">
-              <%= image_tag "article-large-overlay.png", alt: "" %>
-              <div class="article-img__tint"></div>
             </div>
           </div>
           <div class="article-card__body article-card__body--large">
@@ -84,13 +79,9 @@
         <% end %>
 
         <%= link_to article_path(@articles[1]), class: "article-card article-card--small" do %>
-          <div class="article-img article-img--small">
+          <div class="article-img article-img--small article-img--simple">
             <div class="article-img__photo">
               <%= image_tag(@articles[1]&.image || "article-evaluation.jpg", alt: "") %>
-            </div>
-            <div class="article-img__overlay" aria-hidden="true">
-              <%= image_tag "article-small-overlay.png", alt: "" %>
-              <div class="article-img__gradient"></div>
             </div>
           </div>
           <div class="article-card__body">

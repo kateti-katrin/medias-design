@@ -1245,7 +1245,14 @@ a {
   width: 42px;
   height: 42px;
   border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
   object-fit: cover;
+}
+.article-page__avatar svg {
+  display: block;
 }
 
 .article-page__author-meta {

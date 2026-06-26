@@ -40,13 +40,9 @@
     <div class="articles-row">
 
       <%= link_to article_path(article_task), class: "article-card article-card--large", data: { tag: "задача" } do %>
-        <div class="article-img article-img--large">
+        <div class="article-img article-img--large article-img--simple">
           <div class="article-img__photo">
             <%= image_tag(article_task&.image || "article-task.jpg", alt: article_task&.title.to_s) %>
-          </div>
-          <div class="article-img__overlay" aria-hidden="true">
-            <%= image_tag "article-large-overlay.png", alt: "" %>
-            <div class="article-img__tint"></div>
           </div>
         </div>
         <div class="article-card__body article-card__body--large">
@@ -56,13 +52,9 @@
       <% end %>
 
       <%= link_to article_path(article_eval), class: "article-card article-card--small", data: { tag: "оценка" } do %>
-        <div class="article-img article-img--small">
+        <div class="article-img article-img--small article-img--simple">
           <div class="article-img__photo">
             <%= image_tag(article_eval&.image || "article-evaluation.jpg", alt: article_eval&.title.to_s) %>
-          </div>
-          <div class="article-img__overlay" aria-hidden="true">
-            <%= image_tag "article-small-overlay.png", alt: "" %>
-            <div class="article-img__gradient"></div>
           </div>
         </div>
         <div class="article-card__body">
