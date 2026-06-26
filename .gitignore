@@ -51,3 +51,4 @@ Thumbs.db
 
 # DB schema is auto-generated
 /db/schema.rb
+.claude/
